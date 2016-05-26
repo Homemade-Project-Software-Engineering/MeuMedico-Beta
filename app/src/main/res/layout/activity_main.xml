@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="#E6E6FA"
+    android:theme="@style/_MeuMedico"
+    android:background="#e0e0e6"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,34 +13,60 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="meu_medico.es.dc.ufc.com.br.meumedico.MainActivity">
 
-    <TextView
+    <meu_medico.es.dc.ufc.com.br.meumedico.MyMainTextView
+        android:id="@+id/MainTitle"
+        android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="casual"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:text="This is Our first commit!" />
-    <TextView
+        android:layout_centerHorizontal="true"
+        android:shadowColor="#9B9D99"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:textSize="45sp"
+        android:shadowRadius="0"
+        android:textColor="#25DD8B"
+        android:text="Meu Médico" />
+    <meu_medico.es.dc.ufc.com.br.meumedico.MyMainTextView
+        android:id="@+id/logInLabel"
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="casual"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:text="Enter your name" />
+        android:layout_below="@id/MainTitle"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textColor="#25DD8B"
+        android:text="Log in" />
     <EditText
         android:id="@+id/etGuestName"
-        android:layout_width="300px"
+        android:layout_centerHorizontal="true"
+        android:layout_width="600px"
+        android:textSize="15dp"
+        android:layout_below="@id/logInLabel"
+        android:textColor="#000000"
+        android:textStyle="bold"
         android:layout_height="wrap_content"
         />
-    <Button
-        android:id="@+id/btSecondScreen"
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="600px"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/etGuestName"
         android:layout_height="wrap_content"
+        android:id="@+id/passwordTextEdit"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:inputType="textPassword" />
+    <Button
+        android:layout_margin="10dp"
+        android:id="@+id/btSecondScreen"
+        android:layout_width="220px"
+        android:layout_height="100px"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/passwordTextEdit"
         android:text="@string/btSecondActivity"
-        android:textSize="15dp"
+        android:textSize="10dp"
         android:textStyle="bold"
         android:textColor="#D3D3D3"
-        android:background="#8B0000"
+        android:background="#25DD8B"
         android:onClick="callSecondScreen"
         />
-</LinearLayout>
+</RelativeLayout>

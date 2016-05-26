@@ -1,11 +1,16 @@
 package meu_medico.es.dc.ufc.com.br.meumedico;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+
 
 /**
  * Created by jonas on 10/05/16.
@@ -14,25 +19,47 @@ public class SecondScreen extends Activity{
     Intent secondScreenData;
     Bundle infoFromMainScreen;
     private String user;
+    private Button home;
+    private Button datePicker;
     TextView nameUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
+        fillSpinner();
+        btHome();
+        btDate();
 
-        Button bt = (Button) findViewById(R.id.home);
+        setUser("@"+getDataMainScreen());
+        setNameView(getUser());
+    }
 
-        bt.setOnClickListener(new View.OnClickListener() {
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu){
+         getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+     }
+     public void btDate(){
+         datePicker = (Button) findViewById(R.id.btDatePiker);
+         datePicker.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 DialogFragment newFragment = new DatePickerFragment();
+                 newFragment.show(getFragmentManager(),"datePicker");
+             }
+         });
+     }
+
+     public void btHome(){
+         home = (Button) findViewById(R.id.home);
+         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SecondScreen.this, MainActivity.class));
                 finish(); // dispose do java
             }
         });
-
-        setUser("@"+getDataMainScreen());
-        setNameView(getUser());
     }
     public void setNameView(String name){
         nameUser = (TextView) findViewById(R.id.nameUser);
@@ -59,4 +86,15 @@ public class SecondScreen extends Activity{
         }
         return  logInString;
     }
+
+    public void fillSpinner(){
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerOptions);
+        String[] options = getResources().getStringArray(R.array.options);
+        ArrayAdapter<String> adapterOptions =
+                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,options);
+        adapterOptions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterOptions);
+        spinner.setPrompt("Options");
+    }
+
 }

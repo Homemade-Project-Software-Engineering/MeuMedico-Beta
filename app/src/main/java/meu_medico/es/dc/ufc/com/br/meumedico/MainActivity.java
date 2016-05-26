@@ -1,14 +1,14 @@
 package meu_medico.es.dc.ufc.com.br.meumedico;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     Button next;
     Intent secondScreen;
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         callSecondScreen();
+
     }
 
     public String getGuest(){
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText  logInString = (EditText) findViewById(R.id.etGuestName);
         return logInString.getText().toString();
     }
+
+
 
     public void callSecondScreen(){
         next  = (Button) findViewById(R.id.btSecondScreen);
