@@ -1,8 +1,5 @@
 package br.ufc.dc.es.model;
 
-/**
- * Created by César on 29/05/2016.
- */
 public class Atividade {
 
     private String nome, descricao, data, hora;

@@ -2,9 +2,6 @@ package br.ufc.dc.es.model;
 
 import java.io.Serializable;
 
-/**
- * Created by César on 29/05/2016.
- */
 public class Login implements Serializable {
 
     private int id;

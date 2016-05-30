@@ -11,8 +11,8 @@ import br.ufc.dc.es.model.Login;
 
 public class ContaActivity extends Activity {
 
-    private Button createAccount;
-    private ContaHelper helper;
+    Button createAccount;
+    ContaHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

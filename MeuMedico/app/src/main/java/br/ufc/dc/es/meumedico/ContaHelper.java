@@ -1,19 +1,10 @@
 package br.ufc.dc.es.meumedico;
 
-import android.provider.ContactsContract;
 import android.widget.EditText;
-
 import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
 import br.ufc.dc.es.model.Login;
 
-import static java.text.DateFormat.*;
-
-/**
- * Created by César on 29/05/2016.
- */
 public class ContaHelper {
 
     private EditText campoNome,campoEmail,campoSenha;

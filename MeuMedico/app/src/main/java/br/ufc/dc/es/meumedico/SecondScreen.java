@@ -11,30 +11,22 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.io.Serializable;
 import java.util.List;
 
 import br.ufc.dc.es.dao.AtividadeDAO;
 import br.ufc.dc.es.model.Atividade;
 import br.ufc.dc.es.model.Login;
 
-
-/**
- * Created by jonas on 10/05/16.
- */
 public class SecondScreen extends Activity{
 
-    Intent secondScreenData;
     Intent cadAtividade;
-    Bundle infoFromMainScreen;
     String user;
     Button home;
     Button datePicker;
     TextView nameUser;
     Button atividade;
     String nome, email;
-    int id;
+    int id_usuario;
     private ListView lista;
 
     @Override
@@ -49,10 +41,10 @@ public class SecondScreen extends Activity{
 
         Login informacoes = (Login) getIntent().getSerializableExtra("informacoes");
         nome = informacoes.getName();
-        email = informacoes.getEmail().toString();
-        id = informacoes.getId();
+        email = informacoes.getEmail();
+        id_usuario = informacoes.getId();
         //setUser("@"+getDataMainScreen());
-        setUser(id + " - " + nome);
+        setUser(id_usuario + " - " + nome);
         setNameView(getUser());
 
         lista = (ListView) findViewById(R.id.listViewAtividades);
@@ -103,25 +95,11 @@ public class SecondScreen extends Activity{
         return user;
     }
 
-    public String getDataMainScreen(){
-
-        String logInString="User not Inform name"; /* Obviously this will never happen...*/
-        secondScreenData = getIntent();
-        if(secondScreenData != null) {    /* Means that i have info come from mainScreen  */
-            infoFromMainScreen = secondScreenData.getExtras();
-            if(infoFromMainScreen != null){ /* Means that i have info received from getExtras  */
-                logInString=infoFromMainScreen.getString("userInfo");
-                setUser(infoFromMainScreen.getString("userInfo")); //saving string user
-            }
-        }
-        return  logInString;
-    }
-
     public void fillSpinner(){
         Spinner spinner = (Spinner) findViewById(R.id.spinnerOptions);
         String[] options = getResources().getStringArray(R.array.options);
         ArrayAdapter<String> adapterOptions =
-                new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,options);
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
         adapterOptions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterOptions);
         spinner.setPrompt("Options");
@@ -134,7 +112,7 @@ public class SecondScreen extends Activity{
             @Override
             public void onClick(View v) {
                 cadAtividade = new Intent(SecondScreen.this, Cad_AtividadeActivity.class);
-                cadAtividade.putExtra("id",id);
+                cadAtividade.putExtra("id_usuario",id_usuario);
                 startActivity(cadAtividade);
             }
         });
@@ -143,7 +121,8 @@ public class SecondScreen extends Activity{
     public void carregaLista(){
 
         AtividadeDAO dao = new AtividadeDAO(this);
-        List<Atividade> atividades = dao.getListaAtividades();
+
+        List<Atividade> atividades = dao.getListaAtividades(id_usuario);
 
         ArrayAdapter<Atividade> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
 

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import br.ufc.dc.es.dao.LoginDAO;
@@ -29,14 +27,6 @@ public class MainActivity extends Activity {
         callSecondScreen();
         callContaActivity();
     }
-
-    public String getGuest(){
-
-        final EditText  logInString = (EditText) findViewById(R.id.etGuestName);
-        return logInString.getText().toString();
-    }
-
-
 
     public void callSecondScreen(){
         next  = (Button) findViewById(R.id.btSecondScreen);

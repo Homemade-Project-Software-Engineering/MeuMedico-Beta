@@ -4,9 +4,6 @@ import android.widget.EditText;
 
 import br.ufc.dc.es.model.Atividade;
 
-/**
- * Created by César on 29/05/2016.
- */
 public class AtividadeHelper {
 
     EditText campoNome, campoDescricao, campoData, campoHora;

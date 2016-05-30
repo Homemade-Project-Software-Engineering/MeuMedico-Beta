@@ -9,14 +9,11 @@ import android.widget.Toast;
 import br.ufc.dc.es.dao.AtividadeDAO;
 import br.ufc.dc.es.model.Atividade;
 
-/**
- * Created by César on 29/05/2016.
- */
 public class Cad_AtividadeActivity extends Activity{
 
     Button atividade;
     AtividadeHelper helper;
-    int id;
+    int id_usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +33,8 @@ public class Cad_AtividadeActivity extends Activity{
                 AtividadeDAO dao = new AtividadeDAO(Cad_AtividadeActivity.this);
 
                 Atividade atividade = helper.pegaCamposAtividade();
-                id = getIntent().getIntExtra("id", 0);
-                atividade.setId_usuario(id);
+                id_usuario = getIntent().getIntExtra("id_usuario", 0);
+                atividade.setId_usuario(id_usuario);
                 dao.insert(atividade);
                 dao.close();
                 Toast.makeText(Cad_AtividadeActivity.this, "Atividade inserida com sucesso", Toast.LENGTH_SHORT).show();
