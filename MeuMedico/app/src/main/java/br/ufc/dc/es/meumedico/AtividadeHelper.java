@@ -31,4 +31,12 @@ public class AtividadeHelper {
 
         return atividade;
     }
+
+    public void atividadeParaSerAlterada(Atividade atividadeParaSerAlterada) {
+
+        campoNome.setText(atividadeParaSerAlterada.getNome());
+        campoDescricao.setText(atividadeParaSerAlterada.getDescricao());
+        campoData.setText(atividadeParaSerAlterada.getData());
+        campoHora.setText(atividadeParaSerAlterada.getHora());
+    }
 }

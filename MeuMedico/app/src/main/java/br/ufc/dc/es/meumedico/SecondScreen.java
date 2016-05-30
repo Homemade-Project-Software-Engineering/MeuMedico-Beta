@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 
 import br.ufc.dc.es.dao.AtividadeDAO;
@@ -28,6 +33,7 @@ public class SecondScreen extends Activity{
     String nome, email;
     int id_usuario;
     private ListView lista;
+    Atividade atividadeSelecionadaItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,48 @@ public class SecondScreen extends Activity{
 
         lista = (ListView) findViewById(R.id.listViewAtividades);
         registerForContextMenu(lista);
+
+        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
+
+                atividadeSelecionadaItem = (Atividade) adapter.getItemAtPosition(position);
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuItem editar = menu.add("Editar");
+        editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                Intent atividadeSelecionada = new Intent(SecondScreen.this, Cad_AtividadeActivity.class);
+                atividadeSelecionada.putExtra("atividadeSelecionada", atividadeSelecionadaItem);
+                startActivity(atividadeSelecionada);
+
+                return false;
+            }
+        });
+
+        MenuItem deletar = menu.add("Deletar");
+        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                AtividadeDAO dao = new AtividadeDAO(SecondScreen.this);
+                dao.delete(atividadeSelecionadaItem);
+                dao.close();
+                carregaLista();
+                Toast.makeText(SecondScreen.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        });
     }
 
     @Override
@@ -128,4 +176,6 @@ public class SecondScreen extends Activity{
 
         lista.setAdapter(adapter);
     }
+
+
 }
