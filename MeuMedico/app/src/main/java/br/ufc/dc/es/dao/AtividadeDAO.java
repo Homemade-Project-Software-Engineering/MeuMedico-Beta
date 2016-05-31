@@ -5,15 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import br.ufc.dc.es.model.Atividade;
 
-/**
- * Created by César on 29/05/2016.
- */
 public class AtividadeDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_atividade";
@@ -50,7 +46,7 @@ public class AtividadeDAO extends SQLiteOpenHelper {
     public void insert(Atividade atividade) {
 
         ContentValues cv = new ContentValues();
-        cv.put("id_usuario", atividade.getId());
+        cv.put("id_usuario", atividade.getId_usuario());
         cv.put("nome", atividade.getNome());
         cv.put("descricao", atividade.getDescricao());
         cv.put("data", atividade.getData());
@@ -59,11 +55,12 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         getWritableDatabase().insert(TABELA, null, cv);
     }
 
-    public List<Atividade> getListaAtividades() {
+    public List<Atividade> getListaAtividades(int id_usuario) {
 
         final List<Atividade> atividades = new ArrayList<>();
-        String sql = "SELECT * FROM " + TABELA + ";";
-        final Cursor c = getReadableDatabase().rawQuery(sql, null);
+        String sql = "SELECT * FROM " + TABELA + " where id_usuario = ?";
+        String args[] = new String[]{String.valueOf(id_usuario)};
+        final Cursor c = getReadableDatabase().rawQuery(sql, args);
 
         while(c.moveToNext()){
             Atividade atividade = new Atividade();
@@ -76,7 +73,25 @@ public class AtividadeDAO extends SQLiteOpenHelper {
 
             atividades.add(atividade);
         }
-
+        c.close();
         return atividades;
+    }
+
+    public void update(Atividade atividade) {
+
+        ContentValues cv = new ContentValues();
+        cv.put("nome", atividade.getNome());
+        cv.put("descricao", atividade.getDescricao());
+        cv.put("data", atividade.getData());
+        cv.put("hora", atividade.getHora());
+
+        String args[] = {String.valueOf(atividade.getId())};
+        getWritableDatabase().update(TABELA, cv, "id=?", args);
+    }
+
+    public void delete(Atividade atividadeSelecionadaItem) {
+
+        String args[] = {String.valueOf(atividadeSelecionadaItem.getId())};
+        getWritableDatabase().delete(TABELA, "id=?", args);
     }
 }
