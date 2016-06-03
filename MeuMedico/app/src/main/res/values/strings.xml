@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">MeuMedico</string>
+    <string name="app_name">Meu Médico</string>
     <string name="btSecondActivity">Next</string>
-    <string name="spinner">Novo</string>
-    <string name="menu1">Perfis</string>
-    <string name="menu2">Configurações</string>
-    <string name="menu3">Conta</string>
+    <string name="spinner">Perfis</string>
+    <string name="menu1">Configurações</string>
+    <string name="menu2">Conta</string>
+    <string name="menu3">Logout</string>
     <string name="date">Date</string>
     <string-array name="options">
         <item>Opção 1</item>

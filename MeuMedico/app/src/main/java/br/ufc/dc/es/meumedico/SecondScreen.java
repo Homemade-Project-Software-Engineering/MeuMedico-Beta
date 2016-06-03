@@ -26,7 +26,6 @@ public class SecondScreen extends Activity{
 
     Intent cadAtividade;
     String user;
-    Button home;
     Button datePicker;
     TextView nameUser;
     Button atividade;
@@ -40,7 +39,6 @@ public class SecondScreen extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
         fillSpinner();
-        btHome();
         btDate();
 
         callCadAtividade();
@@ -107,7 +105,7 @@ public class SecondScreen extends Activity{
 
     @Override
      public boolean onCreateOptionsMenu(Menu menu){
-         getMenuInflater().inflate(R.menu.menu_main,menu);
+        getMenuInflater().inflate(R.menu.menu_main,menu);
         return true;
      }
      public void btDate(){
@@ -121,16 +119,25 @@ public class SecondScreen extends Activity{
          });
      }
 
-     public void btHome(){
-         home = (Button) findViewById(R.id.home);
-         home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case R.id.itemOptionsPerfil:
+                break;
+            case R.id.itemOptionsConfig:
+                break;
+            case R.id.itemOptionsConta:
+                break;
+            case R.id.itemOptionsLogout:
                 startActivity(new Intent(SecondScreen.this, MainActivity.class));
                 finish(); // dispose do java
-            }
-        });
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
+
     public void setNameView(String name){
         nameUser = (TextView) findViewById(R.id.nameUser);
         nameUser.setText(name);

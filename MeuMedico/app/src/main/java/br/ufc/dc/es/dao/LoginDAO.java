@@ -7,13 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.ufc.dc.es.model.Login;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by César on 28/05/2016.
- */
 public class LoginDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_login";
@@ -60,11 +53,12 @@ public class LoginDAO extends SQLiteOpenHelper {
         getWritableDatabase().insert(TABELA, null, cv);
     }
 
-    public void delete(Login login) {
+    //implementar no código atualizar e deletar contas
+    /*public void delete(Login login) {
 
         String args[] = {String.valueOf(login.getEmail())};
         getWritableDatabase().delete(TABELA, "email=?", args);
-    }
+    }*
 
     public void update(Login login) {
 
@@ -78,7 +72,7 @@ public class LoginDAO extends SQLiteOpenHelper {
 
         String args[] = {String.valueOf(login.getEmail())};
         getWritableDatabase().update(TABELA, cv, "email=?", args);
-    }
+    }*/
 
     public boolean fazerLogin(Login login) {
 
@@ -86,7 +80,13 @@ public class LoginDAO extends SQLiteOpenHelper {
         String[] args = {login.getEmail(),login.getCrypted_password()};
         final Cursor cursor = getReadableDatabase().rawQuery(sql, args);
 
-        return cursor.moveToFirst();
+        if(cursor.moveToFirst()){
+            cursor.close();
+            return true;
+        }else{
+            cursor.close();
+            return false;
+        }
     }
 
     public Login getInformacoes(Login login) {
@@ -99,6 +99,7 @@ public class LoginDAO extends SQLiteOpenHelper {
             login.setId(cursor.getInt(cursor.getColumnIndex("id")));
             login.setName(cursor.getString(cursor.getColumnIndex("name")));
         }
+        cursor.close();
 
         return login;
     }

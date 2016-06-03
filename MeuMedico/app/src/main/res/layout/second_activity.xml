@@ -58,19 +58,8 @@
         android:text="" />
 
     <Button
-        android:id="@+id/home"
-        android:text="Log Out"
-        android:layout_below="@id/nameUser"
-        android:textSize="10dp"
-        android:layout_width="220px"
-        android:layout_height="100px"
-        android:layout_centerHorizontal="true"
-        android:textColor="#000000"
-        android:background="#25dd8b"
-        />
-    <Button
         android:id="@+id/btDatePiker"
-        android:layout_below="@id/home"
+        android:layout_below="@+id/btCad_Atividade"
         android:textSize="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,8 +68,8 @@
         />
     <Button
         android:id="@+id/btEmergency"
-        android:layout_below="@id/home"
-        android:layout_alignRight="@id/home"
+        android:layout_below="@+id/btCad_Atividade"
+        android:layout_alignRight="@+id/btCad_Atividade"
         android:hint="Emergency!"
         android:textSize="10dp"
         android:layout_alignParentRight="true"
@@ -97,12 +86,13 @@
     </ListView>
 
     <Button
+        android:id="@+id/btCad_Atividade"
+        android:text="Cadastrar Atividade"
+        android:layout_below="@id/nameUser"
         android:layout_width="300px"
         android:layout_height="100px"
-        android:text="Cadastrar Atividade"
-        android:id="@+id/btCad_Atividade"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textColor="#000000"
-        android:background="#25dd8b" />
+        android:background="#25dd8b"
+        />
 </RelativeLayout>

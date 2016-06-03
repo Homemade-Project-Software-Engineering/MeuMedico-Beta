@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/itemOptions"
+        android:id="@+id/itemOptionsPerfil"
         android:title="@string/spinner"
         app:showAsAction="never"
     />
     <item
-        android:id="@+id/itemOptions1"
+        android:id="@+id/itemOptionsConfig"
         android:title="@string/menu1"
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/itemOptions2"
+        android:id="@+id/itemOptionsConta"
         android:title="@string/menu2"
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/itemOptions3"
+        android:id="@+id/itemOptionsLogout"
         android:title="@string/menu3"
         app:showAsAction="never"
         />
