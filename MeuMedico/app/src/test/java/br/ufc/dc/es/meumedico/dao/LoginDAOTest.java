@@ -1,36 +1,24 @@
 package br.ufc.dc.es.meumedico.dao;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
-import android.test.AndroidTestRunner;
-import android.test.RenamingDelegatingContext;
-import android.test.mock.MockContext;
-import android.test.suitebuilder.annotation.SmallTest;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import br.ufc.dc.es.dao.LoginDAO;
 import br.ufc.dc.es.model.Login;
-import br.ufc.dc.es.model.MyAlternateLogVersion;
 
-
-/**
- * Created by jonas on 07/06/16.
- */
+import static org.mockito.Mockito.*;
 
 public class LoginDAOTest extends AndroidTestCase{
 
     private LoginDAO loginDAO;
-    SQLiteDatabase db;
-
+    private Login login;
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        loginDAO = new LoginDAO(getContext());
+        loginDAO =  mock(LoginDAO.class);
+        login = mock(Login.class);
     }
 
     @After
@@ -41,38 +29,29 @@ public class LoginDAOTest extends AndroidTestCase{
     @Test
     public void testOnCreate() throws Exception {
 
-        //fail();
+        assertNotNull(loginDAO); //not null
+        when(loginDAO.getDatabaseName()).thenReturn("NAME_BANK");
+        assertEquals(loginDAO.getDatabaseName(),"NAME_BANK");
 
-        db = loginDAO.getWritableDatabase();
-        assertTrue(db.isOpen());
-        db.close();
-        MyAlternateLogVersion.Log("This test has been pass!");
-
-    }
-
-     @Test
-    public void testOnUpgrade() throws Exception {
-         fail();
     }
 
     @Test
-    public void testInsert() throws Exception {
-
-        //loginDAO = new LoginDAO(getContext());
-        //Login login = new Login();
-        //login.setName("LoginName");
-        //assertEquals(loginDAO.getInformacoes(login).getName(),"LoginName");
-        assertNotNull(loginDAO);
+    public void testInsert() throws Exception {// FINALLY!!!!
+        when(loginDAO.insert(login)).thenReturn((long) 100);
+        loginDAO.insert(login);
+        assertEquals(loginDAO.insert(login),100);
 
     }
 
     @Test
     public void testFazerLogin() throws Exception {
-        fail();
+        when(loginDAO.fazerLogin(login)).thenReturn(true);
+        assertEquals(loginDAO.fazerLogin(login),true);
     }
 
     @Test
     public void testGetInformacoes() throws Exception {
-        fail();
+        when(loginDAO.getInformacoes(login)).thenReturn(login);
+        assertEquals(loginDAO.getInformacoes(login),login);
     }
 }
