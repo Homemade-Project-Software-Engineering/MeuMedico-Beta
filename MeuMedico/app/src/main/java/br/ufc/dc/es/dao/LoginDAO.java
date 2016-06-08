@@ -3,6 +3,7 @@ package br.ufc.dc.es.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.ufc.dc.es.model.Login;
@@ -29,7 +30,11 @@ public class LoginDAO extends SQLiteOpenHelper {
                 "created_at TEXT, "+
                 "updated_at REAL"+
                 ");";
-        db.execSQL(sql);
+        try {
+            db.execSQL(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -40,7 +45,7 @@ public class LoginDAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(Login login) {
+    public long insert(Login login) {
 
         ContentValues cv = new ContentValues();
         cv.put("name", login.getName());
@@ -50,7 +55,8 @@ public class LoginDAO extends SQLiteOpenHelper {
         cv.put("created_at", login.getCreated_at());
         cv.put("updated_at", login.getUpdated_at());
 
-        getWritableDatabase().insert(TABELA, null, cv);
+        return getWritableDatabase().insert(TABELA, null, cv);
+
     }
 
     //implementar no código atualizar e deletar contas
@@ -103,6 +109,8 @@ public class LoginDAO extends SQLiteOpenHelper {
 
         return login;
     }
+
 }
 
-/* test git */
+
+
