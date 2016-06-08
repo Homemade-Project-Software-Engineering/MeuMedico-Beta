@@ -26,6 +26,7 @@ public class LoginDAOTest extends AndroidTestCase{
     private LoginDAO loginDAO;
     SQLiteDatabase db;
 
+
     @Before
     public void setUp() throws Exception {
         super.setUp();
