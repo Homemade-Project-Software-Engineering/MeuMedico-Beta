@@ -1,9 +1,13 @@
 package br.ufc.dc.es.meumedico;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import br.ufc.dc.es.dao.AtividadeDAO;
@@ -15,6 +19,8 @@ public class Cad_AtividadeActivity extends Activity{
     AtividadeHelper helper;
     int id_usuario;
     Atividade atividadeParaSerAlterada;
+    int hora, minuto;
+    EditText editTextHora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,23 +45,55 @@ public class Cad_AtividadeActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                AtividadeDAO dao = new AtividadeDAO(Cad_AtividadeActivity.this);
-                Atividade atividade = helper.pegaCamposAtividade();
+                ValidacaoHelper vh = new ValidacaoHelper(Cad_AtividadeActivity.this);
 
-                if(atividadeParaSerAlterada!=null){
-                    atividade.setId(atividadeParaSerAlterada.getId());
-                    atividade.setId_usuario(atividadeParaSerAlterada.getId_usuario());
-                    dao.update(atividade);
-                    Toast.makeText(Cad_AtividadeActivity.this, "Atividade atualizada com sucesso", Toast.LENGTH_SHORT).show();
+                if(vh.verificaCamposVaziosAtividade()){
+                    Toast.makeText(Cad_AtividadeActivity.this, "Todos os campos são obrigatórios, preencha e tente novamente", Toast.LENGTH_LONG).show();
                 }else {
-                    id_usuario = getIntent().getIntExtra("id_usuario", 0);
-                    atividade.setId_usuario(id_usuario);
-                    dao.insert(atividade);
-                    Toast.makeText(Cad_AtividadeActivity.this, "Atividade inserida com sucesso", Toast.LENGTH_SHORT).show();
+                    AtividadeDAO dao = new AtividadeDAO(Cad_AtividadeActivity.this);
+                    Atividade atividade = helper.pegaCamposAtividade();
+
+                    if (atividadeParaSerAlterada != null) {
+                        atividade.setId(atividadeParaSerAlterada.getId());
+                        atividade.setId_usuario(atividadeParaSerAlterada.getId_usuario());
+                        dao.update(atividade);
+                        Toast.makeText(Cad_AtividadeActivity.this, "Atividade atualizada com sucesso", Toast.LENGTH_SHORT).show();
+                    } else {
+                        id_usuario = getIntent().getIntExtra("id_usuario", 0);
+                        atividade.setId_usuario(id_usuario);
+                        dao.insert(atividade);
+                        Toast.makeText(Cad_AtividadeActivity.this, "Atividade inserida com sucesso", Toast.LENGTH_SHORT).show();
+                    }
+                    dao.close();
+                    finish();
                 }
-                dao.close();
-                finish();
             }
         });
+    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
+    }
+
+    TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            System.out.println("Entrou");
+            hora = hourOfDay;
+            minuto = minute;
+            updateDisplay();
+        }
+    };
+
+    private void updateDisplay() {
+        editTextHora = (EditText) findViewById(R.id.AtHora);
+        System.out.println(hora+minuto);
+        editTextHora.setText(hora+minuto);
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
     }
 }
