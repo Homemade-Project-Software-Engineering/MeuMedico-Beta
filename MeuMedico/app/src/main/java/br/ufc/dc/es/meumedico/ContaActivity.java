@@ -27,14 +27,19 @@ public class ContaActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                helper = new ContaHelper(ContaActivity.this);
-                final Login login = helper.pegaCadastroLogin();
+                ValidacaoHelper vh = new ValidacaoHelper(ContaActivity.this);
+                if(vh.verificaCamposVaziosConta()){
+                    Toast.makeText(ContaActivity.this, "Todos os campos são obrigatórios", Toast.LENGTH_LONG).show();
+                }else {
+                    helper = new ContaHelper(ContaActivity.this);
+                    final Login login = helper.pegaCadastroLogin();
 
-                LoginDAO dao = new LoginDAO(ContaActivity.this);
-                dao.insert(login);
-                dao.close();
-                Toast.makeText(ContaActivity.this, "Conta criada com sucesso", Toast.LENGTH_SHORT).show();
-                finish();
+                    LoginDAO dao = new LoginDAO(ContaActivity.this);
+                    dao.insert(login);
+                    dao.close();
+                    Toast.makeText(ContaActivity.this, "Conta criada com sucesso", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
     }

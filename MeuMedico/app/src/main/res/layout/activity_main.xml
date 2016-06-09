@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:theme="@style/_MeuMedico"
-    android:background="#F2F2F2"
+    android:background="#FFFFFF"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,7 +17,6 @@
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:shadowColor="#9B9D99"
         android:shadowDx="5"
         android:shadowDy="5"
@@ -27,59 +25,75 @@
         android:textColor="#25DD8B"
         android:text="Meu Médico" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/login_face"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
+
     <br.ufc.dc.es.meumedico.MyMainTextView
         android:id="@+id/logInLabel"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/MainTitle"
-        android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textColor="#25DD8B"
-        android:text="Log in" />
-    <EditText
-        android:id="@+id/etGuestName"
-        android:layout_centerHorizontal="true"
-        android:layout_width="600px"
-        android:textSize="15dp"
-        android:layout_below="@id/logInLabel"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:layout_width="600px"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/etGuestName"
+        android:text="ou"
+        android:layout_gravity="center_horizontal" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/etGuestName"
+            android:layout_width="match_parent"
+            android:textColor="#000000"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textColorHint="#000000" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputLayoutPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/passwordTextEdit"
         android:textColor="#000000"
-        android:textStyle="bold"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:hint="Senha"
+        android:textColorHint="#000000"/>
+    </android.support.design.widget.TextInputLayout>
+
     <Button
         android:layout_margin="10dp"
         android:id="@+id/btSecondScreen"
-        android:layout_width="220px"
-        android:layout_height="100px"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/passwordTextEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/btSecondActivity"
-        android:textSize="10sp"
-        android:textStyle="bold"
-        android:textColor="#D3D3D3"
-        android:background="#25DD8B"
-        />
+        android:textColor="#000000"
+        android:background="#25DD8B" />
 
-    <Button
-        android:text="Cadastrar Conta"
-        android:id="@+id/btCreateAccount"
-        android:layout_width="250px"
-        android:layout_height="100px"
-        android:layout_marginBottom="43dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btSecondScreen"
-        android:textColor="#D3D3D3"
-        android:background="#25DD8B"
-        />
-</RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Não tem conta ainda?"
+        android:id="@+id/textViewQuestion" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="CADASTRE-SE"
+        android:id="@+id/textViewButton"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/com_facebook_blue"
+        android:clickable="true" />
+
+</LinearLayout>

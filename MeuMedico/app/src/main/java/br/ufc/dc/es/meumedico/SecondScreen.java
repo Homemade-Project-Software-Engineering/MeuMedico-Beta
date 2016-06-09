@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import java.util.List;
 
 import br.ufc.dc.es.dao.AtividadeDAO;
@@ -31,7 +33,7 @@ public class SecondScreen extends Activity{
     Button atividade;
     String nome, email;
     int id_usuario;
-    private ListView lista;
+    ListView lista;
     Atividade atividadeSelecionadaItem;
 
     @Override
@@ -44,11 +46,18 @@ public class SecondScreen extends Activity{
         callCadAtividade();
 
         Login informacoes = (Login) getIntent().getSerializableExtra("informacoes");
-        nome = informacoes.getName();
-        email = informacoes.getEmail();
-        id_usuario = informacoes.getId();
+        if(informacoes!=null) {
+            nome = informacoes.getName();
+            email = informacoes.getEmail();
+            id_usuario = informacoes.getId();
+        }
+
+        Bundle infosFacebook = getIntent().getBundleExtra("infosFacebook");
+        if(infosFacebook!=null) {
+            nome = infosFacebook.get("first_name").toString();
+        }
         //setUser("@"+getDataMainScreen());
-        setUser(id_usuario + " - " + nome);
+        setUser(nome);
         setNameView(getUser());
 
         lista = (ListView) findViewById(R.id.listViewAtividades);
@@ -131,6 +140,7 @@ public class SecondScreen extends Activity{
             case R.id.itemOptionsConta:
                 break;
             case R.id.itemOptionsLogout:
+                LoginManager.getInstance().logOut();
                 startActivity(new Intent(SecondScreen.this, MainActivity.class));
                 finish(); // dispose do java
                 break;
@@ -182,6 +192,8 @@ public class SecondScreen extends Activity{
         ArrayAdapter<Atividade> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
 
         lista.setAdapter(adapter);
+
+        dao.close();
     }
 
 
