@@ -43,7 +43,7 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insert(Atividade atividade) {
+    public long insert(Atividade atividade) {
 
         ContentValues cv = new ContentValues();
         cv.put("id_usuario", atividade.getId_usuario());
@@ -52,7 +52,7 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         cv.put("data", atividade.getData());
         cv.put("hora", atividade.getHora());
 
-        getWritableDatabase().insert(TABELA, null, cv);
+        return getWritableDatabase().insert(TABELA, null, cv);
     }
 
     public List<Atividade> getListaAtividades(int id_usuario) {
@@ -89,9 +89,9 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         getWritableDatabase().update(TABELA, cv, "id=?", args);
     }
 
-    public void delete(Atividade atividadeSelecionadaItem) {
+    public long delete(Atividade atividadeSelecionadaItem) {
 
         String args[] = {String.valueOf(atividadeSelecionadaItem.getId())};
-        getWritableDatabase().delete(TABELA, "id=?", args);
+        return getWritableDatabase().delete(TABELA, "id=?", args);
     }
 }

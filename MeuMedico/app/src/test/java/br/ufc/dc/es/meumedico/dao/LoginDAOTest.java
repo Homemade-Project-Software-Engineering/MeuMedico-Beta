@@ -36,7 +36,7 @@ public class LoginDAOTest extends AndroidTestCase{
     }
 
     @Test
-    public void testInsert() throws Exception {// FINALLY!!!!
+    public void testInsert() throws Exception {
         when(loginDAO.insert(login)).thenReturn((long) 100);
         loginDAO.insert(login);
         assertEquals(loginDAO.insert(login),100);
