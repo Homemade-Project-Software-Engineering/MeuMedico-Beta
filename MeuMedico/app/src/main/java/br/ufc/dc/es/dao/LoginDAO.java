@@ -3,8 +3,8 @@ package br.ufc.dc.es.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.ufc.dc.es.model.Login;
 
@@ -55,8 +55,7 @@ public class LoginDAO extends SQLiteOpenHelper {
         cv.put("created_at", login.getCreated_at());
         cv.put("updated_at", login.getUpdated_at());
 
-       return getWritableDatabase().insert(TABELA, null, cv);
-
+        return getWritableDatabase().insert(TABELA, null, cv);
     }
 
     //implementar no código atualizar e deletar contas
@@ -110,7 +109,41 @@ public class LoginDAO extends SQLiteOpenHelper {
         return login;
     }
 
+    public boolean verificaCadastroFacebookBanco(String email) {
+
+        String sql = "SELECT * FROM " + TABELA + " WHERE EMAIL = ?;";
+        String[] args = {email};
+        final Cursor cursor = getReadableDatabase().rawQuery(sql, args);
+
+        if(cursor.moveToFirst()){
+            cursor.close();
+            return true;
+        }else{
+            cursor.close();
+            return false;
+        }
+    }
+
+    public void cadastraPerfilFacebookBanco(Login login) {
+
+        ContentValues cv = new ContentValues();
+        cv.put("name", login.getName());
+        cv.put("email", login.getEmail());
+
+        getWritableDatabase().insert(TABELA, null, cv);
+    }
+
+    public int getIdUserByFacebookEmail(String email) {
+        String sql = "SELECT id FROM " + TABELA + " WHERE EMAIL = ?;";
+        String[] args = {email};
+        final Cursor cursor = getReadableDatabase().rawQuery(sql, args);
+        int id_user = 0;
+
+        while(cursor.moveToNext()){
+            id_user = cursor.getInt(cursor.getColumnIndex("id"));
+        }
+
+        cursor.close();
+        return id_user;
+    }
 }
-
-
-

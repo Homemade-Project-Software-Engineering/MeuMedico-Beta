@@ -21,6 +21,7 @@ import com.facebook.login.LoginManager;
 import java.util.List;
 
 import br.ufc.dc.es.dao.AtividadeDAO;
+import br.ufc.dc.es.dao.LoginDAO;
 import br.ufc.dc.es.model.Atividade;
 import br.ufc.dc.es.model.Login;
 
@@ -54,7 +55,11 @@ public class SecondScreen extends Activity{
 
         Bundle infosFacebook = getIntent().getBundleExtra("infosFacebook");
         if(infosFacebook!=null) {
+            LoginDAO dao = new LoginDAO(SecondScreen.this);
+
             nome = infosFacebook.get("first_name").toString();
+            email = infosFacebook.get("email").toString();
+            id_usuario = dao.getIdUserByFacebookEmail(email);
         }
         //setUser("@"+getDataMainScreen());
         setUser(nome);

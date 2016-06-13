@@ -7,6 +7,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     private CallbackManager callbackManager;
     private TextInputLayout userTIL, passwordTIL;
     private EditText userET, passwordET;
+    private Bundle bFacebookData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
         //obs: essa chamada precisa vir primeiro que o setContentView
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+
         callSecondScreen();
         callContaActivity();
 
@@ -204,7 +207,24 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
                 // Get facebook data from login
-                Bundle bFacebookData = getFacebookData(object);
+                bFacebookData = getFacebookData(object);
+
+                LoginDAO dao = new LoginDAO(MainActivity.this);
+                Login login = new Login();
+
+                String nome = bFacebookData.getString("first_name");
+                String email = bFacebookData.getString("email");
+                login.setName(nome);
+                login.setEmail(email);
+
+                if(dao.verificaCadastroFacebookBanco(email)){
+                    Log.i("Status","Perfil do facebook já cadastrado no banco");
+                }else{
+                    dao.cadastraPerfilFacebookBanco(login);
+                }
+
+                dao.close();
+
                 progressDialog.dismiss();
                 Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreen.class);
                 irParaATelaPrincipal.putExtra("infosFacebook", bFacebookData);
@@ -225,7 +245,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onCompleted(JSONObject object, GraphResponse response) {
                 // Get facebook data from login
-                Bundle bFacebookData = getFacebookData(object);
+                bFacebookData = getFacebookData(object);
                 Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreen.class);
                 irParaATelaPrincipal.putExtra("infosFacebook", bFacebookData);
                 startActivity(irParaATelaPrincipal);
