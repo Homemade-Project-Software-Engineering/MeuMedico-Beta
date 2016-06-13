@@ -1,9 +1,13 @@
-package br.ufc.dc.es.meumedico;
+package br.ufc.dc.es.meumedico.model;
 
 import android.widget.EditText;
 import java.text.DateFormat;
 import java.util.Date;
-import br.ufc.dc.es.model.Login;
+
+import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.model.Login;
+import br.ufc.dc.es.meumedico.view.ContaActivity;
+import br.ufc.dc.es.meumedico.view.MainActivity;
 
 public class ContaHelper {
 

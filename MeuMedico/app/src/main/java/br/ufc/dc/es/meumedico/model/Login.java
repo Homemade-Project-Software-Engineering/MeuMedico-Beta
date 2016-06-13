@@ -1,4 +1,4 @@
-package br.ufc.dc.es.model;
+package br.ufc.dc.es.meumedico.model;
 
 import java.io.Serializable;
 

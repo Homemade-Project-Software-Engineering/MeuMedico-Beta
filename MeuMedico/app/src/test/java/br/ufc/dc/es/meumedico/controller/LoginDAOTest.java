@@ -1,11 +1,11 @@
-package br.ufc.dc.es.meumedico.dao;
+package br.ufc.dc.es.meumedico.controller;
 
 import android.test.AndroidTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import br.ufc.dc.es.dao.LoginDAO;
-import br.ufc.dc.es.model.Login;
+
+import br.ufc.dc.es.meumedico.model.Login;
 
 import static org.mockito.Mockito.*;
 

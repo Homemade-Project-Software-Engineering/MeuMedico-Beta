@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.dao;
+package br.ufc.dc.es.meumedico.controller;
 
 import android.test.AndroidTestCase;
 
@@ -9,8 +9,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufc.dc.es.dao.AtividadeDAO;
-import br.ufc.dc.es.model.Atividade;
+import br.ufc.dc.es.meumedico.model.Atividade;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

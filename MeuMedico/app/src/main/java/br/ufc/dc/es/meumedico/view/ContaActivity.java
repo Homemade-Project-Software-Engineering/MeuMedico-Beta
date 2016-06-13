@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico;
+package br.ufc.dc.es.meumedico.view;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,8 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import br.ufc.dc.es.dao.LoginDAO;
-import br.ufc.dc.es.model.Login;
+import br.ufc.dc.es.meumedico.model.ContaHelper;
+import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.model.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.controller.LoginDAO;
+import br.ufc.dc.es.meumedico.model.Login;
 
 public class ContaActivity extends Activity {
 

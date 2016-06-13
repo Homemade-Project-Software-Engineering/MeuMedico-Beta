@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico;
+package br.ufc.dc.es.meumedico.view;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -10,8 +10,13 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import br.ufc.dc.es.dao.AtividadeDAO;
-import br.ufc.dc.es.model.Atividade;
+import br.ufc.dc.es.meumedico.model.AtividadeHelper;
+import br.ufc.dc.es.meumedico.model.DatePickerFragment;
+import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.model.TimePickerFragment;
+import br.ufc.dc.es.meumedico.model.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.Atividade;
 
 public class Cad_AtividadeActivity extends Activity{
 

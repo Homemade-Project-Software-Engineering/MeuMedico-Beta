@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico;
+package br.ufc.dc.es.meumedico.model;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

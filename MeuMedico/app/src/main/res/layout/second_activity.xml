@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TableRow>
-            <br.ufc.dc.es.meumedico.MyMainTextView
+            <br.ufc.dc.es.meumedico.model.MyMainTextView
                 android:id="@+id/welcome"
                 android:layout_marginRight="10px"
                 android:textSize="20dp"
@@ -46,7 +46,7 @@
         </TableRow>
     </TableLayout>
 
-    <br.ufc.dc.es.meumedico.MyMainTextView
+    <br.ufc.dc.es.meumedico.model.MyMainTextView
         android:layout_margin="5dp"
         android:layout_below="@id/topTable"
         android:id="@+id/nameUser"

@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico;
+package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -7,14 +7,15 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.ufc.dc.es.dao.LoginDAO;
-import br.ufc.dc.es.model.Login;
+import br.ufc.dc.es.meumedico.model.ContaHelper;
+import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.LoginDAO;
+import br.ufc.dc.es.meumedico.model.Login;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity{
                     if (dao.fazerLogin(login)) {
 
                         Login informacoes = dao.getInformacoes(login);
-                        Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreen.class);
+                        Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreenActivity.class);
                         irParaATelaPrincipal.putExtra("informacoes", informacoes);
                         startActivity(irParaATelaPrincipal);
                         dao.close();
@@ -226,7 +227,7 @@ public class MainActivity extends AppCompatActivity{
                 dao.close();
 
                 progressDialog.dismiss();
-                Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreen.class);
+                Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreenActivity.class);
                 irParaATelaPrincipal.putExtra("infosFacebook", bFacebookData);
                 startActivity(irParaATelaPrincipal);
                 finish();
@@ -246,7 +247,7 @@ public class MainActivity extends AppCompatActivity{
             public void onCompleted(JSONObject object, GraphResponse response) {
                 // Get facebook data from login
                 bFacebookData = getFacebookData(object);
-                Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreen.class);
+                Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreenActivity.class);
                 irParaATelaPrincipal.putExtra("infosFacebook", bFacebookData);
                 startActivity(irParaATelaPrincipal);
                 finish();

@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico;
+package br.ufc.dc.es.meumedico.view;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -20,12 +20,14 @@ import com.facebook.login.LoginManager;
 
 import java.util.List;
 
-import br.ufc.dc.es.dao.AtividadeDAO;
-import br.ufc.dc.es.dao.LoginDAO;
-import br.ufc.dc.es.model.Atividade;
-import br.ufc.dc.es.model.Login;
+import br.ufc.dc.es.meumedico.model.DatePickerFragment;
+import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
+import br.ufc.dc.es.meumedico.controller.LoginDAO;
+import br.ufc.dc.es.meumedico.model.Atividade;
+import br.ufc.dc.es.meumedico.model.Login;
 
-public class SecondScreen extends Activity{
+public class SecondScreenActivity extends Activity{
 
     Intent cadAtividade;
     String user;
@@ -55,7 +57,7 @@ public class SecondScreen extends Activity{
 
         Bundle infosFacebook = getIntent().getBundleExtra("infosFacebook");
         if(infosFacebook!=null) {
-            LoginDAO dao = new LoginDAO(SecondScreen.this);
+            LoginDAO dao = new LoginDAO(SecondScreenActivity.this);
 
             nome = infosFacebook.get("first_name").toString();
             email = infosFacebook.get("email").toString();
@@ -87,7 +89,7 @@ public class SecondScreen extends Activity{
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                Intent atividadeSelecionada = new Intent(SecondScreen.this, Cad_AtividadeActivity.class);
+                Intent atividadeSelecionada = new Intent(SecondScreenActivity.this, Cad_AtividadeActivity.class);
                 atividadeSelecionada.putExtra("atividadeSelecionada", atividadeSelecionadaItem);
                 startActivity(atividadeSelecionada);
 
@@ -100,11 +102,11 @@ public class SecondScreen extends Activity{
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                AtividadeDAO dao = new AtividadeDAO(SecondScreen.this);
+                AtividadeDAO dao = new AtividadeDAO(SecondScreenActivity.this);
                 dao.delete(atividadeSelecionadaItem);
                 dao.close();
                 carregaLista();
-                Toast.makeText(SecondScreen.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SecondScreenActivity.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();
 
                 return false;
             }
@@ -146,7 +148,7 @@ public class SecondScreen extends Activity{
                 break;
             case R.id.itemOptionsLogout:
                 LoginManager.getInstance().logOut();
-                startActivity(new Intent(SecondScreen.this, MainActivity.class));
+                startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
                 finish(); // dispose do java
                 break;
         }
@@ -181,7 +183,7 @@ public class SecondScreen extends Activity{
         atividade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cadAtividade = new Intent(SecondScreen.this, Cad_AtividadeActivity.class);
+                cadAtividade = new Intent(SecondScreenActivity.this, Cad_AtividadeActivity.class);
                 cadAtividade.putExtra("id_usuario",id_usuario);
                 startActivity(cadAtividade);
             }

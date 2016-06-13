@@ -1,4 +1,4 @@
-package br.ufc.dc.es.dao;
+package br.ufc.dc.es.meumedico.controller;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufc.dc.es.model.Atividade;
+import br.ufc.dc.es.meumedico.model.Atividade;
 
 public class AtividadeDAO extends SQLiteOpenHelper {
 
