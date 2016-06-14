@@ -88,12 +88,6 @@ public class Cad_AtividadeActivity extends FragmentActivity implements DatePicke
 
     }
 
-    private void updateDisplay() {
-        editTextHora = (EditText) findViewById(R.id.AtHora);
-        System.out.println(hora+minuto);
-        editTextHora.setText(hora+minuto);
-    }
-
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");

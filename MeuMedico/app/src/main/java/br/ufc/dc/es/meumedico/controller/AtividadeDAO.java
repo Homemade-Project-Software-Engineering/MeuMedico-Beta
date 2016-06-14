@@ -13,7 +13,7 @@ import br.ufc.dc.es.meumedico.model.Atividade;
 public class AtividadeDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_atividade";
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 2;
     private static final String TABELA = "Atividade";
 
     public AtividadeDAO(Context context) {
@@ -29,8 +29,7 @@ public class AtividadeDAO extends SQLiteOpenHelper {
                 "id_usuario INTEGER," +
                 "nome TEXT, " +
                 "descricao TEXT, " +
-                "data TEXT, " +
-                "hora TEXT" +
+                "data TEXT" +
                 ");";
         db.execSQL(sql);
     }
@@ -50,7 +49,6 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         cv.put("nome", atividade.getNome());
         cv.put("descricao", atividade.getDescricao());
         cv.put("data", atividade.getData());
-        cv.put("hora", atividade.getHora());
 
         return getWritableDatabase().insert(TABELA, null, cv);
     }
@@ -68,8 +66,11 @@ public class AtividadeDAO extends SQLiteOpenHelper {
             atividade.setId_usuario(c.getInt(c.getColumnIndex("id_usuario")));
             atividade.setNome(c.getString(c.getColumnIndex("nome")));
             atividade.setDescricao(c.getString(c.getColumnIndex("descricao")));
-            atividade.setData(c.getString(c.getColumnIndex("data")));
-            atividade.setHora(c.getString(c.getColumnIndex("hora")));
+
+            String dataHora = c.getString(c.getColumnIndex("data"));
+            String split[] = dataHora.split(" ");
+            atividade.setData(split[0]);
+            atividade.setHora(split[1]);
 
             atividades.add(atividade);
         }
@@ -83,7 +84,6 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         cv.put("nome", atividade.getNome());
         cv.put("descricao", atividade.getDescricao());
         cv.put("data", atividade.getData());
-        cv.put("hora", atividade.getHora());
 
         String args[] = {String.valueOf(atividade.getId())};
         getWritableDatabase().update(TABELA, cv, "id=?", args);

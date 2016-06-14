@@ -28,8 +28,7 @@ public class AtividadeHelper {
         Atividade atividade = new Atividade();
         atividade.setNome(nome);
         atividade.setDescricao(descricao);
-        atividade.setData(data);
-        atividade.setHora(hora);
+        atividade.setData(data+" "+hora);
 
         return atividade;
     }
