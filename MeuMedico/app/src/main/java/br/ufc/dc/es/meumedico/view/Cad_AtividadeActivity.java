@@ -1,11 +1,16 @@
 package br.ufc.dc.es.meumedico.view;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -18,14 +23,14 @@ import br.ufc.dc.es.meumedico.model.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
 import br.ufc.dc.es.meumedico.model.Atividade;
 
-public class Cad_AtividadeActivity extends Activity{
+public class Cad_AtividadeActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
     Button btsalvarAlterar;
     AtividadeHelper helper;
     int id_usuario;
     Atividade atividadeParaSerAlterada;
     int hora, minuto;
-    EditText editTextHora;
+    EditText editTextHora, editTextData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,17 +84,9 @@ public class Cad_AtividadeActivity extends Activity{
     public void showTimePickerDialog(View v) {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
-    }
 
-    TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            System.out.println("Entrou");
-            hora = hourOfDay;
-            minuto = minute;
-            updateDisplay();
-        }
-    };
+
+    }
 
     private void updateDisplay() {
         editTextHora = (EditText) findViewById(R.id.AtHora);
@@ -100,5 +97,19 @@ public class Cad_AtividadeActivity extends Activity{
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        editTextData = (EditText) findViewById(R.id.AtData);
+        editTextData.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        editTextHora = (EditText) findViewById(R.id.AtHora);
+        editTextHora.setText(hourOfDay+":"+minute);
     }
 }

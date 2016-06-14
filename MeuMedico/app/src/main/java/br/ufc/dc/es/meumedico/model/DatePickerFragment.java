@@ -8,6 +8,8 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
+import br.ufc.dc.es.meumedico.view.Cad_AtividadeActivity;
+
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener  {
 
@@ -21,7 +23,7 @@ public class DatePickerFragment extends DialogFragment
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        return new DatePickerDialog(getActivity(), (Cad_AtividadeActivity)getActivity(), year, month, day);
     }
 
     @Override
