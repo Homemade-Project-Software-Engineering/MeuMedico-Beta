@@ -13,7 +13,7 @@ import br.ufc.dc.es.meumedico.model.Atividade;
 public class AtividadeDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_atividade";
-    private static final int VERSAO = 2;
+    private static final int VERSAO = 3;
     private static final String TABELA = "Atividade";
 
     public AtividadeDAO(Context context) {
@@ -68,8 +68,14 @@ public class AtividadeDAO extends SQLiteOpenHelper {
             atividade.setDescricao(c.getString(c.getColumnIndex("descricao")));
 
             String dataHora = c.getString(c.getColumnIndex("data"));
+
             String split[] = dataHora.split(" ");
-            atividade.setData(split[0]);
+
+            String dataPadrao[] = split[0].split("-");
+
+            String data = dataPadrao[2]+"/"+dataPadrao[1]+"/"+dataPadrao[0];
+
+            atividade.setData(data);
             atividade.setHora(split[1]);
 
             atividades.add(atividade);

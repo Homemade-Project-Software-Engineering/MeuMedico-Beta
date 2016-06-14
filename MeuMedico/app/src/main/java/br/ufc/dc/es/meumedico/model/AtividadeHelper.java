@@ -23,7 +23,12 @@ public class AtividadeHelper {
         String nome = campoNome.getText().toString();
         String descricao = campoDescricao.getText().toString();
         String data = campoData.getText().toString();
+
+        String dataPadrao[] = data.split("/");
+
         String hora = campoHora.getText().toString();
+
+        data = dataPadrao[2]+"-"+dataPadrao[1]+"-"+dataPadrao[0];
 
         Atividade atividade = new Atividade();
         atividade.setNome(nome);
