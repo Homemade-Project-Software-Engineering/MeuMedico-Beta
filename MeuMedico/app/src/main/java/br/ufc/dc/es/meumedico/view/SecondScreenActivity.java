@@ -2,6 +2,7 @@ package br.ufc.dc.es.meumedico.view;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -164,9 +165,19 @@ public class SecondScreenActivity extends Activity{
                 startActivity(irParaATelaContaUsuario);
                 break;
             case R.id.itemOptionsLogout:
-                LoginManager.getInstance().logOut();
-                startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
-                finish(); // dispose do java
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setMessage("Saindo...");
+                progressDialog.show();
+                Thread mTrhead = new Thread(){
+                    @Override
+                    public void run() {
+                        LoginManager.getInstance().logOut();
+                        startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
+                        progressDialog.dismiss();
+                        finish(); // dispose do java
+                    }
+                };
+                mTrhead.start();
                 break;
         }
         return super.onOptionsItemSelected(item);
