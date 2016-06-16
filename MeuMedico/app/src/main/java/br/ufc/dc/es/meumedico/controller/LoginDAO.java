@@ -58,12 +58,11 @@ public class LoginDAO extends SQLiteOpenHelper {
         return getWritableDatabase().insert(TABELA, null, cv);
     }
 
-    //implementar no código atualizar e deletar contas
-    /*public void delete(Login login) {
+    public void delete(String email) {
 
-        String args[] = {String.valueOf(login.getEmail())};
+        String args[] = {email};
         getWritableDatabase().delete(TABELA, "email=?", args);
-    }*
+    }
 
     public void update(Login login) {
 
@@ -77,7 +76,7 @@ public class LoginDAO extends SQLiteOpenHelper {
 
         String args[] = {String.valueOf(login.getEmail())};
         getWritableDatabase().update(TABELA, cv, "email=?", args);
-    }*/
+    }
 
     public boolean fazerLogin(Login login) {
 

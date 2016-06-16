@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(MainActivity.this, "Usuário ou login inválido", Toast.LENGTH_SHORT).show();
                     }
                 }
+                dao.close();
             }
         });
 

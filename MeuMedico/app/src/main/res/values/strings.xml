@@ -14,4 +14,7 @@
     </string-array>
     <string name="title_activity_cad__atividade">Cad_Atividade</string>
     <string name="facebook_app_id">1143975188987718</string>
+    <string name="MensagemDeletarConta">Tem certeza que deseja deletar essa conta?</string>
+    <string name="SimDeletarConta">Sim</string>
+    <string name="CancelarDeletarConta">Cancelar</string>
 </resources>

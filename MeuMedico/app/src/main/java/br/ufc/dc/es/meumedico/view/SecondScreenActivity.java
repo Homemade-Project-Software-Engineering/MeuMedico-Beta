@@ -38,6 +38,8 @@ public class SecondScreenActivity extends Activity{
     int id_usuario;
     ListView lista;
     Atividade atividadeSelecionadaItem;
+    Login informacoes;
+    Bundle infosFacebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +50,21 @@ public class SecondScreenActivity extends Activity{
 
         callCadAtividade();
 
-        Login informacoes = (Login) getIntent().getSerializableExtra("informacoes");
+        informacoes = (Login) getIntent().getSerializableExtra("informacoes");
         if(informacoes!=null) {
             nome = informacoes.getName();
             email = informacoes.getEmail();
             id_usuario = informacoes.getId();
         }
 
-        Bundle infosFacebook = getIntent().getBundleExtra("infosFacebook");
+        infosFacebook = getIntent().getBundleExtra("infosFacebook");
         if(infosFacebook!=null) {
             LoginDAO dao = new LoginDAO(SecondScreenActivity.this);
 
             nome = infosFacebook.get("first_name").toString();
             email = infosFacebook.get("email").toString();
             id_usuario = dao.getIdUserByFacebookEmail(email);
+            dao.close();
         }
         //setUser("@"+getDataMainScreen());
         setUser(nome);
@@ -117,6 +120,13 @@ public class SecondScreenActivity extends Activity{
     protected void onResume() {
         super.onResume();
         carregaLista();
+        LoginDAO dao = new LoginDAO(this);
+        if(dao.getIdUserByFacebookEmail(email)==0){
+            LoginManager.getInstance().logOut();
+            startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
+            finish();
+        }
+        dao.close();
     }
 
     @Override
@@ -145,6 +155,13 @@ public class SecondScreenActivity extends Activity{
             case R.id.itemOptionsConfig:
                 break;
             case R.id.itemOptionsConta:
+                Intent irParaATelaContaUsuario = new Intent(SecondScreenActivity.this, ContaUsuarioActivity.class);
+                if(informacoes!=null) {
+                    irParaATelaContaUsuario.putExtra("informacoes", informacoes);
+                }else if(infosFacebook!=null){
+                    irParaATelaContaUsuario.putExtra("infosFacebook", infosFacebook);
+                }
+                startActivity(irParaATelaContaUsuario);
                 break;
             case R.id.itemOptionsLogout:
                 LoginManager.getInstance().logOut();
