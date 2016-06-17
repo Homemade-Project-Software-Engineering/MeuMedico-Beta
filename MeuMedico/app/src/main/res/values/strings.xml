@@ -17,4 +17,7 @@
     <string name="MensagemDeletarConta">Tem certeza que deseja deletar essa conta?</string>
     <string name="SimDeletarConta">Sim</string>
     <string name="CancelarDeletarConta">Cancelar</string>
+    <string name="MensagemLogout">Tem certeza que deseja deslogar?</string>
+    <string name="SimLogout">Sim</string>
+    <string name="CancelarLogout">Cancelar</string>
 </resources>

@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufc.dc.es.meumedico.model.domain.Atividade;
+
 import static org.junit.Assert.*;
 
 /**

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteOpenHelper;
-import br.ufc.dc.es.meumedico.model.Login;
+import br.ufc.dc.es.meumedico.model.domain.Login;
 
 public class LoginDAO extends SQLiteOpenHelper {
 

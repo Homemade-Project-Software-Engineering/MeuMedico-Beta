@@ -2,18 +2,16 @@ package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.LoginDAO;
-import br.ufc.dc.es.meumedico.model.Login;
+import br.ufc.dc.es.meumedico.model.domain.Login;
 
 public class ContaUsuarioActivity extends AppCompatActivity {
 
@@ -49,9 +47,9 @@ public class ContaUsuarioActivity extends AppCompatActivity {
         builder.setMessage(R.string.MensagemDeletarConta)
                 .setPositiveButton(R.string.SimDeletarConta, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        final ProgressDialog progressDialogdialog = new ProgressDialog(ContaUsuarioActivity.this);
-                        progressDialogdialog.setMessage("Deletando conta e voltando para a Tela de Login...");
-                        progressDialogdialog.show();
+                        final ProgressDialog progressDialog = new ProgressDialog(ContaUsuarioActivity.this);
+                        progressDialog.setMessage("Deletando conta e voltando para a Tela de Login...");
+                        progressDialog.show();
                         Thread mThread = new Thread(){
                             @Override
                             public void run() {
@@ -63,7 +61,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
                                 LoginDAO dao = new LoginDAO(ContaUsuarioActivity.this);
                                 dao.delete(email);
                                 dao.close();
-                                progressDialogdialog.dismiss();
+                                progressDialog.dismiss();
                                 finish();
                             }
                         };
@@ -78,7 +76,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void editarContaUsuario(){
-
+    public void editarContaUsuario(View view){
+        Log.i("Editar", "Implementar Editar Conta");
     }
 }

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.ufc.dc.es.meumedico.model.Atividade;
+import br.ufc.dc.es.meumedico.model.domain.Atividade;
 
 public class AtividadeDAO extends SQLiteOpenHelper {
 

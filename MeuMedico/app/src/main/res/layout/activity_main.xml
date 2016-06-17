@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.MainActivity">
 
-    <br.ufc.dc.es.meumedico.model.MyMainTextView
+    <br.ufc.dc.es.meumedico.model.others.MyMainTextView
         android:id="@+id/MainTitle"
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
 
-    <br.ufc.dc.es.meumedico.model.MyMainTextView
+    <br.ufc.dc.es.meumedico.model.others.MyMainTextView
         android:id="@+id/logInLabel"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"

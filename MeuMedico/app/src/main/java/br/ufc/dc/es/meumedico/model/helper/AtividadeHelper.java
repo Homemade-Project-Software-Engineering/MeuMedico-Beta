@@ -1,9 +1,9 @@
-package br.ufc.dc.es.meumedico.model;
+package br.ufc.dc.es.meumedico.model.helper;
 
 import android.widget.EditText;
 
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.Atividade;
+import br.ufc.dc.es.meumedico.model.domain.Atividade;
 import br.ufc.dc.es.meumedico.view.Cad_AtividadeActivity;
 
 public class AtividadeHelper {

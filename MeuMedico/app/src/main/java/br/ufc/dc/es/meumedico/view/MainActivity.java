@@ -12,10 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.ufc.dc.es.meumedico.model.ContaHelper;
+import br.ufc.dc.es.meumedico.model.helper.ContaHelper;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.LoginDAO;
-import br.ufc.dc.es.meumedico.model.Login;
+import br.ufc.dc.es.meumedico.model.domain.Login;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -24,6 +24,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity{
         //inicializado facebook sdk para logar
         //obs: essa chamada precisa vir primeiro que o setContentView
         FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_main);
 
         callSecondScreen();

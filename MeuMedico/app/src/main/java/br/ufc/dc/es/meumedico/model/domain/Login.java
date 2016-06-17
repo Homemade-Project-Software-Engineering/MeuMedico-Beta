@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model;
+package br.ufc.dc.es.meumedico.model.domain;
 
 import java.io.Serializable;
 

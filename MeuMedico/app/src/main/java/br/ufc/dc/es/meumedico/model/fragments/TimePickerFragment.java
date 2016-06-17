@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model;
+package br.ufc.dc.es.meumedico.model.fragments;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

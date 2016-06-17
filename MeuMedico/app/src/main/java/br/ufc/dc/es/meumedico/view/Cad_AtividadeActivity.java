@@ -1,9 +1,7 @@
 package br.ufc.dc.es.meumedico.view;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -15,13 +13,19 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import br.ufc.dc.es.meumedico.model.AtividadeHelper;
-import br.ufc.dc.es.meumedico.model.DatePickerFragment;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import br.ufc.dc.es.meumedico.model.helper.AtividadeHelper;
+import br.ufc.dc.es.meumedico.model.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.TimePickerFragment;
-import br.ufc.dc.es.meumedico.model.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.model.fragments.TimePickerFragment;
+import br.ufc.dc.es.meumedico.model.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
-import br.ufc.dc.es.meumedico.model.Atividade;
+import br.ufc.dc.es.meumedico.model.domain.Atividade;
 
 public class Cad_AtividadeActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
@@ -29,7 +33,7 @@ public class Cad_AtividadeActivity extends FragmentActivity implements DatePicke
     AtividadeHelper helper;
     int id_usuario;
     Atividade atividadeParaSerAlterada;
-    int hora, minuto;
+    int ano, mes, dia, hora, minuto;
     EditText editTextHora, editTextData;
 
     @Override
@@ -58,11 +62,30 @@ public class Cad_AtividadeActivity extends FragmentActivity implements DatePicke
                 ValidacaoHelper vh = new ValidacaoHelper(Cad_AtividadeActivity.this);
 
                 if(vh.verificaCamposVaziosAtividade()){
+                    SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    GregorianCalendar dataUsuario = new GregorianCalendar();
+                    dataUsuario.add(Calendar.YEAR, ano);
+                    dataUsuario.add(Calendar.MONTH, mes);
+                    dataUsuario.add(Calendar.DAY_OF_MONTH, dia);
+                    dataUsuario.add(Calendar.HOUR_OF_DAY, hora);
+                    dataUsuario.add(Calendar.MINUTE, minuto);
+                    //String data = ano+"/"+mes+"/"+dia+" "+hora+":"+minuto;
+                    try {
+                        Date dataAtual = sf.parse(sf.format(Calendar.getInstance().getTime()));
+                        Date dataFormatada = sf.parse(dataUsuario.toString());
+                        Log.i("data setada",dataUsuario.getTime().toString());
+                        Log.i("data atual",dataAtual.toString());
+                        Log.i("data usuario",dataFormatada.toString());
+                        if(dataFormatada.compareTo(dataAtual)<0){
+                            Log.i("Result", "Data anterior");
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     Toast.makeText(Cad_AtividadeActivity.this, "Todos os campos são obrigatórios, preencha e tente novamente", Toast.LENGTH_LONG).show();
                 }else {
                     AtividadeDAO dao = new AtividadeDAO(Cad_AtividadeActivity.this);
                     Atividade atividade = helper.pegaCamposAtividade();
-
                     if (atividadeParaSerAlterada != null) {
                         atividade.setId(atividadeParaSerAlterada.getId());
                         atividade.setId_usuario(atividadeParaSerAlterada.getId_usuario());
@@ -99,11 +122,16 @@ public class Cad_AtividadeActivity extends FragmentActivity implements DatePicke
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         editTextData = (EditText) findViewById(R.id.AtData);
         editTextData.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+        ano = year;
+        mes = monthOfYear;
+        dia = dayOfMonth;
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         editTextHora = (EditText) findViewById(R.id.AtHora);
         editTextHora.setText(hourOfDay+":"+minute);
+        hora = hourOfDay;
+        minuto = minute;
     }
 }

@@ -18,7 +18,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
         android:textColor="#000000"
-        android:background="#25dd8b"/>
+        android:background="#25dd8b"
+        android:onClick="editarContaUsuario"/>
 
     <Button
         android:layout_width="match_parent"
