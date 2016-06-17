@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,12 +22,12 @@ import com.facebook.login.LoginManager;
 
 import java.util.List;
 
-import br.ufc.dc.es.meumedico.model.DatePickerFragment;
+import br.ufc.dc.es.meumedico.model.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
 import br.ufc.dc.es.meumedico.controller.LoginDAO;
-import br.ufc.dc.es.meumedico.model.Atividade;
-import br.ufc.dc.es.meumedico.model.Login;
+import br.ufc.dc.es.meumedico.model.domain.Atividade;
+import br.ufc.dc.es.meumedico.model.domain.Login;
 
 public class SecondScreenActivity extends Activity{
 
