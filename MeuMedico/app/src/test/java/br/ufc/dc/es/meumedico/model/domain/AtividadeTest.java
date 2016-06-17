@@ -1,12 +1,11 @@
-package br.ufc.dc.es.meumedico.model;
+package br.ufc.dc.es.meumedico.model.domain;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufc.dc.es.meumedico.model.domain.Atividade;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by jonas on 09/06/16.
@@ -23,6 +22,12 @@ public class AtividadeTest {
 
     @After
     public void tearDown() throws Exception {
+        /*  Alguma menssagem rodando o tearDown seria interessante,
+        *  uma vez que o tearDown será chamado toda vez que um método
+        *  terminar de ser testado, é interssante torna-lo nulo
+        *  por questão de organização.*/
+        atividade = null;
+        assertNull(atividade);
     }
 
     @Test

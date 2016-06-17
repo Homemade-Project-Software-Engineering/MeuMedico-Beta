@@ -31,6 +31,14 @@ public class AtividadeDAOTest extends AndroidTestCase {
     @After
     public void tearDown() throws Exception {
         super.tearDown();
+        /*  Alguma menssagem rodando o tearDown seria interessante,
+        *  uma vez que o tearDown será chamado toda vez que um método
+        *  terminar de ser testado, é interssante torna-lo nulo
+        *  por questão de organização.*/
+        atividade = null;
+        atividadeDAO = null;
+        assertNull(atividade);
+        assertNull(atividadeDAO);
 
     }
     @Test

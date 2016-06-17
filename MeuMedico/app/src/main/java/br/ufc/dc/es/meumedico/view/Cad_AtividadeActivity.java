@@ -27,7 +27,8 @@ import br.ufc.dc.es.meumedico.model.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
 import br.ufc.dc.es.meumedico.model.domain.Atividade;
 
-public class Cad_AtividadeActivity extends FragmentActivity implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+public class Cad_AtividadeActivity extends FragmentActivity
+        implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
     Button btsalvarAlterar;
     AtividadeHelper helper;
