@@ -1,19 +1,18 @@
 package br.ufc.dc.es.meumedico.view;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ContextMenu;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +21,7 @@ import com.facebook.login.LoginManager;
 
 import java.util.List;
 
+import br.ufc.dc.es.meumedico.model.fragments.AtividadeFragment;
 import br.ufc.dc.es.meumedico.model.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
@@ -29,7 +29,7 @@ import br.ufc.dc.es.meumedico.controller.LoginDAO;
 import br.ufc.dc.es.meumedico.model.domain.Atividade;
 import br.ufc.dc.es.meumedico.model.domain.Login;
 
-public class SecondScreenActivity extends Activity{
+public class SecondScreenActivity extends AppCompatActivity {
 
     Intent cadAtividade;
     String user;
@@ -38,10 +38,10 @@ public class SecondScreenActivity extends Activity{
     Button atividade;
     String nome, email;
     int id_usuario;
-    ListView lista;
     Atividade atividadeSelecionadaItem;
     Login informacoes;
     Bundle infosFacebook;
+    AtividadeFragment frag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,54 +68,40 @@ public class SecondScreenActivity extends Activity{
             id_usuario = dao.getIdUserByFacebookEmail(email);
             dao.close();
         }
-        //setUser("@"+getDataMainScreen());
+
         setUser(nome);
         setNameView(getUser());
 
-        lista = (ListView) findViewById(R.id.listViewAtividades);
-        registerForContextMenu(lista);
-
-        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-
-                atividadeSelecionadaItem = (Atividade) adapter.getItemAtPosition(position);
-                return false;
-            }
-        });
+        frag = (AtividadeFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        if(frag == null) {
+            frag = new AtividadeFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
+            ft.commit();
+        }
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
+    public boolean onContextItemSelected(MenuItem item) {
 
-        MenuItem editar = menu.add("Editar");
-        editar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+        atividadeSelecionadaItem = frag.mList.get(frag.positionOnLongClick);
+
+        switch (item.getItemId()) {
+            case R.id.itemContextMenuEditar:
 
                 Intent atividadeSelecionada = new Intent(SecondScreenActivity.this, Cad_AtividadeActivity.class);
                 atividadeSelecionada.putExtra("atividadeSelecionada", atividadeSelecionadaItem);
                 startActivity(atividadeSelecionada);
-
-                return false;
-            }
-        });
-
-        MenuItem deletar = menu.add("Deletar");
-        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
+                break;
+            case R.id.itemContextMenuDeletar:
 
                 AtividadeDAO dao = new AtividadeDAO(SecondScreenActivity.this);
                 dao.delete(atividadeSelecionadaItem);
                 dao.close();
                 carregaLista();
                 Toast.makeText(SecondScreenActivity.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();
-
-                return false;
-            }
-        });
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Override
@@ -136,6 +122,7 @@ public class SecondScreenActivity extends Activity{
         getMenuInflater().inflate(R.menu.menu_main,menu);
         return true;
      }
+
      public void btDate(){
          datePicker = (Button) findViewById(R.id.btDatePiker);
          datePicker.setOnClickListener(new View.OnClickListener() {
@@ -166,19 +153,32 @@ public class SecondScreenActivity extends Activity{
                 startActivity(irParaATelaContaUsuario);
                 break;
             case R.id.itemOptionsLogout:
-                final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setMessage("Saindo...");
-                progressDialog.show();
-                Thread mTrhead = new Thread(){
-                    @Override
-                    public void run() {
-                        LoginManager.getInstance().logOut();
-                        startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
-                        progressDialog.dismiss();
-                        finish(); // dispose do java
-                    }
-                };
-                mTrhead.start();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SecondScreenActivity.this);
+
+                builder.setMessage(R.string.MensagemLogout)
+                        .setPositiveButton(R.string.SimDeletarConta, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                final ProgressDialog progressDialog = new ProgressDialog(SecondScreenActivity.this);
+                                progressDialog.setMessage("Saindo...");
+                                progressDialog.show();
+                                Thread mThread = new Thread(){
+                                    @Override
+                                    public void run() {
+                                        LoginManager.getInstance().logOut();
+                                        startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
+                                        progressDialog.dismiss();
+                                        finish(); // dispose do java
+                                    }
+                                };
+                                mThread.start();
+                            }
+                        })
+                        .setNegativeButton(R.string.CancelarDeletarConta, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+                builder.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -221,16 +221,19 @@ public class SecondScreenActivity extends Activity{
 
     public void carregaLista(){
 
+        frag.mList.clear();
+        frag.mList.addAll(getSetAtividadeList());
+        frag.adapter.notifyDataSetChanged();
+    }
+
+    public List<Atividade> getSetAtividadeList(){
+
         AtividadeDAO dao = new AtividadeDAO(this);
 
         List<Atividade> atividades = dao.getListaAtividades(id_usuario);
 
-        ArrayAdapter<Atividade> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, atividades);
-
-        lista.setAdapter(adapter);
-
         dao.close();
+
+        return atividades;
     }
-
-
 }
