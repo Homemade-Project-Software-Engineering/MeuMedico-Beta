@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import br.ufc.dc.es.meumedico.model.helper.AtividadeHelper;
 import br.ufc.dc.es.meumedico.model.fragments.DatePickerFragment;
@@ -122,7 +123,8 @@ public class Cad_AtividadeActivity extends FragmentActivity
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         editTextData = (EditText) findViewById(R.id.AtData);
-        editTextData.setText(String.format("%02d", dayOfMonth)+"/"+String.format("%02d", monthOfYear)+"/"+String.format("%02d", year));
+        editTextData.setText(String.format(Locale.US,"%02d", dayOfMonth)+"/"+String.format(Locale.US,"%02d", monthOfYear+1)+"/"
+                +String.format(Locale.US,"%02d", year));
         ano = year;
         mes = monthOfYear;
         dia = dayOfMonth;
@@ -131,7 +133,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         editTextHora = (EditText) findViewById(R.id.AtHora);
-        editTextHora.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
+        editTextHora.setText(String.format(Locale.US,"%02d", hourOfDay)+":"+String.format(Locale.US,"%02d", minute));
         hora = hourOfDay;
         minuto = minute;
     }
