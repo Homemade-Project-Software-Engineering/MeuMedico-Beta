@@ -122,7 +122,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         editTextData = (EditText) findViewById(R.id.AtData);
-        editTextData.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+        editTextData.setText(String.format("%02d", dayOfMonth)+"/"+String.format("%02d", monthOfYear)+"/"+String.format("%02d", year));
         ano = year;
         mes = monthOfYear;
         dia = dayOfMonth;
@@ -131,7 +131,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         editTextHora = (EditText) findViewById(R.id.AtHora);
-        editTextHora.setText(hourOfDay+":"+minute);
+        editTextHora.setText(String.format("%02d", hourOfDay)+":"+String.format("%02d", minute));
         hora = hourOfDay;
         minuto = minute;
     }
