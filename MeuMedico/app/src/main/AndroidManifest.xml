@@ -46,6 +46,16 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
+
+        <receiver android:name=".model.others.UpdateActivityByNotification">
+            <intent-filter>
+                <action android:name="br.ufc.dc.es.meumedico.intentDone" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="br.ufc.dc.es.meumedico.intentDontDone" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

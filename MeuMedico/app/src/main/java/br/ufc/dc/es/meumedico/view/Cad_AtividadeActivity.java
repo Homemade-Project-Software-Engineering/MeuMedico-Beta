@@ -35,6 +35,7 @@ import br.ufc.dc.es.meumedico.model.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
 import br.ufc.dc.es.meumedico.model.domain.Atividade;
 import br.ufc.dc.es.meumedico.model.others.NotificationPublisher;
+import br.ufc.dc.es.meumedico.model.others.UpdateActivityByNotification;
 
 public class Cad_AtividadeActivity extends FragmentActivity
         implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
@@ -90,6 +91,9 @@ public class Cad_AtividadeActivity extends FragmentActivity
                         data = new Bundle();
 
                         data.putString("descricao", atividade.getDescricao());
+
+                        Log.i("id", String.valueOf(dao.getLastIDInserted()));
+                        data.putInt("id", dao.getLastIDInserted());
 
                         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US);
                         String dataUser = String.format(Locale.US,"%02d", dia)+"/"+String.format(Locale.US,"%02d", mes+1)+"/"
@@ -166,21 +170,25 @@ public class Cad_AtividadeActivity extends FragmentActivity
                 .setContentText(data.getString("descricao"))
                 .setAutoCancel(true);
 
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(Cad_AtividadeActivity.class);
+        Intent intentDone = new Intent("br.ufc.dc.es.meumedico.intentDone");
+        intentDone.putExtra(UpdateActivityByNotification.ID, data.getInt("id"));
+        intentDone.putExtra(UpdateActivityByNotification.BOOLEAN_CONCLUIDA, 1);
+        intentDone.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        PendingIntent pendingIntentDone = PendingIntent.getBroadcast(this, 0, intentDone, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Intent intent = new Intent(this, Cad_AtividadeActivity.class);
-        intent.putExtra("atividadeNotificacao", data);
-        stackBuilder.addNextIntent(intent);
-
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent( 0, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
+        Intent intentDontDone = new Intent("br.ufc.dc.es.meumedico.intentDontDone");
+        intentDontDone.putExtra(UpdateActivityByNotification.ID, data.getInt("id"));
+        intentDontDone.putExtra(UpdateActivityByNotification.BOOLEAN_CONCLUIDA, 0);
+        intentDontDone.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        PendingIntent pendingIntentDontDone = PendingIntent.getBroadcast(this, 0, intentDontDone, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
 
         Uri uri = RingtoneManager.getDefaultUri( RingtoneManager.TYPE_NOTIFICATION);
         builder.setSound(uri);
         builder.setWhen(data.getLong("dataHora"));
+        builder.addAction(R.drawable.ic_notification_done, "Feito", pendingIntentDone);
+        builder.addAction(R.drawable.ic_notification_dont_done, "Não Feito", pendingIntentDontDone);
         return builder.build();
     }
 }
