@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -83,7 +84,11 @@ public class SecondScreenActivity extends AppCompatActivity {
 
     public boolean onContextItemSelected(MenuItem item) {
 
-        atividadeSelecionadaItem = frag.mList.get(frag.positionOnLongClick);
+        try {
+            atividadeSelecionadaItem = frag.mList.get(frag.positionOnLongClick);
+        }catch(IndexOutOfBoundsException e){
+            Log.i("Status", "Array sem nada");
+        }
 
         switch (item.getItemId()) {
             case R.id.itemContextMenuEditar:

@@ -1,10 +1,19 @@
 package br.ufc.dc.es.meumedico.view;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +24,7 @@ import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import br.ufc.dc.es.meumedico.model.helper.AtividadeHelper;
@@ -27,6 +34,7 @@ import br.ufc.dc.es.meumedico.model.fragments.TimePickerFragment;
 import br.ufc.dc.es.meumedico.model.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
 import br.ufc.dc.es.meumedico.model.domain.Atividade;
+import br.ufc.dc.es.meumedico.model.others.NotificationPublisher;
 
 public class Cad_AtividadeActivity extends FragmentActivity
         implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
@@ -37,6 +45,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
     Atividade atividadeParaSerAlterada;
     int ano, mes, dia, hora, minuto;
     EditText editTextHora, editTextData;
+    Bundle data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
         atividadeParaSerAlterada = (Atividade) getIntent().getSerializableExtra("atividadeSelecionada");
 
         if(atividadeParaSerAlterada!=null){
-            btsalvarAlterar.setText("Alterar");
+            btsalvarAlterar.setText(R.string.botao_alterar_atividade);
             helper.atividadeParaSerAlterada(atividadeParaSerAlterada);
         }
     }
@@ -64,26 +73,6 @@ public class Cad_AtividadeActivity extends FragmentActivity
                 ValidacaoHelper vh = new ValidacaoHelper(Cad_AtividadeActivity.this);
 
                 if(vh.verificaCamposVaziosAtividade()){
-                    SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    GregorianCalendar dataUsuario = new GregorianCalendar();
-                    dataUsuario.add(Calendar.YEAR, ano);
-                    dataUsuario.add(Calendar.MONTH, mes);
-                    dataUsuario.add(Calendar.DAY_OF_MONTH, dia);
-                    dataUsuario.add(Calendar.HOUR_OF_DAY, hora);
-                    dataUsuario.add(Calendar.MINUTE, minuto);
-                    //String data = ano+"/"+mes+"/"+dia+" "+hora+":"+minuto;
-                    try {
-                        Date dataAtual = sf.parse(sf.format(Calendar.getInstance().getTime()));
-                        Date dataFormatada = sf.parse(dataUsuario.toString());
-                        Log.i("data setada",dataUsuario.getTime().toString());
-                        Log.i("data atual",dataAtual.toString());
-                        Log.i("data usuario",dataFormatada.toString());
-                        if(dataFormatada.compareTo(dataAtual)<0){
-                            Log.i("Result", "Data anterior");
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
                     Toast.makeText(Cad_AtividadeActivity.this, "Todos os campos são obrigatórios, preencha e tente novamente", Toast.LENGTH_LONG).show();
                 }else {
                     AtividadeDAO dao = new AtividadeDAO(Cad_AtividadeActivity.this);
@@ -97,6 +86,25 @@ public class Cad_AtividadeActivity extends FragmentActivity
                         id_usuario = getIntent().getIntExtra("id_usuario", 0);
                         atividade.setId_usuario(id_usuario);
                         dao.insert(atividade);
+
+                        data = new Bundle();
+
+                        data.putString("descricao", atividade.getDescricao());
+
+                        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US);
+                        String dataUser = String.format(Locale.US,"%02d", dia)+"/"+String.format(Locale.US,"%02d", mes+1)+"/"
+                                +String.format(Locale.US,"%02d", ano) + " " + String.format(Locale.US,"%02d", hora)+":"+String.format(Locale.US,"%02d", minuto);
+                        try {
+                            Date dataFormatada = sf.parse(dataUser);
+                            Log.i("data setada",dataUser);
+                            Log.i("data usuario",dataFormatada.toString());
+                            Log.i("data em millis", String.valueOf(dataFormatada.getTime()));
+                            data.putLong("dataHora", dataFormatada.getTime());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        scheduleNotification(getNotification());
                         Toast.makeText(Cad_AtividadeActivity.this, "Atividade inserida com sucesso", Toast.LENGTH_SHORT).show();
                     }
                     dao.close();
@@ -136,5 +144,43 @@ public class Cad_AtividadeActivity extends FragmentActivity
         editTextHora.setText(String.format(Locale.US,"%02d", hourOfDay)+":"+String.format(Locale.US,"%02d", minute));
         hora = hourOfDay;
         minuto = minute;
+    }
+
+    private void scheduleNotification(Notification notification) {
+
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, data.getLong("dataHora"), pendingIntent);
+    }
+
+    private Notification getNotification() {
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setTicker(data.getString("descricao"))
+                .setSmallIcon(R.drawable.ic_notification_activity)
+                .setContentTitle("Realizar Atividade")
+                .setContentText(data.getString("descricao"))
+                .setAutoCancel(true);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(Cad_AtividadeActivity.class);
+
+        Intent intent = new Intent(this, Cad_AtividadeActivity.class);
+        intent.putExtra("atividadeNotificacao", data);
+        stackBuilder.addNextIntent(intent);
+
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent( 0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+
+        builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+
+        Uri uri = RingtoneManager.getDefaultUri( RingtoneManager.TYPE_NOTIFICATION);
+        builder.setSound(uri);
+        builder.setWhen(data.getLong("dataHora"));
+        return builder.build();
     }
 }
