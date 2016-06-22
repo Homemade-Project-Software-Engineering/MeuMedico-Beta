@@ -34,8 +34,7 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
     public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Log.i("LOG", "onCreateViewHolder()");
         View v = mLayoutInflater.inflate(R.layout.item_atividade, viewGroup, false);
-        MyViewHolder mvh = new MyViewHolder(v);
-        return mvh;
+        return new MyViewHolder(v);
     }
 
     @Override
