@@ -21,7 +21,7 @@ import br.ufc.dc.es.meumedico.view.SecondScreenActivity;
 
 public class AtividadeFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
-    private RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
     public List<Atividade> mList;
     public int positionOnLongClick;
     public AtividadeAdapter adapter;

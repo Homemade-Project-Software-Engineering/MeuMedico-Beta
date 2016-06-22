@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +43,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
     AtividadeHelper helper;
     int id_usuario;
     Atividade atividadeParaSerAlterada;
-    int ano, mes, dia, hora, minuto;
+    int ano, mes, dia, hora, minuto, notification_id = 1;
     EditText editTextHora, editTextData;
     Bundle data;
 
@@ -173,7 +172,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
         Intent intentDone = new Intent("br.ufc.dc.es.meumedico.intentDone");
         intentDone.putExtra(UpdateActivityByNotification.ID, data.getInt("id"));
         intentDone.putExtra(UpdateActivityByNotification.BOOLEAN_CONCLUIDA, 1);
-        intentDone.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        intentDone.putExtra(NotificationPublisher.NOTIFICATION_ID, notification_id);
         PendingIntent pendingIntentDone = PendingIntent.getBroadcast(this, 0, intentDone, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Intent intentDontDone = new Intent("br.ufc.dc.es.meumedico.intentDontDone");
@@ -189,6 +188,9 @@ public class Cad_AtividadeActivity extends FragmentActivity
         builder.setWhen(data.getLong("dataHora"));
         builder.addAction(R.drawable.ic_notification_done, "Feito", pendingIntentDone);
         builder.addAction(R.drawable.ic_notification_dont_done, "Não Feito", pendingIntentDontDone);
+
+        notification_id++;
+
         return builder.build();
     }
 }

@@ -2,9 +2,6 @@ package br.ufc.dc.es.meumedico.model.logs;
 
 import android.util.Log;
 
-/**
- * Created by jonas on 06/06/16.
- */
 public class MyAlternateLogVersion {
 
     public static final void Log(String message){

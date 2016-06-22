@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
 import java.util.List;
@@ -43,11 +45,14 @@ public class SecondScreenActivity extends AppCompatActivity {
     Login informacoes;
     Bundle infosFacebook;
     AtividadeFragment frag;
+    private static final String PREF_NAME = "LoginActivityPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.second_activity);
+
         fillSpinner();
         btDate();
 
@@ -58,16 +63,27 @@ public class SecondScreenActivity extends AppCompatActivity {
             nome = informacoes.getName();
             email = informacoes.getEmail();
             id_usuario = informacoes.getId();
+            userIsLogged(id_usuario, nome, email);
         }
 
         infosFacebook = getIntent().getBundleExtra("infosFacebook");
         if(infosFacebook!=null) {
             LoginDAO dao = new LoginDAO(SecondScreenActivity.this);
-
             nome = infosFacebook.get("first_name").toString();
             email = infosFacebook.get("email").toString();
             id_usuario = dao.getIdUserByFacebookEmail(email);
             dao.close();
+            userIsLogged(id_usuario, nome, email);
+        }
+
+        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        id_usuario = sp.getInt("id_usuario", 0);
+        nome = sp.getString("nome", "");
+        email = sp.getString("email", "");
+
+        if(email.equals("")){
+            startActivity(new Intent(SecondScreenActivity.this,MainActivity.class));
+            finish();
         }
 
         setUser(nome);
@@ -172,6 +188,10 @@ public class SecondScreenActivity extends AppCompatActivity {
                                         LoginManager.getInstance().logOut();
                                         startActivity(new Intent(SecondScreenActivity.this, MainActivity.class));
                                         progressDialog.dismiss();
+                                        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sp.edit();
+                                        editor.clear();
+                                        editor.apply();
                                         finish(); // dispose do java
                                     }
                                 };
@@ -240,5 +260,16 @@ public class SecondScreenActivity extends AppCompatActivity {
         dao.close();
 
         return atividades;
+    }
+
+    public void userIsLogged(int id_usuario, String nome, String email){
+
+        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putInt("id_usuario", id_usuario);
+        editor.putString("nome", nome);
+        editor.putString("email", email);
+        editor.apply();
     }
 }
