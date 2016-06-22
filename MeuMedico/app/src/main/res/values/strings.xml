@@ -20,4 +20,5 @@
     <string name="MensagemLogout">Tem certeza que deseja deslogar?</string>
     <string name="SimLogout">Sim</string>
     <string name="CancelarLogout">Cancelar</string>
+    <string name="botao_alterar_atividade">Alterar</string>
 </resources>

@@ -13,7 +13,7 @@ import br.ufc.dc.es.meumedico.model.domain.Atividade;
 public class AtividadeDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_atividade";
-    private static final int VERSAO = 3;
+    private static final int VERSAO = 5;
     private static final String TABELA = "Atividade";
 
     public AtividadeDAO(Context context) {
@@ -29,7 +29,8 @@ public class AtividadeDAO extends SQLiteOpenHelper {
                 "id_usuario INTEGER," +
                 "nome TEXT, " +
                 "descricao TEXT, " +
-                "data TEXT" +
+                "data TEXT," +
+                "concluida INTEGER" +
                 ");";
         db.execSQL(sql);
     }
@@ -49,6 +50,7 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         cv.put("nome", atividade.getNome());
         cv.put("descricao", atividade.getDescricao());
         cv.put("data", atividade.getData());
+        cv.put("concluida", -1);
 
         return getWritableDatabase().insert(TABELA, null, cv);
     }
@@ -99,5 +101,24 @@ public class AtividadeDAO extends SQLiteOpenHelper {
 
         String args[] = {String.valueOf(atividadeSelecionadaItem.getId())};
         return getWritableDatabase().delete(TABELA, "id=?", args);
+    }
+
+    public int getLastIDInserted(){
+
+        String sql = "SELECT last_insert_rowid();";
+        Cursor c = getReadableDatabase().rawQuery(sql, null);
+        c.moveToFirst();
+        int id = c.getInt(0);
+        c.close();
+        return id;
+    }
+
+    public void changeColumnConcluidabyNotification(int id, int trueOrFalse){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("concluida", trueOrFalse);
+
+        String args[] = {String.valueOf(id)};
+        getWritableDatabase().update(TABELA, contentValues,"id=?", args);
     }
 }
