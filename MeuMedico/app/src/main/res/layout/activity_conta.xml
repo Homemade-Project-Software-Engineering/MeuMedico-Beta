@@ -19,7 +19,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CadastroNome"
@@ -36,7 +36,7 @@
         android:layout_below="@+id/CadastroNome"
         android:layout_alignParentStart="true" />
 
-    <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CadastroEmail"
@@ -53,7 +53,7 @@
         android:layout_below="@+id/CadastroEmail"
         android:layout_alignParentStart="true" />
 
-    <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
