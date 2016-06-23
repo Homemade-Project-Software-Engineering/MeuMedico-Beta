@@ -46,14 +46,14 @@
         android:textColor="#000000"
         android:text="" />
 
-    <Button
+    <br.ufc.dc.es.meumedico.model.others.MyCustomButton
         android:id="@+id/btDatePiker"
         android:layout_below="@+id/btCad_Atividade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_date_range_black_24dp"
         />
-    <Button
+    <br.ufc.dc.es.meumedico.model.others.MyCustomButton
         android:id="@+id/btEmergency"
         android:layout_below="@+id/btCad_Atividade"
         android:layout_alignEnd="@+id/btCad_Atividade"
@@ -63,7 +63,7 @@
         android:background="@drawable/ic_sentiment_very_dissatisfied_black_24dp"
         />
 
-    <Button
+    <br.ufc.dc.es.meumedico.model.others.MyCustomButton
         android:id="@+id/btCad_Atividade"
         android:text="Cadastrar Atividade"
         android:layout_below="@id/nameUser"

@@ -45,10 +45,13 @@ public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaAct
         solo.clearLog();
     }
 
-    @Test
+    @SmallTest
     public void testCallCreateAccount() throws Exception {
         testFirst();
-        solo.sleep(2000);
+        solo.enterText(0,"New client");
+        solo.enterText(1,"New client");
+        //solo.takeScreenshot();
+        solo.sleep(5000);
 
     }
 }

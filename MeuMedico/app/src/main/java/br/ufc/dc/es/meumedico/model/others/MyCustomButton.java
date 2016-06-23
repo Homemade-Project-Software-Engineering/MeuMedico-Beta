@@ -12,6 +12,6 @@ public class MyCustomButton extends Button {
 
     public MyCustomButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/PoiretOne-Regular.ttf"));
+        this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/MODERNA_.TTF"));
     }
 }

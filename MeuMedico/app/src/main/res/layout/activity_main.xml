@@ -79,14 +79,14 @@
         android:textColor="#000000"
         android:background="#25DD8B" />
 
-    <TextView
+    <br.ufc.dc.es.meumedico.model.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Não tem conta ainda?"
         android:id="@+id/textViewQuestion" />
 
-    <TextView
+    <br.ufc.dc.es.meumedico.model.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"

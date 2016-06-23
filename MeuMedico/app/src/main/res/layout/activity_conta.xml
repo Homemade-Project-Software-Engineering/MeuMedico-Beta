@@ -19,12 +19,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CadastroNome"
         android:textColor="#000000"
-        android:textStyle="bold"
         android:layout_below="@+id/textViewNome"
         android:layout_alignParentStart="true" />
 
@@ -37,12 +36,11 @@
         android:layout_below="@+id/CadastroNome"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/CadastroEmail"
         android:textColor="#000000"
-        android:textStyle="bold"
         android:layout_below="@+id/textViewEmail"
         android:layout_alignParentStart="true" />
 
@@ -55,7 +53,7 @@
         android:layout_below="@+id/CadastroEmail"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -64,10 +62,9 @@
         android:layout_alignParentStart="true"
         android:textColor="#000000"
         android:inputType="textPassword"
-        android:textStyle="bold"
         android:layout_alignEnd="@+id/CadastroEmail" />
 
-    <Button
+    <br.ufc.dc.es.meumedico.model.others.MyCustomButton
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
