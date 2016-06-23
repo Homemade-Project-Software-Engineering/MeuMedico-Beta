@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.controller;
+package br.ufc.dc.es.meumedico.model;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteOpenHelper;
-import br.ufc.dc.es.meumedico.model.domain.Login;
+import br.ufc.dc.es.meumedico.controller.domain.Login;
 
 public class LoginDAO extends SQLiteOpenHelper {
 

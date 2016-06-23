@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.helper;
+package br.ufc.dc.es.meumedico.controller.helper;
 
 import android.widget.EditText;
 

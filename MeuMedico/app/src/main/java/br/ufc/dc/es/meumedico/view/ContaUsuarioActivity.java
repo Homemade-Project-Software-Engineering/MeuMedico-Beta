@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.controller.LoginDAO;
-import br.ufc.dc.es.meumedico.model.domain.Login;
+import br.ufc.dc.es.meumedico.model.LoginDAO;
+import br.ufc.dc.es.meumedico.controller.domain.Login;
 
 public class ContaUsuarioActivity extends AppCompatActivity {
 

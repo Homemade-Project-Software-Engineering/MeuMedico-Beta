@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.others;
+package br.ufc.dc.es.meumedico.controller.others;
 
 import android.content.Context;
 import android.graphics.Typeface;

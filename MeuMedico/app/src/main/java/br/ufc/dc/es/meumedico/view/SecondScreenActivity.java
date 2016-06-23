@@ -26,12 +26,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import br.ufc.dc.es.meumedico.model.fragments.AtividadeFragment;
+import br.ufc.dc.es.meumedico.controller.fragments.AtividadeFragment;
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
-import br.ufc.dc.es.meumedico.controller.LoginDAO;
-import br.ufc.dc.es.meumedico.model.domain.Atividade;
-import br.ufc.dc.es.meumedico.model.domain.Login;
+import br.ufc.dc.es.meumedico.model.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.LoginDAO;
+import br.ufc.dc.es.meumedico.controller.domain.Atividade;
+import br.ufc.dc.es.meumedico.controller.domain.Login;
 
 public class SecondScreenActivity extends AppCompatActivity {
 

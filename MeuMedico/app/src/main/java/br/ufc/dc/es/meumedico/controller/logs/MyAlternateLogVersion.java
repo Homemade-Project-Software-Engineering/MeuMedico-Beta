@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.logs;
+package br.ufc.dc.es.meumedico.controller.logs;
 
 import android.util.Log;
 

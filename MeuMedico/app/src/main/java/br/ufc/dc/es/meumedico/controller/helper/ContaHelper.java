@@ -1,11 +1,11 @@
-package br.ufc.dc.es.meumedico.model.helper;
+package br.ufc.dc.es.meumedico.controller.helper;
 
 import android.widget.EditText;
 import java.text.DateFormat;
 import java.util.Date;
 
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.domain.Login;
+import br.ufc.dc.es.meumedico.controller.domain.Login;
 import br.ufc.dc.es.meumedico.view.ContaActivity;
 import br.ufc.dc.es.meumedico.view.MainActivity;
 

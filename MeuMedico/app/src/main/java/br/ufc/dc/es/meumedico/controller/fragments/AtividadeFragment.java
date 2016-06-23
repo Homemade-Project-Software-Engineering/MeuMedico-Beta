@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.fragments;
+package br.ufc.dc.es.meumedico.controller.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.adapters.AtividadeAdapter;
-import br.ufc.dc.es.meumedico.model.domain.Atividade;
-import br.ufc.dc.es.meumedico.model.interfaces.RecyclerViewOnClickListenerHack;
+import br.ufc.dc.es.meumedico.controller.adapters.AtividadeAdapter;
+import br.ufc.dc.es.meumedico.controller.domain.Atividade;
+import br.ufc.dc.es.meumedico.controller.interfaces.RecyclerViewOnClickListenerHack;
 import br.ufc.dc.es.meumedico.view.SecondScreenActivity;
 
 public class AtividadeFragment extends Fragment implements RecyclerViewOnClickListenerHack {

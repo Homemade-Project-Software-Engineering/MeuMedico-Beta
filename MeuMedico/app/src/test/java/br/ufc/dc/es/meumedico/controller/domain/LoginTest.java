@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.domain;
+package br.ufc.dc.es.meumedico.controller.domain;
 
 import org.junit.After;
 import org.junit.Before;

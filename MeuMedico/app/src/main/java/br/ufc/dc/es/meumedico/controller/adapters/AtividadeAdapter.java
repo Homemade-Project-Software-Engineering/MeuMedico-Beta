@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.adapters;
+package br.ufc.dc.es.meumedico.controller.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.domain.Atividade;
-import br.ufc.dc.es.meumedico.model.interfaces.RecyclerViewOnClickListenerHack;
+import br.ufc.dc.es.meumedico.controller.domain.Atividade;
+import br.ufc.dc.es.meumedico.controller.interfaces.RecyclerViewOnClickListenerHack;
 
 
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyViewHolder> {

@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.interfaces;
+package br.ufc.dc.es.meumedico.controller.interfaces;
 
 import android.view.View;
 

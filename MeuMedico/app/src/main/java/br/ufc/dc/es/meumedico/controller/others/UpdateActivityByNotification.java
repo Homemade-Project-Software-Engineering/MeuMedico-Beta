@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.model.others;
+package br.ufc.dc.es.meumedico.controller.others;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.AtividadeDAO;
 
 public class UpdateActivityByNotification extends BroadcastReceiver{
 

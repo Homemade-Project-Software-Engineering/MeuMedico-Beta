@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import br.ufc.dc.es.meumedico.model.helper.ContaHelper;
+import br.ufc.dc.es.meumedico.controller.helper.ContaHelper;
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.helper.ValidacaoHelper;
-import br.ufc.dc.es.meumedico.controller.LoginDAO;
-import br.ufc.dc.es.meumedico.model.domain.Login;
+import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.model.LoginDAO;
+import br.ufc.dc.es.meumedico.controller.domain.Login;
 
 public class ContaActivity extends Activity {
 

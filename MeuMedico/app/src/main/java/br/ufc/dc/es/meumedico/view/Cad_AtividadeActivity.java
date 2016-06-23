@@ -26,15 +26,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import br.ufc.dc.es.meumedico.model.helper.AtividadeHelper;
-import br.ufc.dc.es.meumedico.model.fragments.DatePickerFragment;
+import br.ufc.dc.es.meumedico.controller.helper.AtividadeHelper;
+import br.ufc.dc.es.meumedico.controller.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.fragments.TimePickerFragment;
-import br.ufc.dc.es.meumedico.model.helper.ValidacaoHelper;
-import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
-import br.ufc.dc.es.meumedico.model.domain.Atividade;
-import br.ufc.dc.es.meumedico.model.others.NotificationPublisher;
-import br.ufc.dc.es.meumedico.model.others.UpdateActivityByNotification;
+import br.ufc.dc.es.meumedico.controller.fragments.TimePickerFragment;
+import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.model.AtividadeDAO;
+import br.ufc.dc.es.meumedico.controller.domain.Atividade;
+import br.ufc.dc.es.meumedico.controller.others.NotificationPublisher;
+import br.ufc.dc.es.meumedico.controller.others.UpdateActivityByNotification;
 
 public class Cad_AtividadeActivity extends FragmentActivity
         implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
