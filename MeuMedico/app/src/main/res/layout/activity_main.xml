@@ -70,7 +70,7 @@
         android:textColorHint="#000000"/>
     </android.support.design.widget.TextInputLayout>
 
-    <Button
+    <br.ufc.dc.es.meumedico.model.others.MyCustomButton
         android:layout_margin="10dp"
         android:id="@+id/btSecondScreen"
         android:layout_width="match_parent"

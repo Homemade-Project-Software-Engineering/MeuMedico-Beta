@@ -6,13 +6,11 @@ import junit.framework.TestCase;
 
 import org.testng.annotations.Test;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by jonas on 17/06/16.
  */
 public class AtividadeHelperTest extends TestCase{
-
     AtividadeHelper atividadeHelper;
 
     public AtividadeHelperTest(){
