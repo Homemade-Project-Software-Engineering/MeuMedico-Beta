@@ -55,11 +55,11 @@ public class AtividadeDAO extends SQLiteOpenHelper {
         return getWritableDatabase().insert(TABELA, null, cv);
     }
 
-    public List<Atividade> getListaAtividades(int id_usuario) {
+    public List<Atividade> getListaAtividades(int id_usuario, String dataAtual) {
 
         final List<Atividade> atividades = new ArrayList<>();
-        String sql = "SELECT * FROM " + TABELA + " where id_usuario = ?";
-        String args[] = new String[]{String.valueOf(id_usuario)};
+        String sql = "SELECT * FROM " + TABELA + " where id_usuario = ? and data like ?";
+        String args[] = new String[]{String.valueOf(id_usuario),dataAtual+"%"};
         final Cursor c = getReadableDatabase().rawQuery(sql, args);
 
         while(c.moveToNext()){

@@ -1,6 +1,5 @@
 package br.ufc.dc.es.meumedico.view;
 
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,10 +21,12 @@ import android.widget.Toast;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import br.ufc.dc.es.meumedico.model.fragments.AtividadeFragment;
-import br.ufc.dc.es.meumedico.model.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.AtividadeDAO;
 import br.ufc.dc.es.meumedico.controller.LoginDAO;
@@ -149,8 +150,8 @@ public class SecondScreenActivity extends AppCompatActivity {
          datePicker.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 DialogFragment newFragment = new DatePickerFragment();
-                 newFragment.show(getFragmentManager(),"datePicker");
+                 /*DialogFragment newFragment = new DatePickerFragment();
+                 newFragment.show(getFragmentManager(),"datePicker");*/
              }
          });
      }
@@ -255,7 +256,10 @@ public class SecondScreenActivity extends AppCompatActivity {
 
         AtividadeDAO dao = new AtividadeDAO(this);
 
-        List<Atividade> atividades = dao.getListaAtividades(id_usuario);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        String dataAtual = simpleDateFormat.format(Calendar.getInstance().getTime());
+
+        List<Atividade> atividades = dao.getListaAtividades(id_usuario,dataAtual);
 
         dao.close();
 
