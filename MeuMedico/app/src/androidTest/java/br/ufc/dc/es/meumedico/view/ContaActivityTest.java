@@ -49,9 +49,13 @@ public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaAct
     public void testCallCreateAccount() throws Exception {
         testFirst();
         solo.enterText(0,"New client");
-        solo.enterText(1,"New client");
-        //solo.takeScreenshot();
-        solo.sleep(5000);
+        solo.enterText(1,"new_client@email.com");
+        solo.enterText(2,"123456");
+        //solo.takeScreenshot(); need a path to save the screens.
+        solo.waitForText("New client",1,2000); // find New client 2 times in 2 seconds
+        assertTrue(solo.searchText("123456"));
+        solo.sleep(2000);
 
+        // NÃO TESTAR O BOTÃO CRIAR NESSE TESTE AINDA.
     }
 }

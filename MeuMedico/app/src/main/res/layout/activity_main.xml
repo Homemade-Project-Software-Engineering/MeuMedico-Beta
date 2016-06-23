@@ -47,7 +47,7 @@
         android:id="@+id/inputLayoutUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
+        <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
             android:id="@+id/etGuestName"
             android:layout_width="match_parent"
             android:textColor="#000000"
@@ -60,7 +60,7 @@
         android:id="@+id/inputLayoutPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
+        <br.ufc.dc.es.meumedico.model.others.MyCustomEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/passwordTextEdit"
