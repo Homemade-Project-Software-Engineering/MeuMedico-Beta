@@ -16,6 +16,7 @@ public class UpdateActivityByNotification extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         int id = intent.getIntExtra(ID, 0);
         int trueOrFalse = intent.getIntExtra(BOOLEAN_CONCLUIDA, 0);
         Log.i("id", String.valueOf(id));

@@ -62,9 +62,9 @@ public class AtividadeDAOTest extends AndroidTestCase {
         atividade.setNome("Name_to_test");
         List<Atividade> atividades = new ArrayList<>();
         atividades.add(atividade);
-        when(atividadeDAO.getListaAtividades(0)).thenReturn(atividades);
+        when(atividadeDAO.getListaAtividades(0, "data atual")).thenReturn(atividades);
         // the users activity names should be equal, since they have same id (1)
-        assertEquals(atividadeDAO.getListaAtividades(0).get(0).getNome(),atividades.get(0).getNome());
+        assertEquals(atividadeDAO.getListaAtividades(0, "data atual").get(0).getNome(),atividades.get(0).getNome());
     }
     @Test
     public void testDelete() throws Exception{

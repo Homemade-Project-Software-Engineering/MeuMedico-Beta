@@ -150,8 +150,7 @@ public class SecondScreenActivity extends AppCompatActivity {
          datePicker.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 /*DialogFragment newFragment = new DatePickerFragment();
-                 newFragment.show(getFragmentManager(),"datePicker");*/
+                 startActivity(new Intent(SecondScreenActivity.this, CalendarActivity.class));
              }
          });
      }
