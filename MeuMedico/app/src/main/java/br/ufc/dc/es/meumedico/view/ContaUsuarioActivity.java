@@ -2,6 +2,7 @@ package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,32 +12,27 @@ import android.widget.TextView;
 
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
-import br.ufc.dc.es.meumedico.controller.domain.Login;
 
 public class ContaUsuarioActivity extends AppCompatActivity {
 
+    private static final String PREF_NAME = "LoginActivityPreferences";
     String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conta_usuario);
 
-        Login informacoes = (Login) getIntent().getSerializableExtra("informacoes");
-        Bundle infosFacebook = getIntent().getBundleExtra("infosFacebook");
+        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        if (informacoes != null) {
-            TextView logado = (TextView) findViewById(R.id.textViewLogado);
-            logado.setText(informacoes.getName());
-            TextView email = (TextView) findViewById(R.id.textViewEmail);
-            email.setText(informacoes.getEmail());
-            this.email = informacoes.getEmail();
-        } else if (infosFacebook != null) {
-            TextView logado = (TextView) findViewById(R.id.textViewLogado);
-            logado.setText(infosFacebook.get("first_name").toString());
-            TextView email = (TextView) findViewById(R.id.textViewEmail);
-            email.setText(infosFacebook.get("email").toString());
-            this.email = infosFacebook.get("email").toString();
-        }
+        TextView logado = (TextView) findViewById(R.id.textViewLogadoContaUsuario);
+        logado.setText(sp.getString("nome", ""));
+        TextView email = (TextView) findViewById(R.id.textViewEmailContaUsuario);
+        email.setText(sp.getString("email", ""));
+        this.email = sp.getString("email", "");
+        TextView id = (TextView) findViewById(R.id.textViewIdPerfil);
+        id.setText(String.valueOf(sp.getInt("id_usuario", 0)));
+
 
     }
 

@@ -52,7 +52,7 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.CalendarActivity"></activity>
+        <activity android:name=".view.CalendarActivity" />
     </application>
 
 </manifest>

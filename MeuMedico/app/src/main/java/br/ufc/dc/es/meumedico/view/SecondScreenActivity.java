@@ -159,8 +159,6 @@ public class SecondScreenActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         switch(id){
-            case R.id.itemOptionsPerfil:
-                break;
             case R.id.itemOptionsConfig:
                 break;
             case R.id.itemOptionsConta:
