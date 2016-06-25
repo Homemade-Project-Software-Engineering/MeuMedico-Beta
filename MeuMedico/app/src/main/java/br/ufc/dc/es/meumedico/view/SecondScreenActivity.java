@@ -217,7 +217,7 @@ public class SecondScreenActivity extends AppCompatActivity {
         this.user = name;
     }
     public String getUser(){
-        return user;
+        return id_usuario + " - " + user;
     }
 
     public void callCadAtividade(){
