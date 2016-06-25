@@ -12,9 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +52,6 @@ public class SecondScreenActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.second_activity);
 
-        fillSpinner();
         btDate();
 
         callCadAtividade();
@@ -150,7 +147,9 @@ public class SecondScreenActivity extends AppCompatActivity {
          datePicker.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 startActivity(new Intent(SecondScreenActivity.this, CalendarActivity.class));
+                 Intent irParaCalendarView = new Intent(SecondScreenActivity.this, CalendarActivity.class);
+                 irParaCalendarView.putExtra("id_usuario",id_usuario);
+                 startActivity(irParaCalendarView);
              }
          });
      }
@@ -219,16 +218,6 @@ public class SecondScreenActivity extends AppCompatActivity {
     }
     public String getUser(){
         return user;
-    }
-
-    public void fillSpinner(){
-        Spinner spinner = (Spinner) findViewById(R.id.spinnerOptions);
-        String[] options = getResources().getStringArray(R.array.options);
-        ArrayAdapter<String> adapterOptions =
-                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, options);
-        adapterOptions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapterOptions);
-        spinner.setPrompt("Options");
     }
 
     public void callCadAtividade(){
