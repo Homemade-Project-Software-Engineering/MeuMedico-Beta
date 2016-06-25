@@ -5,7 +5,18 @@ import java.io.Serializable;
 public class Atividade implements Serializable{
 
     private String nome, descricao, data, hora;
-    private int id, id_usuario;
+    private int id;
+    private int id_usuario;
+
+    public int getConcluida() {
+        return concluida;
+    }
+
+    public void setConcluida(int concluida) {
+        this.concluida = concluida;
+    }
+
+    private int concluida;
 
     public String getNome() {
         return nome;

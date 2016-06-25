@@ -68,6 +68,39 @@ public class AtividadeDAO extends SQLiteOpenHelper {
             atividade.setId_usuario(c.getInt(c.getColumnIndex("id_usuario")));
             atividade.setNome(c.getString(c.getColumnIndex("nome")));
             atividade.setDescricao(c.getString(c.getColumnIndex("descricao")));
+            atividade.setConcluida(c.getInt(c.getColumnIndex("concluida")));
+
+            String dataHora = c.getString(c.getColumnIndex("data"));
+
+            String split[] = dataHora.split(" ");
+
+            String dataPadrao[] = split[0].split("-");
+
+            String data = dataPadrao[2]+"/"+dataPadrao[1]+"/"+dataPadrao[0];
+
+            atividade.setData(data);
+            atividade.setHora(split[1]);
+
+            atividades.add(atividade);
+        }
+        c.close();
+        return atividades;
+    }
+
+    public List<Atividade> getListaAtividades(int id_usuario) {
+
+        final List<Atividade> atividades = new ArrayList<>();
+        String sql = "SELECT * FROM " + TABELA + " where id_usuario = ?";
+        String args[] = new String[]{String.valueOf(id_usuario)};
+        final Cursor c = getReadableDatabase().rawQuery(sql, args);
+
+        while(c.moveToNext()){
+            Atividade atividade = new Atividade();
+            atividade.setId(c.getInt(c.getColumnIndex("id")));
+            atividade.setId_usuario(c.getInt(c.getColumnIndex("id_usuario")));
+            atividade.setNome(c.getString(c.getColumnIndex("nome")));
+            atividade.setDescricao(c.getString(c.getColumnIndex("descricao")));
+            atividade.setConcluida(c.getInt(c.getColumnIndex("concluida")));
 
             String dataHora = c.getString(c.getColumnIndex("data"));
 
