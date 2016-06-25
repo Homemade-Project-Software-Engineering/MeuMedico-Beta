@@ -25,7 +25,9 @@
         <activity
             android:name=".view.Cad_AtividadeActivity"
             android:parentActivityName=".view.SecondScreenActivity" />
-        <activity android:name=".view.ContaUsuarioActivity" />
+        <activity
+            android:name=".view.ContaUsuarioActivity"
+            android:parentActivityName=".view.SecondScreenActivity"/>
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -52,7 +54,9 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.CalendarActivity" />
+        <activity
+            android:name=".view.CalendarActivity"
+            android:parentActivityName=".view.SecondScreenActivity"/>
     </application>
 
 </manifest>

@@ -33,7 +33,8 @@ public class ContaUsuarioActivity extends AppCompatActivity {
         TextView id = (TextView) findViewById(R.id.textViewIdPerfil);
         id.setText(String.valueOf(sp.getInt("id_usuario", 0)));
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Minha Conta");
     }
 
     public void deletarContaUsuarioByEmail(View view){

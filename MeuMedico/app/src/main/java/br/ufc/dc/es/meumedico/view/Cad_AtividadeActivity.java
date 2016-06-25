@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +37,7 @@ import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.others.NotificationPublisher;
 import br.ufc.dc.es.meumedico.controller.others.UpdateActivityByNotification;
 
-public class Cad_AtividadeActivity extends FragmentActivity
+public class Cad_AtividadeActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
     Button btsalvarAlterar;
@@ -47,6 +48,7 @@ public class Cad_AtividadeActivity extends FragmentActivity
     EditText editTextHora, editTextData;
     Bundle data;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +58,13 @@ public class Cad_AtividadeActivity extends FragmentActivity
         atividadeParaSerAlterada = (Atividade) getIntent().getSerializableExtra("atividadeSelecionada");
 
         if(atividadeParaSerAlterada!=null){
+            getSupportActionBar().show();
+            getSupportActionBar().setTitle("Editar Atividade");
             btsalvarAlterar.setText(R.string.botao_alterar_atividade);
             helper.atividadeParaSerAlterada(atividadeParaSerAlterada);
+        }else{
+            getSupportActionBar().show();
+            getSupportActionBar().setTitle("Cadastrar Atividade");
         }
     }
 
