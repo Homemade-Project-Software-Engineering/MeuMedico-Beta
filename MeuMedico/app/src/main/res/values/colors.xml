@@ -6,4 +6,15 @@
     <color name="colorRedActivityDontDone">#F44336</color>
     <color name="colorGreenActivityDone">#4CAF50</color>
     <color name="colorGrayActivityPending">#9E9E9E</color>
+
+    <!-- Main colors app -->
+    <color name="greenLine">#329555</color>
+    <color name="emeraldGreen">#00C957</color>
+    <color name="seaGreen">#54FF9F</color>
+    <color name="hotPink">#FF69B4</color>
+    <color name="nightBlack">#0C090A</color>
+    <color name="wihteBackground">#FFFFFF</color>
+    <color name="shadowGray">#9B9D99</color>
+
+
 </resources>
