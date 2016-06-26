@@ -4,7 +4,7 @@ package br.ufc.dc.es.meumedico.controller.helper;
 
 import junit.framework.TestCase;
 
-import org.testng.annotations.Test;
+//import org.testng.annotations.Test;
 
 
 /**
@@ -18,18 +18,18 @@ public class AtividadeHelperTest extends TestCase{
     }
 
 
-    @org.junit.Before
+    //@org.junit.Before
     public void setUp() throws Exception {
         super.setUp();
 
     }
 
-    @org.junit.After
+   // @org.junit.After
     public void tearDown() throws Exception {
 
     }
 
-    @Test  //or fail(), or this: @Test(expected=Exception.class)
+   // @Test  //or fail(), or this: @Test(expected=Exception.class)
     public void testPegaCamposAtividade() /*throws Exception*/ {
         try{
             fail();
@@ -37,7 +37,7 @@ public class AtividadeHelperTest extends TestCase{
     }
 
 
-    @org.junit.Test
+   // @org.junit.Test
     public void testAtividadeParaSerAlterada() throws Exception {
 
     }

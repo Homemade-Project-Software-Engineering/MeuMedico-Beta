@@ -4,12 +4,12 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import com.robotium.solo.Solo;
-
+/*
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import static org.testng.Assert.*;
-
+*/
 /**
  * Created by jonas on 24/06/16.
  */
@@ -21,7 +21,8 @@ public class SecondScreenActivityTest extends ActivityInstrumentationTestCase2<S
         super(SecondScreenActivity.class);
     }
 
-    @BeforeMethod
+    //@BeforeMethod
+    @Override
     public void setUp() throws Exception {
         /**setUp() is run before a test case is started.
          This is where the solo object is created.*/
@@ -29,7 +30,8 @@ public class SecondScreenActivityTest extends ActivityInstrumentationTestCase2<S
         getActivity();
     }
 
-    @AfterMethod
+    //@AfterMethod
+    @Override
     public void tearDown() throws Exception {
         /**tearDown() is run after a test case has finished.
          finishOpenedActivities() will finish all the activities that

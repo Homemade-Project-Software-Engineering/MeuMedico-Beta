@@ -1,8 +1,9 @@
 package br.ufc.dc.es.meumedico.view;
-
+/*
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+*/
 import com.robotium.solo.Solo;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -19,7 +20,8 @@ public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaAct
         super(ContaActivity.class);
     }
 
-    @BeforeMethod
+    //@BeforeMethod
+    @Override
     public void setUp() throws Exception {
         /**setUp() is run before a test case is started.
          This is where the solo object is created.*/
@@ -27,7 +29,8 @@ public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaAct
         getActivity();
     }
 
-    @AfterMethod
+    //@AfterMethod
+    @Override
     public void tearDown() throws Exception {
         /**tearDown() is run after a test case has finished.
          finishOpenedActivities() will finish all the activities that
