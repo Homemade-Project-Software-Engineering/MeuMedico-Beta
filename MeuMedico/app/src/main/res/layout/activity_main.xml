@@ -76,9 +76,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btSecondActivity"
-        android:textColor="@color/nightBlack"
-        android:background="@color/emeraldGreen" />
-
+        android:textColor="@color/whitTextButton"
+        android:shadowColor="@color/shadowGray"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:background="@drawable/buttonshape"
+         />
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

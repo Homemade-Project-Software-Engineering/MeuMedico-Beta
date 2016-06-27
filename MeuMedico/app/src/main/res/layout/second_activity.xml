@@ -59,11 +59,11 @@
         android:id="@+id/btCad_Atividade"
         android:text="Cadastrar Atividade"
         android:layout_below="@id/nameUser"
-        android:layout_width="150dp"
+        android:layout_width="190dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/nightBlack"
-        android:background="@color/emeraldGreen"
+        android:textColor="@color/whitTextButton"
+        android:background="@drawable/buttonshape"
         />
 
     <RelativeLayout

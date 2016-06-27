@@ -16,5 +16,10 @@
     <color name="wihteBackground">#FFFFFF</color>
     <color name="shadowGray">#9B9D99</color>
 
+    <!-- Gradient most efficient colors -->
+    <color name="clearGreen">#f799ff99</color>
+    <color name="mediumGreen">#00C957</color>
+    <color name="hardGreen">#e90a451d</color>
+    <color name="whitTextButton">#ffffff</color>
 
 </resources>
