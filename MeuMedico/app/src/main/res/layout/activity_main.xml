@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:background="@color/wihteBackground"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,12 +17,12 @@
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:shadowColor="#9B9D99"
+        android:shadowColor="@color/shadowGray"
         android:shadowDx="5"
         android:shadowDy="5"
         android:textSize="45sp"
         android:shadowRadius="0"
-        android:textColor="#25DD8B"
+        android:textColor="@color/emeraldGreen"
         android:text="Meu Médico" />
 
     <com.facebook.login.widget.LoginButton
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textColor="#25DD8B"
+        android:textColor="@color/emeraldGreen"
         android:text="ou"
         android:layout_gravity="center_horizontal" />
 
@@ -50,10 +50,10 @@
         <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
             android:id="@+id/etGuestName"
             android:layout_width="match_parent"
-            android:textColor="#000000"
+            android:textColor="@color/nightBlack"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:textColorHint="#000000" />
+            android:textColorHint="@color/nightBlack" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -64,10 +64,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/passwordTextEdit"
-        android:textColor="#000000"
+        android:textColor="@color/nightBlack"
         android:inputType="textPassword"
         android:hint="Senha"
-        android:textColorHint="#000000"/>
+        android:textColorHint="@color/nightBlack"/>
     </android.support.design.widget.TextInputLayout>
 
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
@@ -76,8 +76,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btSecondActivity"
-        android:textColor="#000000"
-        android:background="#25DD8B" />
+        android:textColor="@color/nightBlack"
+        android:background="@color/emeraldGreen" />
 
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:layout_width="wrap_content"

@@ -117,4 +117,5 @@ public class CalendarActivity extends AppCompatActivity implements CalendarPicke
     public void onScrollToDate(Calendar calendar) {
         Log.i("Status", "Scroll");
     }
+
 }

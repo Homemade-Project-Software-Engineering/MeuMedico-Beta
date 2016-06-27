@@ -15,12 +15,12 @@
         android:id="@+id/agenda_calendar_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        agendaCalendar:agendaCurrentDayTextColor="@color/theme_primary"
-        agendaCalendar:calendarColor="@color/theme_primary"
-        agendaCalendar:calendarCurrentDayTextColor="@color/calendar_text_current_day"
+        agendaCalendar:agendaCurrentDayTextColor="@color/seaGreen"
+        agendaCalendar:calendarColor="@color/emeraldGreen"
+        agendaCalendar:calendarCurrentDayTextColor="@color/nightBlack"
         agendaCalendar:calendarDayTextColor="@color/theme_text_icons"
-        agendaCalendar:calendarHeaderColor="@color/theme_primary_dark"
+        agendaCalendar:calendarHeaderColor="@color/greenLine"
         agendaCalendar:calendarPastDayTextColor="@color/theme_light_primary"
-        agendaCalendar:fabColor="@color/theme_accent" />
+        agendaCalendar:fabColor="@color/hotPink" />
 
 </LinearLayout>

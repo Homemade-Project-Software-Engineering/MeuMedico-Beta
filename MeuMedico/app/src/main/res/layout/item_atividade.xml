@@ -6,7 +6,7 @@
     android:background="?android:attr/selectableItemBackground">
 
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
-        android:textColor="#000000"
+        android:textColor="@color/nightBlack"
         android:id="@+id/tv_model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:textSize="16sp" />
 
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
-        android:textColor="#000000"
+        android:textColor="@color/nightBlack"
         android:layout_below="@+id/tv_model"
         android:layout_alignLeft="@+id/tv_model"
         android:id="@+id/tv_brand"
@@ -29,7 +29,7 @@
         android:layout_marginTop="20dp"
         android:layout_alignLeft="@+id/tv_model"
         android:layout_below="@+id/tv_brand"
-        android:background="#25dd8b"
+        android:background="@color/emeraldGreen"
         android:layout_width="match_parent"
         android:layout_height="0.8dp" />
 
