@@ -145,4 +145,19 @@ public class LoginDAO extends SQLiteOpenHelper {
         cursor.close();
         return id_user;
     }
+
+    public boolean verificarUsuarioTabelaLogin(int id_usuario){
+
+        String sql = "SELECT id FROM " + TABELA + " WHERE id = ?;";
+        String[] args = {String.valueOf(id_usuario)};
+        final Cursor cursor = getReadableDatabase().rawQuery(sql, args);
+
+        if(cursor.moveToFirst()){
+            cursor.close();
+            return true;
+        }else{
+            cursor.close();
+            return false;
+        }
+    }
 }
