@@ -2,6 +2,7 @@ package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.domain.Login;
 import br.ufc.dc.es.meumedico.model.CuidadorDAO;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 
 public class ContaUsuarioActivity extends AppCompatActivity {
 
     private static final String PREF_NAME = "LoginActivityPreferences";
-    String email;
+    String email,nome;
     int id_usuario, id_recebido;
     CuidadorDAO dao_cuidador = new CuidadorDAO(this);
 
@@ -32,7 +34,8 @@ public class ContaUsuarioActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
         TextView logado = (TextView) findViewById(R.id.textViewLogadoContaUsuario);
-        logado.setText(sp.getString("nome", ""));
+        this.nome = sp.getString("nome", "");
+        logado.setText(nome);
         TextView email = (TextView) findViewById(R.id.textViewEmailContaUsuario);
         this.email = sp.getString("email", "");
         email.setText(this.email);
@@ -81,7 +84,15 @@ public class ContaUsuarioActivity extends AppCompatActivity {
     }
 
     public void editarContaUsuario(View view){
-        Log.i("Editar", "Implementar Editar Conta");
+
+        Login conta = new Login();
+        conta.setId(id_usuario);
+        conta.setName(nome);
+        conta.setEmail(email);
+
+        Intent contaParaSerAlterada = new Intent(ContaUsuarioActivity.this, ContaActivity.class);
+        contaParaSerAlterada.putExtra("contaParaSerAlterada", conta);
+        startActivity(contaParaSerAlterada);
     }
 
     public void inserirCuidador(View view){

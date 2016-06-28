@@ -55,4 +55,10 @@ public class ContaHelper {
 
         return login;
     }
+
+    public void contaParaSerAlterada(Login contaParaSerAlterada) {
+
+        campoNome.setText(contaParaSerAlterada.getName());
+        campoEmail.setText(contaParaSerAlterada.getEmail());
+    }
 }

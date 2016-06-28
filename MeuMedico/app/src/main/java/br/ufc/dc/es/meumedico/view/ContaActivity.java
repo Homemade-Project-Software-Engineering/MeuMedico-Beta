@@ -1,7 +1,8 @@
 package br.ufc.dc.es.meumedico.view;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,7 +13,7 @@ import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
 
-public class ContaActivity extends Activity {
+public class ContaActivity extends AppCompatActivity {
 
     Button createAccount;
     ContaHelper helper;
@@ -21,11 +22,30 @@ public class ContaActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conta);
+
+        createAccount = (Button) findViewById(R.id.btcriarConta);
+
         callCreateAccount();
+
+        Login contaParaSerAlterada = (Login) getIntent().getSerializableExtra("contaParaSerAlterada");
+
+        if(contaParaSerAlterada!=null){
+            getSupportActionBar().show();
+            getSupportActionBar().setTitle("Editar Conta");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            createAccount.setText("Editar Conta");
+
+            helper = new ContaHelper(this);
+
+            helper.contaParaSerAlterada(contaParaSerAlterada);
+        }else{
+            getSupportActionBar().show();
+            getSupportActionBar().setTitle("Cadastrar Conta");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     public void callCreateAccount(){
-        createAccount = (Button) findViewById(R.id.btcriarConta);
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,5 +65,17 @@ public class ContaActivity extends Activity {
                 }
             }
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
