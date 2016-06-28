@@ -72,6 +72,6 @@
         android:id="@+id/btcriarConta"
         android:layout_below="@+id/CadastroSenha"
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"/>
+        android:background="@color/emeraldGreen"/>
 
 </RelativeLayout>

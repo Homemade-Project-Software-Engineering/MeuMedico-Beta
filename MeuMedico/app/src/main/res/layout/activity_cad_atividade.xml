@@ -59,7 +59,7 @@
 
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"
+        android:background="@color/emeraldGreen"
         android:layout_width="300px"
         android:layout_height="100px"
         android:text="Salvar"

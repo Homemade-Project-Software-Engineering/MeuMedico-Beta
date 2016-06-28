@@ -63,7 +63,7 @@
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"
+        android:background="@color/emeraldGreen"
         />
 
     <RelativeLayout

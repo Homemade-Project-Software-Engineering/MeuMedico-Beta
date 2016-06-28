@@ -81,7 +81,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"
+        android:background="@color/emeraldGreen"
         android:onClick="editarContaUsuario"/>
 
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
@@ -90,7 +90,7 @@
         android:text="Excluir Conta"
         android:id="@+id/btExcluirConta"
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"
+        android:background="@color/emeraldGreen"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/btEditarConta"
         android:layout_alignParentStart="true"
@@ -116,7 +116,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="320dp"
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"
+        android:background="@color/emeraldGreen"
         android:onClick="inserirCuidador"/>
 
 
@@ -126,7 +126,7 @@
         android:text="Excluir Cuidador"
         android:id="@+id/btExcluirCuidador"
         android:textColor="@color/whitTextButton"
-        android:background="@drawable/buttonshape"
+        android:background="@color/emeraldGreen"
         android:layout_marginTop="30dp"
         android:layout_below="@+id/btCadastrarCuidador"
         android:layout_alignParentStart="true"

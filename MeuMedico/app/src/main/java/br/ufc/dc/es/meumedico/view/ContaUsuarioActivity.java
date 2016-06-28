@@ -85,14 +85,6 @@ public class ContaUsuarioActivity extends AppCompatActivity {
     }
 
     public void inserirCuidador(View view){
-        showDialogCadastrarCuidador();
-    }
-
-    public void deletarCuidador(View view){
-        showDialogExcluirCuidador();
-    }
-
-    public void showDialogCadastrarCuidador(){
 
         final AlertDialog diag = new AlertDialog.Builder(this)
                 .setTitle("Cadastrar Cuidador")
@@ -118,7 +110,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
 
                         if(id_usuario==id_recebido){
                             Toast.makeText(ContaUsuarioActivity.this, "Você não pode se cadastrar como Cuidador" +
-                                    ", por favor, tente novamente",
+                                            ", por favor, tente novamente",
                                     Toast.LENGTH_LONG).show();
                             diag.dismiss();
                         }else{
@@ -133,7 +125,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
                                 diag.dismiss();
                             }else if(dao_cuidador.verificaUsuarioCadastradoComoCuidador(id_usuario,id_recebido)){
                                 Toast.makeText(ContaUsuarioActivity.this, "Você já cadastrou esse usuário de ID "
-                                        + id_recebido + " como seu cuidador",
+                                                + id_recebido + " como seu cuidador",
                                         Toast.LENGTH_LONG).show();
                                 diag.dismiss();
                             }else{
@@ -150,7 +142,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
 
                     }catch (NumberFormatException e){
                         Toast.makeText(ContaUsuarioActivity.this, "ID do Cuidador para cadastro é um inteiro" +
-                                ", por favor, tente novamente",
+                                        ", por favor, tente novamente",
                                 Toast.LENGTH_LONG).show();
                         diag.dismiss();
                     }
@@ -166,7 +158,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
         });
     }
 
-    public void showDialogExcluirCuidador(){
+    public void deletarCuidador(View view){
 
         final AlertDialog diag = new AlertDialog.Builder(this)
                 .setTitle("Excluir Cuidador")
