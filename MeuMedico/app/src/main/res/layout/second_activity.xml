@@ -8,11 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
+
     <TableLayout
         android:id="@+id/topTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <TableRow>
             <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
                 android:id="@+id/welcome"
                 android:layout_marginEnd="10dp"
@@ -21,8 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/nightBlack"
-                android:text="Bem-Vindo" />
-        </TableRow>
+                android:text="@string/second_bem_vindo" />
     </TableLayout>
 
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
@@ -57,7 +56,7 @@
 
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:id="@+id/btCad_Atividade"
-        android:text="Cadastrar Atividade"
+        android:text="@string/second_btCadastrarAtividade"
         android:layout_below="@id/nameUser"
         android:layout_width="190dp"
         android:layout_height="50dp"

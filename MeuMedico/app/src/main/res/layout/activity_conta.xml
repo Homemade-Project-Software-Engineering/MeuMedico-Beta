@@ -14,7 +14,7 @@
         android:textColor="@color/nightBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome"
+        android:text="@string/conta_nome"
         android:id="@+id/textViewNome"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -31,7 +31,7 @@
         android:textColor="@color/nightBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
+        android:text="@string/conta_email"
         android:id="@+id/textViewEmail"
         android:layout_below="@+id/CadastroNome"
         android:layout_alignParentStart="true" />
@@ -48,7 +48,7 @@
         android:textColor="@color/nightBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Senha:"
+        android:text="@string/conta_senha"
         android:id="@+id/textViewSenha"
         android:layout_below="@+id/CadastroEmail"
         android:layout_alignParentStart="true" />
@@ -68,7 +68,7 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="Criar Conta"
+        android:text="@string/conta_btCriarConta"
         android:id="@+id/btcriarConta"
         android:layout_below="@+id/CadastroSenha"
         android:textColor="@color/whitTextButton"

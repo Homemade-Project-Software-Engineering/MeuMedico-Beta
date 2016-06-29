@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="horizontal"
+    style="?android:attr/buttonBarButtonStyle"
     >
 
     <EditText
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
         android:inputType="text"
-        android:hint="Digite o ID do cuidador"/>
+        android:hint="@string/dialog_inserir_id_cuidador"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -25,18 +26,20 @@
         android:layout_marginTop="10dp">
 
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/btn_Cancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Cancelar" />
+            android:text="@string/dialog_btCancelar" />
 
         <Button
+            style="?android:attr/buttonBarButtonStyle"
             android:id="@+id/btn_Confirmar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Confirmar" />
+            android:text="@string/dialog_btConfirmar" />
     </LinearLayout>
 
 </RelativeLayout>

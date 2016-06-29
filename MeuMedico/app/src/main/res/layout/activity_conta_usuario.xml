@@ -14,7 +14,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logado como: "
+        android:text="@string/conta_usuario_logado_label"
         android:id="@+id/textViewLogadoLabel"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -24,7 +24,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="xxxxxx"
+        android:text="@string/conta_usuario_logado_nome"
         android:id="@+id/textViewLogadoContaUsuario"
         android:layout_alignTop="@+id/textViewLogadoLabel"
         android:layout_toEndOf="@+id/textViewLogadoLabel"
@@ -34,7 +34,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email:"
+        android:text="@string/conta_usuario_email_label"
         android:id="@+id/textViewEmailLabel"
         android:layout_below="@+id/textViewLogadoLabel"
         android:layout_alignStart="@+id/textViewLogadoLabel"
@@ -44,7 +44,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="xxxxx@xxxx.xxx"
+        android:text="@string/conta_usuario_email"
         android:id="@+id/textViewEmailContaUsuario"
         android:layout_alignTop="@+id/textViewEmailLabel"
         android:layout_toEndOf="@+id/textViewEmailLabel"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Seu ID:"
+        android:text="@string/conta_usuario_id_label"
         android:id="@+id/textViewSeuID"
         android:layout_marginTop="24dp"
         android:textColor="@color/nightBlack"
@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="00000"
+        android:text="@string/conta_usuario_id"
         android:id="@+id/textViewIdPerfil"
         android:textColor="@color/nightBlack"
         android:layout_marginStart="130dp"
@@ -75,7 +75,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Editar Conta"
+        android:text="@string/conta_usuario_btEditarConta"
         android:id="@+id/btEditarConta"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -87,7 +87,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Excluir Conta"
+        android:text="@string/conta_usuario_btExcluirConta"
         android:id="@+id/btExcluirConta"
         android:textColor="@color/whitTextButton"
         android:background="@color/emeraldGreen"
@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Cuidador(es)"
+        android:text="@string/conta_usuario_cuidador_label"
         android:id="@+id/textView"
         android:layout_marginTop="28dp"
         android:textColor="@color/nightBlack"
@@ -110,7 +110,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastrar Cuidador"
+        android:text="@string/conta_usuario_btCadastrarCuidador"
         android:id="@+id/btCadastrarCuidador"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -123,7 +123,7 @@
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Excluir Cuidador"
+        android:text="@string/conta_usuario_btExcluirCuidador"
         android:id="@+id/btExcluirCuidador"
         android:textColor="@color/whitTextButton"
         android:background="@color/emeraldGreen"

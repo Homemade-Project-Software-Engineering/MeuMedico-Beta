@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Meu Médico</string>
-    <string name="btSecondActivity">Entrar</string>
     <string name="spinner">Perfis</string>
     <string name="menu1">Conta</string>
     <string name="menu2">Configurações</string>
@@ -21,4 +20,49 @@
     <string name="SimLogout">Sim</string>
     <string name="CancelarLogout">Cancelar</string>
     <string name="botao_alterar_atividade">Alterar</string>
+
+    <!-- Cad_AtividadeActivity String res-->
+    <string name="cad_atividade_nome">Nome:</string>
+    <string name="cad_atividade_descricao">Descrição::</string>
+    <string name="cad_atividade_data">Data:</string>
+    <string name="cad_atividade_hora">Hora:</string>
+    <string name="cad_atividade_btSalvar">Salvar</string>
+
+    <!-- ContaActivity String res-->
+    <string name="conta_nome">Nome:</string>
+    <string name="conta_email">Email:</string>
+    <string name="conta_senha">Senha:</string>
+    <string name="conta_btCriarConta">Criar Conta</string>
+
+    <!-- ContaActivity String res-->
+    <string name="conta_usuario_logado_label">Logado como:</string>
+    <string name="conta_usuario_logado_nome">xxxxxx</string>
+    <string name="conta_usuario_email_label">Email:</string>
+    <string name="conta_usuario_email">xxxxx@xxxx.xxx</string>
+    <string name="conta_usuario_id_label">Seu ID:</string>
+    <string name="conta_usuario_id">00000</string>
+    <string name="conta_usuario_btEditarConta">Editar Conta</string>
+    <string name="conta_usuario_btExcluirConta">Excluir Conta</string>
+    <string name="conta_usuario_cuidador_label">Cuidador(es)</string>
+    <string name="conta_usuario_btCadastrarCuidador">Cadastrar Cuidador</string>
+    <string name="conta_usuario_btExcluirCuidador">Excluir Cuidador</string>
+
+    <!-- MainActivity String res-->
+    <string name="main_nome_app">Meu Médico</string>
+    <string name="main_ou">ou</string>
+    <string name="main_email">Email</string>
+    <string name="main_senha">Senha</string>
+    <string name="main_btSecondActivity">Entrar</string>
+    <string name="main_pergunta_conta">Não tem conta ainda?</string>
+    <string name="main_cadastre_se">CADASTRE-SE</string>
+
+    <!-- dialog_insert_cuidador String res-->
+    <string name="dialog_inserir_id_cuidador">Digite o ID do cuidador</string>
+    <string name="dialog_btCancelar">Cancelar</string>
+    <string name="dialog_btConfirmar">Confirmar</string>
+
+    <!-- SecondActivity String res-->
+    <string name="second_bem_vindo">Bem-Vindo</string>
+    <string name="second_btCadastrarAtividade">Cadastrar Atividade</string>
+
 </resources>

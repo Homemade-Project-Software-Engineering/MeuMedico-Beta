@@ -23,7 +23,7 @@
         android:textSize="45sp"
         android:shadowRadius="0"
         android:textColor="@color/emeraldGreen"
-        android:text="Meu Médico" />
+        android:text="@string/main_nome_app" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_face"
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/emeraldGreen"
-        android:text="ou"
+        android:text="@string/main_ou"
         android:layout_gravity="center_horizontal" />
 
     <android.support.design.widget.TextInputLayout
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:textColor="@color/nightBlack"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/main_email"
             android:textColorHint="@color/nightBlack" />
     </android.support.design.widget.TextInputLayout>
 
@@ -66,7 +66,7 @@
         android:id="@+id/passwordTextEdit"
         android:textColor="@color/nightBlack"
         android:inputType="textPassword"
-        android:hint="Senha"
+        android:hint="@string/main_senha"
         android:textColorHint="@color/nightBlack"/>
     </android.support.design.widget.TextInputLayout>
 
@@ -75,7 +75,7 @@
         android:id="@+id/btSecondScreen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btSecondActivity"
+        android:text="@string/main_btSecondActivity"
         android:textColor="@color/whitTextButton"
         android:shadowColor="@color/shadowGray"
         android:shadowDx="0"
@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Não tem conta ainda?"
+        android:text="@string/main_pergunta_conta"
         android:textColor="@color/com_facebook_blue"
         android:id="@+id/textViewQuestion" />
 
@@ -94,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="CADASTRE-SE"
+        android:text="@string/main_cadastre_se"
         android:id="@+id/textViewButton"
         android:layout_gravity="center_horizontal"
         android:textColor="@color/com_facebook_blue"

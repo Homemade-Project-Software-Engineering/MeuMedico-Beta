@@ -2,7 +2,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="20dp"
-    android:paddingLeft="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:background="?android:attr/selectableItemBackground">
 
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
@@ -11,23 +12,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
         android:textColor="@color/nightBlack"
         android:layout_below="@+id/tv_model"
-        android:layout_alignLeft="@+id/tv_model"
+        android:layout_alignStart="@+id/tv_model"
         android:id="@+id/tv_brand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingRight="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textSize="12sp" />
 
     <View
         android:id="@+id/vw_divider"
         android:layout_marginTop="20dp"
-        android:layout_alignLeft="@+id/tv_model"
+        android:layout_alignStart="@+id/tv_model"
         android:layout_below="@+id/tv_brand"
         android:background="@color/emeraldGreen"
         android:layout_width="match_parent"
