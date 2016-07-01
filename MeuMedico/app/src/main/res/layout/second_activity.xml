@@ -37,21 +37,21 @@
 
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:id="@+id/btDatePiker"
-        android:layout_margin="5dp"
+        android:layout_margin="20dp"
         android:layout_below="@+id/btCad_Atividade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/calendar_ios"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/calendar_button"
         />
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
         android:id="@+id/btEmergency"
-        android:layout_margin="5dp"
+        android:layout_margin="20dp"
         android:layout_below="@+id/btCad_Atividade"
         android:layout_alignEnd="@+id/btCad_Atividade"
         android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ambulance_ios"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/emergency_button"
         />
 
     <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
