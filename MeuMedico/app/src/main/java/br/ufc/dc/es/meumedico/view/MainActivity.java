@@ -35,13 +35,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
 
-/*
-*   Error:Execution failed for task ':app:transformClassesWithJarMergingForDebugAndroidTest'.
-> com.android.build.api.transform.TransformException: java.util.zip.ZipException: duplicate entry: org/hamcrest/BaseDescription.class
-*
-* */
-
-
 public class MainActivity extends AppCompatActivity{
 
     Button next;
