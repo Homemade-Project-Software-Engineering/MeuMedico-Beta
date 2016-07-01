@@ -62,7 +62,7 @@
     <string name="dialog_btConfirmar">Confirmar</string>
 
     <!-- SecondActivity String res-->
-    <string name="second_bem_vindo">Bem-Vindo</string>
+    <string name="second_logado_como">Logado como: ID - Nome</string>
     <string name="second_btCadastrarAtividade">Cadastrar Atividade</string>
 
 </resources>
