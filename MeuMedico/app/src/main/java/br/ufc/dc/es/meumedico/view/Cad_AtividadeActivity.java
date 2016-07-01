@@ -170,6 +170,8 @@ public class Cad_AtividadeActivity extends AppCompatActivity
     private Notification getNotification() {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setCategory("CATEGORY_EVENT")
+                .setPriority(Notification.PRIORITY_MAX)
                 .setTicker(data.getString("descricao"))
                 .setSmallIcon(R.drawable.ic_notification_activity)
                 .setContentTitle("Realizar Atividade")
