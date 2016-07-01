@@ -202,6 +202,12 @@ public class SecondScreenActivity extends AppCompatActivity {
                         });
                 builder.show();
                 break;
+            case R.id.itemOptionsCadastrar:
+                startActivity(new Intent(this, Cad_AtividadeActivity.class));
+                break;
+            case R.id.itemOptionsAtualizar:
+                //chamar método pra atualizar recyclerview da API
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

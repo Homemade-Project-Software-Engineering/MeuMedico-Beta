@@ -16,4 +16,16 @@
         android:title="@string/menu3"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/itemOptionsCadastrar"
+        android:title="@string/menu4"
+        android:icon="@drawable/ic_menu_add_white"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/itemOptionsAtualizar"
+        android:title="@string/menu5"
+        android:icon="@drawable/ic_menu_refresh_white"
+        app:showAsAction="ifRoom"
+        />
 </menu>
