@@ -51,7 +51,7 @@ public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaAct
         //solo.takeScreenshot(); need a path to save the screens.
         solo.waitForText("New client",1,2000); // find New client 2 times in 2 seconds
         assertTrue(solo.searchText("123456"));
-        solo.sleep(2000);
+        solo.sleep(1000);
 
         // NÃO TESTAR O BOTÃO CRIAR NESSE TESTE AINDA.
     }

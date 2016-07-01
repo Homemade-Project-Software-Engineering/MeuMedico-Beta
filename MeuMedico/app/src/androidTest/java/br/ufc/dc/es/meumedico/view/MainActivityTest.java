@@ -45,8 +45,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     @SmallTest
     public void testMainActivity() throws Exception {
 
-        testFirst();
-
         solo.enterText(0,"email@example.com");
         solo.typeText(1,"password");
 
@@ -66,14 +64,35 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.clickOnButton(1);// enter button
 
         solo.searchText("Pedro"); // string assure that login works fine
-        solo.pressMenuItem(9); // menu exit
-        solo.clickOnButton(1);// click on ok
+        solo.pressMenuItem(9,1); // menu exit
+        solo.clickOnButton(1); //exiting
 
 
         /** The same as touch on some button or else */
         solo.clickOnText("CADASTRE-SE");
         solo.goBackToActivity("MainActivity");
-        //solo.waitForDialogToOpen(5000);
-        //solo.waitForDialogToClose(10000);
+
+
+        /** Enter with a local database user */
+        solo.enterText(0,"pedro@gmail.com");
+        solo.typeText(1,"2323");
+        solo.clickOnButton(1);// enter button
+
+        // Not possible to run this two activities separately....
+        solo.pressMenuItem(0);
+        solo.goBackToActivity("SecondScreenActivity");
+        solo.pressMenuItem(3);
+        //solo.goBackToActivity("SecondScreenActivity"); não implementado ainda....
+
+        solo.clickOnText("Cadastrar Atividade");
+        solo.goBackToActivity("SecondScreenActivity");
+        solo.clickOnButton(0);
+        solo.goBackToActivity("SecondScreenActivity");
+        solo.clickOnButton(1);
+        // solo.goBackToActivity("SecondScreenActivity"); botão emergencia
+        //exiting....
+        solo.pressMenuItem(9);
+        solo.clickOnButton(1);
+
     }
 }
