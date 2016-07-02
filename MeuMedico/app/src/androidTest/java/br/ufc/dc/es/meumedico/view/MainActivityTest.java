@@ -66,7 +66,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         //ok user created just for test.
 
         /** Enter with a local database user */
-        solo.enterText(0,"pedro@gmail.com");
+        solo.goBackToActivity("MainActivity");
+        solo.typeText(0,"pedro@gmail.com");
         solo.typeText(1,"2323");
 
         solo.clickOnButton(1);// enter button
