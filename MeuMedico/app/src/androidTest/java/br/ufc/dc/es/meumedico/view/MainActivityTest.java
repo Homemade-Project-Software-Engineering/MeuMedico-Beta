@@ -57,6 +57,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.clickOnButton(0); // facebook button
         solo.goBackToActivity("MainActivity");
 
+        // create a user to avoid database issues
+        solo.clickOnText("CADASTRE-SE");
+        solo.enterText(0,"Pedro");
+        solo.enterText(1,"pedro@gmail.com");
+        solo.enterText(2,"2323");
+        solo.clickOnButton(0);
+        //ok user created just for test.
+
         /** Enter with a local database user */
         solo.enterText(0,"pedro@gmail.com");
         solo.typeText(1,"2323");
