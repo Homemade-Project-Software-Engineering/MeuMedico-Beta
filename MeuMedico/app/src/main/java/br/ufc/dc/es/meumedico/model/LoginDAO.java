@@ -160,4 +160,18 @@ public class LoginDAO extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public String getNomeByIdUsuario(int id_usuario){
+
+        String sql = "SELECT name FROM " + TABELA + " WHERE id = ?;";
+        String[] args = {String.valueOf(id_usuario)};
+        final Cursor cursor = getReadableDatabase().rawQuery(sql, args);
+        String nome = "";
+
+        while(cursor.moveToNext()){
+            nome = cursor.getString(cursor.getColumnIndex("name"));
+        }
+
+        return nome;
+    }
 }
