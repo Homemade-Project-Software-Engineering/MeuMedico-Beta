@@ -2,7 +2,7 @@
     <string name="app_name">Meu Médico</string>
     <string name="spinner">Perfis</string>
     <string name="menu1">Conta</string>
-    <string name="menu2">Configurações</string>
+    <string name="menu2">Cuidadores</string>
     <string name="menu3">Logout</string>
     <string name="menu4">Cadastrar Atividade</string>
     <string name="menu5">Atualizar</string>

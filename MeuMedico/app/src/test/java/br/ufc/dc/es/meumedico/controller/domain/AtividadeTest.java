@@ -7,9 +7,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-/**
- * Created by jonas on 09/06/16.
- */
 public class AtividadeTest {
 
     private Atividade atividade;
