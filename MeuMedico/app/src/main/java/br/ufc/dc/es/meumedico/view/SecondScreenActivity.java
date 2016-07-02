@@ -26,7 +26,7 @@ import java.util.Locale;
 
 import br.ufc.dc.es.meumedico.controller.fragments.AtividadeFragment;
 import br.ufc.dc.es.meumedico.R;
-import br.ufc.dc.es.meumedico.model.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
@@ -113,7 +113,7 @@ public class SecondScreenActivity extends AppCompatActivity {
                 break;
             case R.id.itemContextMenuDeletar:
 
-                AtividadeDAO dao = new AtividadeDAO(SecondScreenActivity.this);
+                MeuMedicoDAO dao = new MeuMedicoDAO(SecondScreenActivity.this);
                 dao.delete(atividadeSelecionadaItem);
                 dao.close();
                 carregaLista();
@@ -246,7 +246,7 @@ public class SecondScreenActivity extends AppCompatActivity {
 
     public List<Atividade> getSetAtividadeList(){
 
-        AtividadeDAO dao = new AtividadeDAO(this);
+        MeuMedicoDAO dao = new MeuMedicoDAO(this);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         String dataAtual = simpleDateFormat.format(Calendar.getInstance().getTime());

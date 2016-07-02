@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,7 +31,7 @@ import br.ufc.dc.es.meumedico.controller.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.fragments.TimePickerFragment;
 import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
-import br.ufc.dc.es.meumedico.model.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.others.NotificationPublisher;
 import br.ufc.dc.es.meumedico.controller.others.UpdateActivityByNotification;
@@ -82,7 +81,7 @@ public class Cad_AtividadeActivity extends AppCompatActivity
                 if(vh.verificaCamposVaziosAtividade()){
                     Toast.makeText(Cad_AtividadeActivity.this, "Todos os campos são obrigatórios, preencha e tente novamente", Toast.LENGTH_LONG).show();
                 }else {
-                    AtividadeDAO dao = new AtividadeDAO(Cad_AtividadeActivity.this);
+                    MeuMedicoDAO dao = new MeuMedicoDAO(Cad_AtividadeActivity.this);
                     Atividade atividade = helper.pegaCamposAtividade();
                     if (atividadeParaSerAlterada != null) {
                         atividade.setId(atividadeParaSerAlterada.getId());

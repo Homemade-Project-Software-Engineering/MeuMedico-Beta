@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import br.ufc.dc.es.meumedico.model.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 
 public class UpdateActivityByNotification extends BroadcastReceiver{
 
@@ -21,7 +21,7 @@ public class UpdateActivityByNotification extends BroadcastReceiver{
         int trueOrFalse = intent.getIntExtra(BOOLEAN_CONCLUIDA, 0);
         Log.i("id", String.valueOf(id));
         Log.i("trueOrFalse", String.valueOf(trueOrFalse));
-        AtividadeDAO dao = new AtividadeDAO(context);
+        MeuMedicoDAO dao = new MeuMedicoDAO(context);
         dao.changeColumnConcluidabyNotification(id,trueOrFalse);
         dao.close();
 

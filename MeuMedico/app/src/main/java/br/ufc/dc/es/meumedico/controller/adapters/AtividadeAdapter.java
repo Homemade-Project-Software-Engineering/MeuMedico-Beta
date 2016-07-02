@@ -14,6 +14,8 @@ import java.util.List;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.interfaces.RecyclerViewOnClickListenerHack;
+import br.ufc.dc.es.meumedico.model.LoginDAO;
+import br.ufc.dc.es.meumedico.view.SecondScreenActivity;
 
 
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyViewHolder> {
@@ -21,8 +23,10 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
     private LayoutInflater mLayoutInflater;
     private RecyclerViewOnClickListenerHack mRecyclerViewOnClickListenerHack;
     ContextMenu.ContextMenuInfo info;
+    Context c;
 
     public AtividadeAdapter(Context c, List<Atividade> l){
+        this.c = c;
         mList = l;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -40,8 +44,12 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int position) {
         Log.i("LOG", "onBindViewHolder()");
-        myViewHolder.tvModel.setText(mList.get(position).getDescricao() );
-        myViewHolder.tvBrand.setText( mList.get(position).getHora() );
+        myViewHolder.tvModel.setText(mList.get(position).getDescricao());
+        myViewHolder.tvBrand.setText(mList.get(position).getHora());
+        LoginDAO dao = new LoginDAO(c);
+        String nome_usuario = dao.getNomeByIdUsuario(mList.get(position).getId_usuario());
+        dao.close();
+        myViewHolder.tvName.setText(nome_usuario);
     }
 
     @Override
@@ -57,11 +65,13 @@ public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener{
         public TextView tvModel;
         public TextView tvBrand;
+        public TextView tvName;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tvModel = (TextView) itemView.findViewById(R.id.tv_model);
             tvBrand = (TextView) itemView.findViewById(R.id.tv_brand);
+            tvName = (TextView) itemView.findViewById(R.id.tv_name);
 
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);

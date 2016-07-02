@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
-import br.ufc.dc.es.meumedico.model.CuidadorDAO;
+import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 
 public class ContaUsuarioActivity extends AppCompatActivity {
@@ -24,7 +23,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
     private static final String PREF_NAME = "LoginActivityPreferences";
     String email,nome;
     int id_usuario, id_recebido;
-    CuidadorDAO dao_cuidador = new CuidadorDAO(this);
+    MeuMedicoDAO dao_cuidador = new MeuMedicoDAO(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +126,7 @@ public class ContaUsuarioActivity extends AppCompatActivity {
                         }else{
 
                             LoginDAO dao_login = new LoginDAO(ContaUsuarioActivity.this);
-                            CuidadorDAO dao_cuidador = new CuidadorDAO(ContaUsuarioActivity.this);
+                            MeuMedicoDAO dao_cuidador = new MeuMedicoDAO(ContaUsuarioActivity.this);
 
                             if(dao_login.verificarUsuarioTabelaLogin(id_recebido)==false){
                                 Toast.makeText(ContaUsuarioActivity.this, "ID não encontrado" +
@@ -194,14 +193,14 @@ public class ContaUsuarioActivity extends AppCompatActivity {
                         id_recebido = Integer.parseInt(id_cuidador.getText().toString());
 
                         if(id_usuario==id_recebido){
-                            Toast.makeText(ContaUsuarioActivity.this, "Você não pode se cadastrar como Cuidador, " +
+                            Toast.makeText(ContaUsuarioActivity.this, "Você não pode se deletar como Cuidador" +
                                             ", por favor, tente novamente",
                                     Toast.LENGTH_LONG).show();
                             diag.dismiss();
                         }else{
 
                             LoginDAO dao_login = new LoginDAO(ContaUsuarioActivity.this);
-                            dao_cuidador = new CuidadorDAO(ContaUsuarioActivity.this);
+                            dao_cuidador = new MeuMedicoDAO(ContaUsuarioActivity.this);
 
                             if(dao_login.verificarUsuarioTabelaLogin(id_recebido)==false){
                                 Toast.makeText(ContaUsuarioActivity.this, "ID não encontrado" +

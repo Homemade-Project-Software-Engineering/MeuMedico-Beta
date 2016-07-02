@@ -1,6 +1,5 @@
 package br.ufc.dc.es.meumedico.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +21,7 @@ import java.util.Locale;
 
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
-import br.ufc.dc.es.meumedico.model.AtividadeDAO;
+import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 
 public class CalendarActivity extends AppCompatActivity implements CalendarPickerController{
 
@@ -41,7 +40,7 @@ public class CalendarActivity extends AppCompatActivity implements CalendarPicke
 
         AgendaCalendarView mAgendaCalendarView = (AgendaCalendarView) findViewById(R.id.agenda_calendar_view);
 
-        AtividadeDAO dao = new AtividadeDAO(this);
+        MeuMedicoDAO dao = new MeuMedicoDAO(this);
 
         id_usuario = getIntent().getIntExtra("id_usuario", 0);
         listAtividade = dao.getListaAtividades(id_usuario);
