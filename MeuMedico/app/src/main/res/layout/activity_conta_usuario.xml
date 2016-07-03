@@ -96,40 +96,4 @@
         android:layout_alignParentStart="true"
         android:onClick="deletarContaUsuarioByEmail"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/conta_usuario_cuidador_label"
-        android:id="@+id/textView"
-        android:layout_marginTop="28dp"
-        android:textColor="@color/nightBlack"
-        android:layout_below="@+id/btExcluirConta"
-        android:layout_alignParentStart="true" />
-
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/conta_usuario_btCadastrarCuidador"
-        android:id="@+id/btCadastrarCuidador"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="320dp"
-        android:textColor="@color/whitTextButton"
-        android:background="@color/emeraldGreen"
-        android:onClick="inserirCuidador"/>
-
-
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/conta_usuario_btExcluirCuidador"
-        android:id="@+id/btExcluirCuidador"
-        android:textColor="@color/whitTextButton"
-        android:background="@color/emeraldGreen"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/btCadastrarCuidador"
-        android:layout_alignParentStart="true"
-        android:onClick="deletarCuidador"/>
-
 </RelativeLayout>

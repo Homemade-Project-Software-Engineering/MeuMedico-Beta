@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/wihteBackground"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.ufc.dc.es.meumedico.view.CuidadorActivity">
+
+    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/cuidador_cuidador_acoes"
+        android:id="@+id/textViewAcoes"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/nightBlack"
+        android:layout_alignParentStart="true" />
+
+    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cuidador_btCadastrarCuidador"
+        android:id="@+id/btCadastrarCuidador"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/whitTextButton"
+        android:background="@color/emeraldGreen"
+        android:layout_marginTop="70dp"
+        android:onClick="inserirCuidador"
+        android:layout_below="@+id/textViewAcoes"/>
+
+
+    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cuidador_btExcluirCuidador"
+        android:id="@+id/btExcluirCuidador"
+        android:textColor="@color/whitTextButton"
+        android:background="@color/emeraldGreen"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/btCadastrarCuidador"
+        android:layout_alignParentStart="true"
+        android:onClick="deletarCuidador"/>
+
+    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/cuidador_cuidador_label"
+        android:id="@+id/textViewCuidador"
+        android:layout_marginTop="28dp"
+        android:textColor="@color/nightBlack"
+        android:layout_below="@+id/btExcluirCuidador"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lista_cuidador"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewCuidador" />
+
+
+</RelativeLayout>
