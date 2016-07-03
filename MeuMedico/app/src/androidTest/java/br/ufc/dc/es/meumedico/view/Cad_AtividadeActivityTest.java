@@ -7,16 +7,13 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.robotium.solo.Solo;
 
 /**
- * Created by jonas on 27/06/16.
+ * Created by jonas on 02/07/16.
  */
-public class ContaUsuarioActivityTest extends
-        ActivityInstrumentationTestCase2<ContaUsuarioActivity> {
+public class Cad_AtividadeActivityTest extends ActivityInstrumentationTestCase2<Cad_AtividadeActivity> {
 
     private Solo solo;
-    /**Super importance....*/
-    public ContaUsuarioActivityTest() {
-        super(ContaUsuarioActivity.class);
-    }
+
+    public Cad_AtividadeActivityTest(){super(Cad_AtividadeActivity.class);}
 
     @Override
     public void setUp() throws Exception {
@@ -37,27 +34,27 @@ public class ContaUsuarioActivityTest extends
     /**This initial test is done to be called first put before the setUp
      * but should be implemented out as change to the settings in each activity,
      * would be more or less an authentication test.*/
-
     @SmallTest
     public void testFirst() throws Exception{
-        solo.assertCurrentActivity("This isn't the right Activity to test!",ContaUsuarioActivity.class);
+        solo.assertCurrentActivity("This isn't the right Activity to test!",Cad_AtividadeActivity.class);
         solo.assertMemoryNotLow();
         solo.clearLog();
     }
 
     @SmallTest
-    public void testContaActivity(){
-        solo.clickOnButton(0);
-        solo.goBackToActivity("ContaUsuarioActivity");
-        solo.clickOnButton(1);
-        solo.clickOnButton(0); //canceled?
-        solo.goBackToActivity("ContaUsuarioActivity");
-        solo.clickOnButton(2);
-        solo.clickOnButton(0); //canceled?
-        solo.goBackToActivity("ContaUsuarioActivity");
-        solo.clickOnButton(3);
-        solo.clickOnButton(0); //canceled?
-        solo.goBackToActivity("ContaUsuarioActivity");
+    public void testCad_Atividade() throws Exception{
+        solo.enterText(0,"AtividadeTest");
+        solo.enterText(1,"Help with my medicines please!");
+        solo.enterText(2,"6/6/1966");
+        solo.clickOnButton(0);// canceled?
+        solo.enterText(3,"23:59:59");
+        solo.clickOnButton(0);// canceled?
 
+        //tests
+        assertTrue(solo.searchText("AtividadeTest"));
+        assertTrue(solo.searchText("Help with my medicines please!"));
+        assertTrue(solo.searchText("6/6/1966"));
+        assertTrue(solo.searchText("23:59:59"));
+        solo.clickOnButton(0); // test button touch
     }
 }
