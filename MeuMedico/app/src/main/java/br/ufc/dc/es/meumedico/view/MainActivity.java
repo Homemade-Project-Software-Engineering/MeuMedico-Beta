@@ -1,264 +1,272 @@
 package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.ufc.dc.es.meumedico.controller.helper.ContaHelper;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+import br.ufc.dc.es.meumedico.controller.fragments.AtividadeFragment;
 import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
+import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
 
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+public class MainActivity extends AppCompatActivity {
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Collections;
-
-public class MainActivity extends AppCompatActivity{
-
-    Button next;
-    TextView conta;
-    private Intent contaActivity;
-    private ContaHelper helper;
-    private Login login;
-    private CallbackManager callbackManager;
-    private TextInputLayout userTIL, passwordTIL;
-    private EditText userET, passwordET;
-    private Bundle bFacebookData;
+    Intent cadAtividade;
+    String user;
+    Button datePicker;
+    TextView nameUser;
+    Button atividade;
+    String nome, email;
+    int id_usuario;
+    Atividade atividadeSelecionadaItem;
+    Login informacoes;
+    Bundle infosFacebook;
+    AtividadeFragment frag;
+    private static final String PREF_NAME = "LoginActivityPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        //inicializado facebook sdk para logar
-        //obs: essa chamada precisa vir primeiro que o setContentView
         FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(getApplication());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.second_activity);
 
-        callSecondScreen();
-        callContaActivity();
+        btDate();
 
-        if(AccessToken.getCurrentAccessToken()!=null){
+        callCadAtividade();
 
-            processLoginFacebook(AccessToken.getCurrentAccessToken());
+        informacoes = (Login) getIntent().getSerializableExtra("informacoes");
+        if(informacoes!=null) {
+            nome = informacoes.getName();
+            email = informacoes.getEmail();
+            id_usuario = informacoes.getId();
+            userIsLogged(id_usuario, nome, email);
         }
 
-        userET = (EditText) findViewById(R.id.etGuestName);
-        passwordET = (EditText) findViewById(R.id.passwordTextEdit);
-        userTIL = (TextInputLayout) findViewById(R.id.inputLayoutUsername);
-        passwordTIL = (TextInputLayout) findViewById(R.id.inputLayoutPassword);
+        infosFacebook = getIntent().getBundleExtra("infosFacebook");
+        if(infosFacebook!=null) {
+            LoginDAO dao = new LoginDAO(MainActivity.this);
+            nome = infosFacebook.get("first_name").toString();
+            email = infosFacebook.get("email").toString();
+            id_usuario = dao.getIdUserByFacebookEmail(email);
+            dao.close();
+            userIsLogged(id_usuario, nome, email);
+        }
 
-        callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_face);
-        /*como é somente um único item na lista, e você precisa enviar uma lista,
-        melhor usar o Collections.singletonList ao inves de Arrays.asList*/
-        loginButton.setReadPermissions(Collections.singletonList("email"));
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
+        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        id_usuario = sp.getInt("id_usuario", 0);
+        nome = sp.getString("nome", "");
+        email = sp.getString("email", "");
 
-                processLoginFacebook(loginResult);
-            }
+        if(email.equals("")){
+            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            finish();
+        }
 
-            @Override
-            public void onCancel() {
-                System.out.println("onCancel");
-            }
+        setUser(nome);
+        setNameView(getUser());
 
-            @Override
-            public void onError(FacebookException error) {
-                System.out.println("onError");
-                Log.v("LoginActivity", error.getCause().toString());
-            }
-        });
+        frag = (AtividadeFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        if(frag == null) {
+            frag = new AtividadeFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
+            ft.commit();
+        }
     }
 
-    public void callSecondScreen(){
-        next  = (Button) findViewById(R.id.btSecondScreen);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public boolean onContextItemSelected(MenuItem item) {
 
-                helper = new ContaHelper(MainActivity.this);
+        try {
+            atividadeSelecionadaItem = frag.mList.get(frag.positionOnLongClick);
+        }catch(IndexOutOfBoundsException e){
+            Log.i("Status", "Array sem nada");
+        }
 
-                login = helper.pegaDadosLogin();
+        switch (item.getItemId()) {
+            case R.id.itemContextMenuEditar:
 
-                LoginDAO dao = new LoginDAO(MainActivity.this);
-                if(validateLogin() && validatePassword()) {
-                    if (dao.fazerLogin(login)) {
+                Intent atividadeSelecionada = new Intent(MainActivity.this, Cad_AtividadeActivity.class);
+                atividadeSelecionada.putExtra("atividadeSelecionada", atividadeSelecionadaItem);
+                startActivity(atividadeSelecionada);
+                break;
+            case R.id.itemContextMenuDeletar:
 
-                        Login informacoes = dao.getInformacoes(login);
-                        Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreenActivity.class);
-                        irParaATelaPrincipal.putExtra("informacoes", informacoes);
-                        startActivity(irParaATelaPrincipal);
-                        dao.close();
-                        finish();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Usuário ou login inválido", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                MeuMedicoDAO dao = new MeuMedicoDAO(MainActivity.this);
+                dao.delete(atividadeSelecionadaItem);
                 dao.close();
-            }
-        });
-
-    }
-
-    private boolean validateLogin() {
-
-        if(userET.getText().toString().isEmpty()){
-            userTIL.setError("Email não pode ser vazio");
-            return false;
-        }else{
-            userTIL.setErrorEnabled(false);
-            return true;
+                carregaLista();
+                Toast.makeText(MainActivity.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();
+                break;
         }
-    }
-
-    private boolean validatePassword() {
-        if(passwordET.getText().toString().isEmpty()){
-            passwordTIL.setError("Senha não pode ser vazia");
-            return false;
-        }else{
-            passwordTIL.setErrorEnabled(false);
-            return true;
-        }
-    }
-
-    public void callContaActivity(){
-
-        conta = (TextView) findViewById(R.id.textViewButton);
-        conta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                contaActivity = new Intent(MainActivity.this, ContaActivity.class);
-                startActivity(contaActivity);
-            }
-        });
+        return super.onContextItemSelected(item);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private Bundle getFacebookData(JSONObject object) {
-
-        Bundle bundle = new Bundle();
-
-        try {
-            String id = object.getString("id");
-
-            try {
-                URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
-                bundle.putString("profile_pic", profile_pic.toString());
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            }
-
-            bundle.putString("idFacebook", id);
-            if (object.has("first_name")) {
-                bundle.putString("first_name", object.getString("first_name"));
-            }if (object.has("last_name")) {
-                bundle.putString("last_name", object.getString("last_name"));
-            }if (object.has("email")) {
-                bundle.putString("email", object.getString("email"));
-            }if (object.has("gender")) {
-                bundle.putString("gender", object.getString("gender"));
-            }if (object.has("birthday")) {
-                bundle.putString("birthday", object.getString("birthday"));
-            }if (object.has("location")) {
-                bundle.putString("location", object.getJSONObject("location").getString("name"));
-            }
-        }catch(JSONException e){
-            e.printStackTrace();
+    protected void onResume() {
+        super.onResume();
+        carregaLista();
+        LoginDAO dao = new LoginDAO(this);
+        if(dao.getIdUserByFacebookEmail(email)==0){
+            LoginManager.getInstance().logOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
         }
-        return bundle;
+        dao.close();
     }
 
-    private void processLoginFacebook(LoginResult loginResult){
+    @Override
+     public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+     }
 
-        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.setMessage("Processando dados...");
-        progressDialog.show();
+     public void btDate(){
+         datePicker = (Button) findViewById(R.id.btDatePiker);
+         datePicker.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent irParaCalendarView = new Intent(MainActivity.this, CalendarActivity.class);
+                 irParaCalendarView.putExtra("id_usuario",id_usuario);
+                 startActivity(irParaCalendarView);
+             }
+         });
+     }
 
-        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-            @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                // Get facebook data from login
-                bFacebookData = getFacebookData(object);
-
-                LoginDAO dao = new LoginDAO(MainActivity.this);
-                Login login = new Login();
-
-                String nome = bFacebookData.getString("first_name");
-                String email = bFacebookData.getString("email");
-                login.setName(nome);
-                login.setEmail(email);
-
-                if(dao.verificaCadastroFacebookBanco(email)){
-                    Log.i("Status","Perfil do facebook já cadastrado no banco");
-                }else{
-                    dao.cadastraPerfilFacebookBanco(login);
+        switch(id){
+            case R.id.itemOptionsCuidador:
+                startActivity(new Intent(this, CuidadorActivity.class));
+                break;
+            case R.id.itemOptionsConta:
+                Intent irParaATelaContaUsuario = new Intent(MainActivity.this, ContaUsuarioActivity.class);
+                if(informacoes!=null) {
+                    irParaATelaContaUsuario.putExtra("informacoes", informacoes);
+                }else if(infosFacebook!=null){
+                    irParaATelaContaUsuario.putExtra("infosFacebook", infosFacebook);
                 }
+                startActivity(irParaATelaContaUsuario);
+                break;
+            case R.id.itemOptionsLogout:
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                dao.close();
-
-                progressDialog.dismiss();
-                Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreenActivity.class);
-                irParaATelaPrincipal.putExtra("infosFacebook", bFacebookData);
-                startActivity(irParaATelaPrincipal);
-                finish();
-            }
-        });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parâmetros que pedimos ao facebook
-        request.setParameters(parameters);
-        request.executeAsync();
+                builder.setMessage(R.string.MensagemLogout)
+                        .setPositiveButton(R.string.SimDeletarConta, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                                progressDialog.setMessage("Saindo...");
+                                progressDialog.show();
+                                Thread mThread = new Thread(){
+                                    @Override
+                                    public void run() {
+                                        LoginManager.getInstance().logOut();
+                                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                        progressDialog.dismiss();
+                                        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sp.edit();
+                                        editor.clear();
+                                        editor.apply();
+                                        finish(); // dispose do java
+                                    }
+                                };
+                                mThread.start();
+                            }
+                        })
+                        .setNegativeButton(R.string.CancelarDeletarConta, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+                builder.show();
+                break;
+            case R.id.itemOptionsCadastrar:
+                startActivity(new Intent(this, Cad_AtividadeActivity.class));
+                break;
+            case R.id.itemOptionsAtualizar:
+                //chamar método pra atualizar recyclerview da API
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    private void processLoginFacebook(AccessToken token){
+    public void setNameView(String name){
+        nameUser = (TextView) findViewById(R.id.nameUser);
+        nameUser.setText(name);
+    }
 
-        GraphRequest request = GraphRequest.newMeRequest(token, new GraphRequest.GraphJSONObjectCallback() {
+    public void setUser(String name){
+        this.user = name;
+    }
+    public String getUser(){
+        return id_usuario + " - " + user;
+    }
 
+    public void callCadAtividade(){
+
+        atividade = (Button) findViewById(R.id.btCad_Atividade);
+        atividade.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCompleted(JSONObject object, GraphResponse response) {
-                // Get facebook data from login
-                bFacebookData = getFacebookData(object);
-                Intent irParaATelaPrincipal = new Intent(MainActivity.this, SecondScreenActivity.class);
-                irParaATelaPrincipal.putExtra("infosFacebook", bFacebookData);
-                startActivity(irParaATelaPrincipal);
-                finish();
+            public void onClick(View v) {
+                cadAtividade = new Intent(MainActivity.this, Cad_AtividadeActivity.class);
+                cadAtividade.putExtra("id_usuario",id_usuario);
+                startActivity(cadAtividade);
             }
         });
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parâmetros que pedimos ao facebook
-        request.setParameters(parameters);
-        request.executeAsync();
+    }
+
+    public void carregaLista(){
+
+        frag.mList.clear();
+        frag.mList.addAll(getSetAtividadeList());
+        frag.adapter.notifyDataSetChanged();
+    }
+
+    public List<Atividade> getSetAtividadeList(){
+
+        MeuMedicoDAO dao = new MeuMedicoDAO(this);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        String dataAtual = simpleDateFormat.format(Calendar.getInstance().getTime());
+
+        List<Atividade> atividades = dao.getListaAtividades(id_usuario,dataAtual);
+
+        dao.close();
+
+        return atividades;
+    }
+
+    public void userIsLogged(int id_usuario, String nome, String email){
+
+        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putInt("id_usuario", id_usuario);
+        editor.putString("nome", nome);
+        editor.putString("email", email);
+        editor.apply();
     }
 }

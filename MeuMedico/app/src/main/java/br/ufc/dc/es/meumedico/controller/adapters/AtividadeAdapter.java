@@ -15,7 +15,6 @@ import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.interfaces.RecyclerViewOnClickListenerHack;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
-import br.ufc.dc.es.meumedico.view.SecondScreenActivity;
 
 
 public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.MyViewHolder> {

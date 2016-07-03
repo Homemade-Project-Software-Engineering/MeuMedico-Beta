@@ -7,7 +7,7 @@ import java.util.Date;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
 import br.ufc.dc.es.meumedico.view.ContaActivity;
-import br.ufc.dc.es.meumedico.view.MainActivity;
+import br.ufc.dc.es.meumedico.view.LoginActivity;
 
 public class ContaHelper {
 
@@ -20,7 +20,7 @@ public class ContaHelper {
         campoSenha = (EditText) activity.findViewById(R.id.CadastroSenha);
     }
 
-    public ContaHelper(MainActivity activity){
+    public ContaHelper(LoginActivity activity){
 
         campoEmail = (EditText) activity.findViewById(R.id.etGuestName);
         campoSenha = (EditText) activity.findViewById(R.id.passwordTextEdit);

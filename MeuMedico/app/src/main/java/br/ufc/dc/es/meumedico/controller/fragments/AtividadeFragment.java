@@ -17,7 +17,7 @@ import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.adapters.AtividadeAdapter;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.interfaces.RecyclerViewOnClickListenerHack;
-import br.ufc.dc.es.meumedico.view.SecondScreenActivity;
+import br.ufc.dc.es.meumedico.view.MainActivity;
 
 public class AtividadeFragment extends Fragment implements RecyclerViewOnClickListenerHack {
 
@@ -40,7 +40,7 @@ public class AtividadeFragment extends Fragment implements RecyclerViewOnClickLi
         mRecyclerView.setLayoutManager(llm);
 
 
-        mList = ((SecondScreenActivity) getActivity()).getSetAtividadeList();
+        mList = ((MainActivity) getActivity()).getSetAtividadeList();
         adapter = new AtividadeAdapter(getActivity(), mList);
         adapter.setRecyclerViewOnClickListenerHack(this);
         mRecyclerView.setAdapter( adapter );

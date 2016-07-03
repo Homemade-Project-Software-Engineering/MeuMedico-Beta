@@ -64,7 +64,7 @@ public class LoginDAO extends SQLiteOpenHelper {
         getWritableDatabase().delete(TABELA, "email=?", args);
     }
 
-    public void update(Login login) {
+    /*public void update(Login login) {
 
         ContentValues cv = new ContentValues();
         cv.put("name", login.getName());
@@ -76,7 +76,7 @@ public class LoginDAO extends SQLiteOpenHelper {
 
         String args[] = {String.valueOf(login.getEmail())};
         getWritableDatabase().update(TABELA, cv, "email=?", args);
-    }
+    }*/
 
     public boolean fazerLogin(Login login) {
 

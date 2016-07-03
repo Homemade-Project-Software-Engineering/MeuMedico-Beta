@@ -31,9 +31,9 @@
     <string name="cad_atividade_btSalvar">Salvar</string>
 
     <!-- ContaActivity String res-->
-    <string name="conta_nome">Nome:</string>
-    <string name="conta_email">Email:</string>
-    <string name="conta_senha">Senha:</string>
+    <string name="conta_nome">Nome</string>
+    <string name="conta_email">Email</string>
+    <string name="conta_senha">Senha</string>
     <string name="conta_btCriarConta">Criar Conta</string>
 
     <!-- ContaActivity String res-->
@@ -45,11 +45,8 @@
     <string name="conta_usuario_id">00000</string>
     <string name="conta_usuario_btEditarConta">Editar Conta</string>
     <string name="conta_usuario_btExcluirConta">Excluir Conta</string>
-    <string name="conta_usuario_cuidador_label">Cuidador(es)</string>
-    <string name="conta_usuario_btCadastrarCuidador">Cadastrar Cuidador</string>
-    <string name="conta_usuario_btExcluirCuidador">Excluir Cuidador</string>
 
-    <!-- MainActivity String res-->
+    <!-- LoginActivity String res-->
     <string name="main_nome_app">Meu Médico</string>
     <string name="main_ou">ou</string>
     <string name="main_email">Email</string>
@@ -66,5 +63,12 @@
     <!-- SecondActivity String res-->
     <string name="second_logado_como">Logado como: ID - Nome</string>
     <string name="second_btCadastrarAtividade">Cadastrar Atividade</string>
+
+    <!-- CuidadorActivity String res-->
+    <string name="cuidador_action_bar">Cuidador</string>
+    <string name="cuidador_cuidador_acoes">Ações</string>
+    <string name="cuidador_btCadastrarCuidador">Cadastrar Cuidador</string>
+    <string name="cuidador_btExcluirCuidador">Excluir Cuidador</string>
+    <string name="cuidador_cuidador_label">Cuidador(es)</string>
 
 </resources>

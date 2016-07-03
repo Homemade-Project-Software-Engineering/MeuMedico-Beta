@@ -7,12 +7,12 @@ import android.test.suitebuilder.annotation.SmallTest;
 /**
  * Created by jonas on 19/06/16.
  */
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity>{
+public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity>{
 
     private Solo solo;
     /**Super importance....*/
-    public MainActivityTest() {
-        super(MainActivity.class);
+    public LoginActivityTest() {
+        super(LoginActivity.class);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * would be more or less an authentication test.*/
     @SmallTest
     public void testFirst() throws Exception{
-        solo.assertCurrentActivity("This isn't the right Activity to test!",MainActivity.class);
+        solo.assertCurrentActivity("This isn't the right Activity to test!",LoginActivity.class);
         solo.assertMemoryNotLow();
         solo.clearLog();
     }
@@ -55,7 +55,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.clearEditText(1);
 
         solo.clickOnButton(0); // facebook button
-        solo.goBackToActivity("MainActivity");
+        solo.goBackToActivity("LoginActivity");
 
         /** Enter with a local database user */
         solo.enterText(0,"pedro@gmail.com");
@@ -70,7 +70,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         /** The same as touch on some button or else */
         solo.clickOnText("CADASTRE-SE");
-        solo.goBackToActivity("MainActivity");
+        solo.goBackToActivity("LoginActivity");
 
 
         /** Enter with a local database user */
@@ -80,16 +80,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         // Not possible to run this two activities separately....
         solo.pressMenuItem(0);
-        solo.goBackToActivity("SecondScreenActivity");
+        solo.goBackToActivity("MainActivity");
         solo.pressMenuItem(3);
-        //solo.goBackToActivity("SecondScreenActivity"); não implementado ainda....
+        //solo.goBackToActivity("MainActivity"); não implementado ainda....
 
         solo.clickOnText("Cadastrar Atividade");
-        solo.goBackToActivity("SecondScreenActivity");
+        solo.goBackToActivity("MainActivity");
         solo.clickOnButton(0);
-        solo.goBackToActivity("SecondScreenActivity");
+        solo.goBackToActivity("MainActivity");
         solo.clickOnButton(1);
-        // solo.goBackToActivity("SecondScreenActivity"); botão emergencia
+        // solo.goBackToActivity("MainActivity"); botão emergencia
         //exiting....
         solo.pressMenuItem(9);
         solo.clickOnButton(1);
