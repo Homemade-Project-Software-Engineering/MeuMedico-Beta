@@ -57,8 +57,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.clickOnButton(0); // facebook button
         solo.goBackToActivity("MainActivity");
 
-        // create a user to avoid database issues
-        // solo.clickOnText("CADASTRE-SE");
+
+        //create a user to avoid database issues
+        //solo.clickOnText("CADASTRE-SE");
         //solo.enterText(0,"Pedro");
         //solo.enterText(1,"pedro@gmail.com");
         //solo.enterText(2,"2323");
@@ -75,10 +76,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         //solo.searchText("Pedro"); // string assure that login works fine
         //solo.pressMenuItem(9,1); // menu exit
         //solo.clickOnButton(1); //exiting
-
-
-
-        /**
 
         /** The same as touch on some button or else */
         //solo.clickOnText("CADASTRE-SE");
@@ -107,6 +104,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         //exiting....
         //solo.pressMenuItem(9);
         //solo.clickOnButton(1);
-        */
+
     }
 }
