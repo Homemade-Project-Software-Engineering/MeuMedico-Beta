@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.LoginActivity">
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:id="@+id/MainTitle"
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:id="@+id/logInLabel"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/main_email"
         android:textColorHint="@color/emeraldGreen">
-        <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
             android:id="@+id/etGuestName"
             android:layout_width="match_parent"
             android:textColor="@color/nightBlack"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/main_senha"
         android:textColorHint="@color/emeraldGreen">
-        <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/passwordTextEdit"
@@ -70,7 +70,7 @@
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:layout_margin="10dp"
         android:id="@+id/btSecondScreen"
         android:layout_width="match_parent"
@@ -82,7 +82,7 @@
         android:shadowDy="0"
         android:background="@color/emeraldGreen"
          />
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -90,7 +90,7 @@
         android:textColor="@color/com_facebook_blue"
         android:id="@+id/textViewQuestion" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"

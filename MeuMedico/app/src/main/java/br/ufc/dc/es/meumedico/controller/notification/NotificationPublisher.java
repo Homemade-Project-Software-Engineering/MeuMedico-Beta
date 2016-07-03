@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.controller.others;
+package br.ufc.dc.es.meumedico.controller.notification;
 
 import android.app.Notification;
 import android.app.NotificationManager;

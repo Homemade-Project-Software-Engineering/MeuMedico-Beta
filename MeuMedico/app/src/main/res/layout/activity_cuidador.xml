@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.ufc.dc.es.meumedico.view.CuidadorActivity">
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -20,7 +20,7 @@
         android:textColor="@color/nightBlack"
         android:layout_alignParentStart="true" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cuidador_btCadastrarCuidador"
@@ -34,7 +34,7 @@
         android:layout_below="@+id/textViewAcoes"/>
 
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/cuidador_btExcluirCuidador"
@@ -46,7 +46,7 @@
         android:layout_alignParentStart="true"
         android:onClick="deletarCuidador"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"

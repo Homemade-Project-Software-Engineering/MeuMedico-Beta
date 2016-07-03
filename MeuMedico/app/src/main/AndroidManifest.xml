@@ -38,14 +38,14 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <receiver android:name=".controller.others.NotificationPublisher">
+        <receiver android:name=".controller.notification.NotificationPublisher">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".controller.others.UpdateActivityByNotification">
+        <receiver android:name=".controller.notification.UpdateActivityByNotification">
             <intent-filter>
                 <action android:name="br.ufc.dc.es.meumedico.intentDone" />
             </intent-filter>

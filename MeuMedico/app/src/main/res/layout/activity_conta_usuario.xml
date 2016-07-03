@@ -11,7 +11,7 @@
     tools:context="br.ufc.dc.es.meumedico.view.ContaUsuarioActivity">
 
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/conta_usuario_logado_label"
@@ -21,7 +21,7 @@
         android:layout_marginStart="56dp"
         android:textColor="@color/nightBlack"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/conta_usuario_logado_nome"
@@ -31,7 +31,7 @@
         android:layout_marginStart="10dp"
         android:textColor="@color/nightBlack"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/conta_usuario_email_label"
@@ -41,7 +41,7 @@
         android:layout_marginTop="13dp"
         android:textColor="@color/nightBlack"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/conta_usuario_email"
@@ -51,7 +51,7 @@
         android:layout_marginStart="10dp"
         android:textColor="@color/nightBlack"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -62,7 +62,7 @@
         android:layout_below="@+id/textViewEmailLabel"
         android:layout_alignStart="@+id/textViewEmailLabel" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -72,7 +72,7 @@
         android:layout_marginStart="130dp"
         android:layout_alignBottom="@+id/textViewSeuID" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/conta_usuario_btEditarConta"
@@ -84,7 +84,7 @@
         android:background="@color/emeraldGreen"
         android:onClick="editarContaUsuario"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/conta_usuario_btExcluirConta"

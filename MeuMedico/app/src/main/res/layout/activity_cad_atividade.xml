@@ -5,37 +5,37 @@
     android:weightSum="1"
     android:background="@color/whitTextButton">
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cad_atividade_nome"
         android:textColor="@color/nightBlack" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
         android:textColor="@color/nightBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/AtNome" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cad_atividade_descricao"
         android:textColor="@color/nightBlack" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
         android:textColor="@color/nightBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/AtDescricao" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cad_atividade_data"
         android:textColor="@color/nightBlack" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
         android:textColor="@color/nightBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,13 +43,13 @@
         android:onClick="showDatePickerDialog"
         android:focusable="false"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cad_atividade_hora"
         android:textColor="@color/nightBlack" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
         android:textColor="#000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         android:onClick="showTimePickerDialog"
         android:focusable="false"/>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:textColor="@color/whitTextButton"
         android:background="@color/emeraldGreen"
         android:layout_width="150dp"

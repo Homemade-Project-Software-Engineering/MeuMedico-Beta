@@ -7,7 +7,7 @@
     android:paddingEnd="16dp"
     android:background="?android:attr/selectableItemBackground">
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:textColor="@color/nightBlack"
         android:id="@+id/tv_model"
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:paddingEnd="16dp"
         android:textSize="20sp" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:textColor="@color/nightBlack"
         android:layout_below="@+id/tv_model"
         android:layout_alignStart="@+id/tv_model"
@@ -28,7 +28,7 @@
         android:paddingEnd="16dp"
         android:textSize="16sp" />
 
-    <br.ufc.dc.es.meumedico.controller.others.MyMainTextView
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
         android:textColor="@color/nightBlack"
         android:layout_below="@+id/tv_model"
         android:layout_alignParentEnd="true"

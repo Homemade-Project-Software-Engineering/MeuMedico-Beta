@@ -1,4 +1,4 @@
-package br.ufc.dc.es.meumedico.controller.others;
+package br.ufc.dc.es.meumedico.controller.custom_widgets;
 
 import android.content.Context;
 import android.graphics.Typeface;

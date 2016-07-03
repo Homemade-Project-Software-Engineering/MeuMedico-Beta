@@ -17,7 +17,7 @@
         android:hint="@string/conta_nome"
         android:textColorHint="@color/emeraldGreen"
         android:layout_marginTop="70dp">
-        <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CadastroNome"
@@ -32,7 +32,7 @@
         android:hint="@string/conta_email"
         android:textColorHint="@color/emeraldGreen"
         android:layout_below="@+id/contaInputUserName">
-        <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/CadastroEmail"
@@ -47,7 +47,7 @@
         android:hint="@string/conta_senha"
         android:textColorHint="@color/emeraldGreen"
         android:layout_below="@+id/contaInputUserEmail">
-        <br.ufc.dc.es.meumedico.controller.others.MyCustomEditText
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -59,7 +59,7 @@
             android:layout_alignEnd="@+id/inputLayoutUseremail" />
     </android.support.design.widget.TextInputLayout>
 
-    <br.ufc.dc.es.meumedico.controller.others.MyCustomButton
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"

@@ -33,8 +33,8 @@ import br.ufc.dc.es.meumedico.controller.fragments.TimePickerFragment;
 import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
-import br.ufc.dc.es.meumedico.controller.others.NotificationPublisher;
-import br.ufc.dc.es.meumedico.controller.others.UpdateActivityByNotification;
+import br.ufc.dc.es.meumedico.controller.notification.NotificationPublisher;
+import br.ufc.dc.es.meumedico.controller.notification.UpdateActivityByNotification;
 
 public class Cad_AtividadeActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
