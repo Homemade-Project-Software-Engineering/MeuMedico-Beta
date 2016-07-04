@@ -81,14 +81,13 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         //solo.clickOnText("CADASTRE-SE");
         //solo.goBackToActivity("MainActivity");
 
-
         /** Enter with a local database user */
         //solo.enterText(0,"pedro@gmail.com");
         //solo.typeText(1,"2323");
         //solo.clickOnButton(1);// enter button
         //solo.finishOpenedActivities();
 
-        
+        /*
         // Not possible to run this two activities separately....
         solo.pressMenuItem(0);
         solo.goBackToActivity("MainActivity");
@@ -115,6 +114,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
         //exiting....
         //solo.pressMenuItem(9);
         //solo.clickOnButton(1);
-
+        */
     }
 }
