@@ -34,6 +34,7 @@
     <string name="conta_nome">Nome</string>
     <string name="conta_email">Email</string>
     <string name="conta_senha">Senha</string>
+    <string name="conta_editar_conta">Editar Conta</string>
     <string name="conta_btCriarConta">Criar Conta</string>
 
     <!-- ContaActivity String res-->
