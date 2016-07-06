@@ -1,7 +1,10 @@
 package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.TextInputLayout;
@@ -97,8 +100,16 @@ public class LoginActivity extends AppCompatActivity{
 
             @Override
             public void onError(FacebookException error) {
+                ConnectivityManager cm =
+                        (ConnectivityManager)LoginActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&
+                        activeNetwork.isConnectedOrConnecting();
+                if(!isConnected){
+                    Toast.makeText(LoginActivity.this, "Sem conexão com a internet para login com o Facebook", Toast.LENGTH_LONG).show();
+                }
                 System.out.println("onError");
-                Log.v("LoginActivity", error.getCause().toString());
             }
         });
     }
