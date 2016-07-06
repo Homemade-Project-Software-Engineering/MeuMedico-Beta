@@ -10,6 +10,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
@@ -38,6 +40,7 @@ import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.fragments.TimePickerFragment;
 import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTActivity;
+import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.notification.NotificationPublisher;
@@ -136,6 +139,22 @@ public class Cad_AtividadeActivity extends AppCompatActivity
 
                                     POSTActivity post = new POSTActivity();
                                     try {
+                                        ConnectivityManager cm =
+                                                (ConnectivityManager)toastCad_AtividadeActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                                        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                                        boolean isConnected = activeNetwork != null &&
+                                                activeNetwork.isConnectedOrConnecting();
+                                        if(isConnected) {
+                                            post.POST(dados);
+                                        }else{
+                                            toastCad_AtividadeActivity.runOnUiThread(new Runnable() {
+                                                public void run() {
+                                                    Toast.makeText(toastCad_AtividadeActivity.getBaseContext(), "Sem conexão com a internet, " +
+                                                            "salvando apenas localmente", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
                                         post.POST(dados);
                                     } catch (IOException | JSONException e) {
                                         e.printStackTrace();

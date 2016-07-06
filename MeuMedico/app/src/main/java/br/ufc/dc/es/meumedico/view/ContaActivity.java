@@ -1,6 +1,9 @@
 package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -95,8 +98,23 @@ public class ContaActivity extends AppCompatActivity {
                             dados.put("password", login.getCrypted_password());
 
                             try {
+                                ConnectivityManager cm =
+                                        (ConnectivityManager)toastContaActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                                boolean isConnected = activeNetwork != null &&
+                                        activeNetwork.isConnectedOrConnecting();
                                 POSTUser user = new POSTUser();
-                                user.POST(dados);
+                                if(isConnected) {
+                                    user.POST(dados);
+                                }else{
+                                    toastContaActivity.runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            Toast.makeText(toastContaActivity.getBaseContext(), "Sem conexão com a internet, " +
+                                                    "salvando apenas localmente", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             } catch (IOException | JSONException e) {
                                 e.printStackTrace();
                             }

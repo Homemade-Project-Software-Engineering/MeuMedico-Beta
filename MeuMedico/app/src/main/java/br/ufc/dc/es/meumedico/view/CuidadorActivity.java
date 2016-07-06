@@ -1,8 +1,11 @@
 package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +24,7 @@ import java.util.Map;
 
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTCaregiver;
+import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 
@@ -116,6 +120,22 @@ public class CuidadorActivity extends AppCompatActivity {
 
                                         POSTCaregiver post = new POSTCaregiver();
                                         try {
+                                            ConnectivityManager cm =
+                                                    (ConnectivityManager)toastCuidadorActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                                            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                                            boolean isConnected = activeNetwork != null &&
+                                                    activeNetwork.isConnectedOrConnecting();
+                                            if(isConnected) {
+                                                post.POST(dados);
+                                            }else{
+                                                toastCuidadorActivity.runOnUiThread(new Runnable() {
+                                                    public void run() {
+                                                        Toast.makeText(toastCuidadorActivity.getBaseContext(), "Sem conexão com a internet, " +
+                                                                "salvando apenas localmente", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
                                             post.POST(dados);
                                         } catch (IOException|JSONException e) {
                                             e.printStackTrace();
@@ -127,8 +147,8 @@ public class CuidadorActivity extends AppCompatActivity {
                                                         Toast.LENGTH_LONG).show();
                                             }
                                         });
-
                                         diag.dismiss();
+                                        dialog.dismiss();
                                     }
                                 };
                                 mThread.start();
