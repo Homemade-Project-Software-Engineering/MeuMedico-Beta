@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.Notification;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -21,16 +22,22 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import br.ufc.dc.es.meumedico.controller.helper.AtividadeHelper;
 import br.ufc.dc.es.meumedico.controller.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.fragments.TimePickerFragment;
 import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.controller.serverAPI.POSTActivity;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.notification.NotificationPublisher;
@@ -46,6 +53,7 @@ public class Cad_AtividadeActivity extends AppCompatActivity
     int ano, mes, dia, hora, minuto, notification_id = 1;
     EditText editTextHora, editTextData;
     Bundle data;
+    private static Cad_AtividadeActivity toastCad_AtividadeActivity;
 
 
     @Override
@@ -53,6 +61,8 @@ public class Cad_AtividadeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_atividade);
         callCriarAtividade();
+
+        toastCad_AtividadeActivity = Cad_AtividadeActivity.this;
 
         atividadeParaSerAlterada = (Atividade) getIntent().getSerializableExtra("atividadeSelecionada");
 
@@ -81,43 +91,74 @@ public class Cad_AtividadeActivity extends AppCompatActivity
                 if(vh.verificaCamposVaziosAtividade()){
                     Toast.makeText(Cad_AtividadeActivity.this, "Todos os campos são obrigatórios, preencha e tente novamente", Toast.LENGTH_LONG).show();
                 }else {
-                    MeuMedicoDAO dao = new MeuMedicoDAO(Cad_AtividadeActivity.this);
-                    Atividade atividade = helper.pegaCamposAtividade();
+                    final MeuMedicoDAO dao = new MeuMedicoDAO(Cad_AtividadeActivity.this);
+                    final Atividade atividade = helper.pegaCamposAtividade();
                     if (atividadeParaSerAlterada != null) {
                         atividade.setId(atividadeParaSerAlterada.getId());
                         atividade.setId_usuario(atividadeParaSerAlterada.getId_usuario());
                         dao.update(atividade);
                         Toast.makeText(Cad_AtividadeActivity.this, "Atividade atualizada com sucesso", Toast.LENGTH_SHORT).show();
                     } else {
-                        id_usuario = getIntent().getIntExtra("id_usuario", 0);
-                        atividade.setId_usuario(id_usuario);
-                        dao.insert(atividade);
 
-                        data = new Bundle();
+                        final ProgressDialog dialog = new ProgressDialog(Cad_AtividadeActivity.this);
+                        dialog.setMessage("Criando atividade...");
+                        dialog.show();
+                        Thread mThread = new Thread() {
+                            @Override
+                            public void run() {
+                                id_usuario = getIntent().getIntExtra("id_usuario", 0);
+                                atividade.setId_usuario(id_usuario);
+                                dao.insert(atividade);
 
-                        data.putString("descricao", atividade.getDescricao());
+                                data = new Bundle();
 
-                        Log.i("id", String.valueOf(dao.getLastIDInserted()));
-                        data.putInt("id", dao.getLastIDInserted());
+                                data.putString("descricao", atividade.getDescricao());
 
-                        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US);
-                        String dataUser = String.format(Locale.US,"%02d", dia)+"/"+String.format(Locale.US,"%02d", mes+1)+"/"
-                                +String.format(Locale.US,"%02d", ano) + " " + String.format(Locale.US,"%02d", hora)+":"+String.format(Locale.US,"%02d", minuto);
-                        try {
-                            Date dataFormatada = sf.parse(dataUser);
-                            Log.i("data setada",dataUser);
-                            Log.i("data usuario",dataFormatada.toString());
-                            Log.i("data em millis", String.valueOf(dataFormatada.getTime()));
-                            data.putLong("dataHora", dataFormatada.getTime());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                                Log.i("id", String.valueOf(dao.getLastIDInserted()));
+                                data.putInt("id", dao.getLastIDInserted());
 
-                        scheduleNotification(getNotification());
-                        Toast.makeText(Cad_AtividadeActivity.this, "Atividade inserida com sucesso", Toast.LENGTH_SHORT).show();
+                                SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US);
+                                String dataUser = String.format(Locale.US, "%02d", dia) + "/" + String.format(Locale.US, "%02d", mes + 1) + "/"
+                                        + String.format(Locale.US, "%02d", ano) + " " + String.format(Locale.US, "%02d", hora) + ":" + String.format(Locale.US, "%02d", minuto);
+                                try {
+                                    Date dataFormatada = sf.parse(dataUser);
+                                    Log.i("data setada", dataUser);
+                                    Log.i("data usuario", dataFormatada.toString());
+                                    Log.i("data em millis", String.valueOf(dataFormatada.getTime()));
+                                    data.putLong("dataHora", dataFormatada.getTime());
+
+                                    Map<String, String> dados = new HashMap<>();
+                                    dados.put("name", atividade.getNome());
+                                    dados.put("description", atividade.getDescricao());
+                                    dados.put("horario", dataFormatada.toString());
+                                    dados.put("checked", String.valueOf(atividade.getConcluida()));
+                                    dados.put("user_id", String.valueOf(atividade.getId_usuario()));
+
+                                    POSTActivity post = new POSTActivity();
+                                    try {
+                                        post.POST(dados);
+                                    } catch (IOException | JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                scheduleNotification(getNotification());
+
+                                dialog.dismiss();
+                                toastCad_AtividadeActivity.runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        Toast.makeText(toastCad_AtividadeActivity.getBaseContext(), "Atividade inserida com sucesso", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                dao.close();
+                                finish();
+                            }
+                        };
+                        mThread.start();
                     }
-                    dao.close();
-                    finish();
                 }
             }
         });

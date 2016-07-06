@@ -24,7 +24,7 @@ public class ConfigAPI {
     //variable - id_user, id_caregiver
     public static final String DELETE_RELATIONSHIP = "/relationships_remove";
 
-    //variables - id_user, name, checked, hour
+    //variables - id_user, name, checked, horario, description
     public static final String POST_ALARM = "/users/user_id/alarms";
 
     //variables - id_user, name, checked, hour

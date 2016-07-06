@@ -1,5 +1,6 @@
 package br.ufc.dc.es.meumedico.view;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,7 +13,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.serverAPI.POSTCaregiver;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 
@@ -23,6 +31,7 @@ public class CuidadorActivity extends AppCompatActivity {
     int id_usuario, id_recebido;
     MeuMedicoDAO dao_cuidador = new MeuMedicoDAO(this);
     ListView lista_cuidador;
+    private static CuidadorActivity toastCuidadorActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,8 @@ public class CuidadorActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle(R.string.cuidador_action_bar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toastCuidadorActivity = CuidadorActivity.this;
 
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         this.id_usuario = sp.getInt("id_usuario", 0);
@@ -66,7 +77,7 @@ public class CuidadorActivity extends AppCompatActivity {
                     diag.dismiss();
                 }else{
                     try{
-                        int id_recebido = Integer.parseInt(id_cuidador.getText().toString());
+                        final int id_recebido = Integer.parseInt(id_cuidador.getText().toString());
 
                         if(id_usuario==id_recebido){
                             Toast.makeText(CuidadorActivity.this, "Você não pode se cadastrar como Cuidador" +
@@ -75,8 +86,8 @@ public class CuidadorActivity extends AppCompatActivity {
                             diag.dismiss();
                         }else{
 
-                            LoginDAO dao_login = new LoginDAO(CuidadorActivity.this);
-                            MeuMedicoDAO dao_cuidador = new MeuMedicoDAO(CuidadorActivity.this);
+                            final LoginDAO dao_login = new LoginDAO(CuidadorActivity.this);
+                            final MeuMedicoDAO dao_cuidador = new MeuMedicoDAO(CuidadorActivity.this);
 
                             if(dao_login.verificarUsuarioTabelaLogin(id_recebido)==false){
                                 Toast.makeText(CuidadorActivity.this, "ID não encontrado" +
@@ -90,11 +101,38 @@ public class CuidadorActivity extends AppCompatActivity {
                                 diag.dismiss();
                             }else{
 
-                                dao_cuidador.insertCuidador(id_usuario, id_recebido);
+                                final ProgressDialog dialog = new ProgressDialog(CuidadorActivity.this);
+                                dialog.setMessage("Cadastrando Cuidador...");
+                                dialog.show();
 
-                                Toast.makeText(CuidadorActivity.this, "Cuidador cadastrado com sucesso",
-                                        Toast.LENGTH_LONG).show();
-                                diag.dismiss();
+                                Thread mThread = new Thread() {
+                                    @Override
+                                    public void run() {
+                                        dao_cuidador.insertCuidador(id_usuario, id_recebido);
+
+                                        Map<String, String> dados = new HashMap<>();
+                                        dados.put("patient_id", String.valueOf(id_usuario));
+                                        dados.put("caregiver_id", String.valueOf(id_recebido));
+
+                                        POSTCaregiver post = new POSTCaregiver();
+                                        try {
+                                            post.POST(dados);
+                                        } catch (IOException|JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        toastCuidadorActivity.runOnUiThread(new Runnable() {
+                                            public void run() {
+                                                Toast.makeText(toastCuidadorActivity.getBaseContext(), "Cuidador cadastrado com sucesso",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
+                                        diag.dismiss();
+                                    }
+                                };
+                                mThread.start();
+
                             }
                             dao_cuidador.close();
                             dao_login.close();

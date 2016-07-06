@@ -1,5 +1,6 @@
 package br.ufc.dc.es.meumedico.view;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import br.ufc.dc.es.meumedico.controller.helper.ContaHelper;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
 
@@ -20,14 +28,15 @@ public class ContaActivity extends AppCompatActivity {
     Button createAccount;
     ContaHelper helper;
     private TextInputLayout emailTIL, passwordTIL;
-    private EditText nameET, emailET, passwordET;
+    private EditText emailET, passwordET;
+    private static ContaActivity toastContaActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conta);
 
-        nameET = (EditText) findViewById(R.id.CadastroNome);
+        toastContaActivity = ContaActivity.this;
 
         emailTIL = (TextInputLayout) findViewById(R.id.contaInputUserEmail);
         emailET = (EditText) findViewById(R.id.CadastroEmail);
@@ -45,7 +54,7 @@ public class ContaActivity extends AppCompatActivity {
             getSupportActionBar().show();
             getSupportActionBar().setTitle("Editar Conta");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            createAccount.setText("Editar Conta");
+            createAccount.setText(R.string.conta_editar_conta);
 
             helper = new ContaHelper(this);
 
@@ -66,14 +75,41 @@ public class ContaActivity extends AppCompatActivity {
                 if (vh.verificaCamposVaziosConta()) {
                     Toast.makeText(ContaActivity.this, "Todos os campos são obrigatórios", Toast.LENGTH_LONG).show();
                 }else if(validateEmail() && validatePassword()){
-                    helper = new ContaHelper(ContaActivity.this);
-                    final Login login = helper.pegaCadastroLogin();
 
-                    LoginDAO dao = new LoginDAO(ContaActivity.this);
-                    dao.insert(login);
-                    dao.close();
-                    Toast.makeText(ContaActivity.this, "Conta criada com sucesso", Toast.LENGTH_SHORT).show();
-                    finish();
+                    final ProgressDialog dialog = new ProgressDialog(ContaActivity.this);
+                    dialog.setMessage("Criando conta...");
+                    dialog.show();
+                    Thread mThread = new Thread(){
+                        @Override
+                        public void run() {
+                            helper = new ContaHelper(ContaActivity.this);
+                            final Login login = helper.pegaCadastroLogin();
+
+                            LoginDAO dao = new LoginDAO(ContaActivity.this);
+                            dao.insert(login);
+                            dao.close();
+
+                            Map<String, String> dados = new HashMap<>();
+                            dados.put("name", login.getName());
+                            dados.put("email", login.getEmail());
+                            dados.put("password", login.getCrypted_password());
+
+                            try {
+                                POSTUser user = new POSTUser();
+                                user.POST(dados);
+                            } catch (IOException | JSONException e) {
+                                e.printStackTrace();
+                            }
+                            dialog.dismiss();
+                            toastContaActivity.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    Toast.makeText(toastContaActivity.getBaseContext(), "Conta criada com sucesso", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            finish();
+                        }
+                    };
+                    mThread.start();
                 }
             }
         });
