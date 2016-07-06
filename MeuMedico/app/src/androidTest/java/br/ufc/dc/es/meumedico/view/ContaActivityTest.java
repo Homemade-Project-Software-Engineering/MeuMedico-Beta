@@ -32,29 +32,16 @@ public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaAct
         solo.finishOpenedActivities();
     }
 
-    /**This initial test is done to be called first put before the setUp
-     * but should be implemented out as change to the settings in each activity,
-     * would be more or less an authentication test.*/
-    @SmallTest
-    public void testFirst() throws Exception{
-        solo.assertCurrentActivity("This isn't the right Activity to test!",ContaActivity.class);
-        solo.assertMemoryNotLow();
-        solo.clearLog();
-    }
-
     @SmallTest
     public void testCallCreateAccount() throws Exception {
-        testFirst();
         solo.enterText(0,"New client");
         solo.enterText(1,"new_client@email.com");
-        solo.enterText(2,"123456");
+        solo.enterText(2,"12345678");
         //solo.takeScreenshot(); need a path to save the screens.
-        solo.waitForText("New client",1,2000); // find New client 2 times in 2 seconds
-        assertTrue(solo.searchText("123456"));
-        solo.clickOnButton(0); //creating an account
-
+        assertTrue(solo.searchText("12345678"));
+        //solo.clickOnButton(0); //creating an account
+        //solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.));
+        //solo.goBack();
     }
-
-
 
 }

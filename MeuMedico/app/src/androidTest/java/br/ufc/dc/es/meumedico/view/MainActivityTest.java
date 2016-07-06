@@ -37,7 +37,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * would be more or less an authentication test.*/
     @SmallTest
     public void testFirst() throws Exception{
-        //solo.assertCurrentActivity("This isn't the right Activity to test!",MainActivity.class);
         solo.assertMemoryNotLow();
         solo.clearLog();
     }

@@ -33,31 +33,32 @@ public class ContaUsuarioActivityTest extends
          have been opened during the test execution.*/
         solo.finishOpenedActivities();
     }
-
-    /**This initial test is done to be called first put before the setUp
-     * but should be implemented out as change to the settings in each activity,
-     * would be more or less an authentication test.*/
-
-    @SmallTest
-    public void testFirst() throws Exception{
-        solo.assertCurrentActivity("This isn't the right Activity to test!",ContaUsuarioActivity.class);
-        solo.assertMemoryNotLow();
-        solo.clearLog();
-    }
-
     @SmallTest
     public void testContaActivity(){
         solo.clickOnButton(0);
-        solo.goBackToActivity("ContaUsuarioActivity");
+        //Press hard key back button
+        assertTrue(solo.searchText("NameExampleTes"));
+        assertTrue(solo.searchText("email@gmail.com"));
+        solo.goBack();
         solo.clickOnButton(1);
         solo.clickOnButton(0); //canceled?
-        solo.goBackToActivity("ContaUsuarioActivity");
+
+        solo.clickOnButton(1);
+        solo.clickOnButton(1); //deleted?
+        /*
+        //Press hard key back button
+        solo.goBack();
+        //solo.goBackToActivity("ContaUsuarioActivity");
         solo.clickOnButton(2);
         solo.clickOnButton(0); //canceled?
-        solo.goBackToActivity("ContaUsuarioActivity");
+        //Press hard key back button
+        solo.goBack();
+        //solo.goBackToActivity("ContaUsuarioActivity");
         solo.clickOnButton(3);
         solo.clickOnButton(0); //canceled?
-        solo.goBackToActivity("ContaUsuarioActivity");
-
+        //Press hard key back button
+        solo.goBack();
+        //solo.goBackToActivity("ContaUsuarioActivity");
+        */
     }
 }
