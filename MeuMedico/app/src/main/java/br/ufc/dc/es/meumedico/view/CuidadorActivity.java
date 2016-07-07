@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.helper.isConnected;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTCaregiver;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
@@ -120,13 +121,7 @@ public class CuidadorActivity extends AppCompatActivity {
 
                                         POSTCaregiver post = new POSTCaregiver();
                                         try {
-                                            ConnectivityManager cm =
-                                                    (ConnectivityManager)toastCuidadorActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-                                            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                                            boolean isConnected = activeNetwork != null &&
-                                                    activeNetwork.isConnectedOrConnecting();
-                                            if(isConnected) {
+                                            if(new isConnected().isConnected(toastCuidadorActivity)) {
                                                 post.POST(dados);
                                             }else{
                                                 toastCuidadorActivity.runOnUiThread(new Runnable() {

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     Intent cadAtividade;
     String user;
     Button datePicker;
+    Button emergency;
     TextView nameUser;
     Button atividade;
     String nome, email;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.second_activity);
 
         btDate();
+        btEmergency();
 
         callCadAtividade();
 
@@ -94,6 +97,22 @@ public class MainActivity extends AppCompatActivity {
             ft.replace(R.id.rl_fragment_container, frag, "mainFrag");
             ft.commit();
         }
+    }
+
+    private void btEmergency() {
+
+        emergency = (Button) findViewById(R.id.btEmergency);
+
+        emergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String telefone = "192";
+                Uri uri = Uri.parse("tel:" + telefone);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+
+                startActivity(intent);
+            }
+        });
     }
 
     public boolean onContextItemSelected(MenuItem item) {
