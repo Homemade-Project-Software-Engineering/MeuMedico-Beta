@@ -1,5 +1,7 @@
 package br.ufc.dc.es.meumedico.controller.serverAPI;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,15 +33,21 @@ public class POSTUser {
         con.setRequestProperty("Accept", "application/json");
         con.setRequestMethod(post);
 
-        JSONObject data   = new JSONObject();
+
+        JSONObject user = new JSONObject();
+
+        JSONObject data = new JSONObject();
 
         data.put("name", dados.get("name"));
         data.put("email", dados.get("email"));
         data.put("password", dados.get("password"));
 
+        user.put("user", data);
+
         OutputStream os = con.getOutputStream();
         OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-        osw.write(data.toString());
+        osw.write(user.toString());
+        Log.i("json", data.toString());
         osw.flush();
         osw.close();
 

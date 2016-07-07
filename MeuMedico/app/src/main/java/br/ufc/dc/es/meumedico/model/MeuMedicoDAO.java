@@ -15,7 +15,7 @@ import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 public class MeuMedicoDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_meu_medico";
-    private static final int VERSAO = 7;
+    private static final int VERSAO = 11;
     private static final String TABELA_ATIVIDADE = "Atividade";
     private static final String TABELA_CUIDADOR = "Cuidador";
 

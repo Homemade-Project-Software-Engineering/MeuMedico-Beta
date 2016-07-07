@@ -1,5 +1,7 @@
 package br.ufc.dc.es.meumedico.controller.serverAPI;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,12 +17,13 @@ import java.util.Map;
 public class POSTActivity {
 
     String base_url = ConfigAPI.BASE_URL;
-    String post_alarm = ConfigAPI.POST_ALARM;
+    String post_user = ConfigAPI.POST_ALARM_USERS;
+    String post_alarm = ConfigAPI.POST_ALARM_ALARMS;
     String post = ConfigAPI.POST;
 
-    public void POST(Map<String,String> dados) throws IOException, JSONException {
+    public void POST(Map<String,String> dados, int id_usuario) throws IOException, JSONException {
 
-        String url = base_url+post_alarm;
+        String url = base_url+post_user+id_usuario+post_alarm;
 
         URL object=new URL(url);
 
@@ -32,6 +35,7 @@ public class POSTActivity {
         con.setRequestMethod(post);
 
         JSONObject data   = new JSONObject();
+        JSONObject alarm   = new JSONObject();
 
         data.put("name", dados.get("name"));
         data.put("checked", dados.get("checked"));
@@ -39,9 +43,13 @@ public class POSTActivity {
         data.put("horario", dados.get("horario"));
         data.put("description", dados.get("description"));
 
+        alarm.put("alarm", data);
+
+        Log.i("json", alarm.toString());
+
         OutputStream os = con.getOutputStream();
         OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-        osw.write(data.toString());
+        osw.write(alarm.toString());
         osw.flush();
         osw.close();
 

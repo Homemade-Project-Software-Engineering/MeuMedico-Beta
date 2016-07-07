@@ -39,6 +39,7 @@ import br.ufc.dc.es.meumedico.controller.fragments.DatePickerFragment;
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.fragments.TimePickerFragment;
 import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
+import br.ufc.dc.es.meumedico.controller.helper.isConnected;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTActivity;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
@@ -122,7 +123,11 @@ public class Cad_AtividadeActivity extends AppCompatActivity
 
                                 SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US);
                                 String dataUser = String.format(Locale.US, "%02d", dia) + "/" + String.format(Locale.US, "%02d", mes + 1) + "/"
-                                        + String.format(Locale.US, "%02d", ano) + " " + String.format(Locale.US, "%02d", hora) + ":" + String.format(Locale.US, "%02d", minuto);
+                                        + String.format(Locale.US, "%02d", ano) + " " + String.format(Locale.US, "%02d", hora) + ":"
+                                        + String.format(Locale.US, "%02d", minuto);
+                                String dataAPI = String.format(Locale.US, "%02d", ano) + "-" + String.format(Locale.US, "%02d", mes + 1) + "-"
+                                        + String.format(Locale.US, "%02d", dia) + " " + String.format(Locale.US, "%02d", hora) + ":"
+                                        + String.format(Locale.US, "%02d", minuto) + ":00.0000";
                                 try {
                                     Date dataFormatada = sf.parse(dataUser);
                                     Log.i("data setada", dataUser);
@@ -133,20 +138,14 @@ public class Cad_AtividadeActivity extends AppCompatActivity
                                     Map<String, String> dados = new HashMap<>();
                                     dados.put("name", atividade.getNome());
                                     dados.put("description", atividade.getDescricao());
-                                    dados.put("horario", dataFormatada.toString());
+                                    dados.put("horario", dataAPI);
                                     dados.put("checked", String.valueOf(atividade.getConcluida()));
                                     dados.put("user_id", String.valueOf(atividade.getId_usuario()));
 
                                     POSTActivity post = new POSTActivity();
                                     try {
-                                        ConnectivityManager cm =
-                                                (ConnectivityManager)toastCad_AtividadeActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-                                        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                                        boolean isConnected = activeNetwork != null &&
-                                                activeNetwork.isConnectedOrConnecting();
-                                        if(isConnected) {
-                                            post.POST(dados);
+                                        if(new isConnected().isConnected(toastCad_AtividadeActivity)) {
+                                            post.POST(dados,id_usuario);
                                         }else{
                                             toastCad_AtividadeActivity.runOnUiThread(new Runnable() {
                                                 public void run() {
@@ -155,7 +154,6 @@ public class Cad_AtividadeActivity extends AppCompatActivity
                                                 }
                                             });
                                         }
-                                        post.POST(dados);
                                     } catch (IOException | JSONException e) {
                                         e.printStackTrace();
                                     }

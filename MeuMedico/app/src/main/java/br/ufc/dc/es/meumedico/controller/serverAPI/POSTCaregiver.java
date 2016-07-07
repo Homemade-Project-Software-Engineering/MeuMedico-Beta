@@ -1,5 +1,7 @@
 package br.ufc.dc.es.meumedico.controller.serverAPI;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,16 +34,19 @@ public class POSTCaregiver {
         con.setRequestMethod(post);
 
         JSONObject data   = new JSONObject();
+        JSONObject rel = new JSONObject();
 
         data.put("patient_id", dados.get("patient_id"));
         data.put("caregiver_id", dados.get("caregiver_id"));
+        rel.put("relationship", data);
 
         OutputStream os = con.getOutputStream();
         OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-        osw.write(data.toString());
+        osw.write(rel.toString());
         osw.flush();
         osw.close();
 
+        Log.i("json", rel.toString());
         //display what returns the POST request
 
         StringBuilder sb = new StringBuilder();

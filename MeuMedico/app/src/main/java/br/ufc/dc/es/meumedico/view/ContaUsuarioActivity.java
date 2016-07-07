@@ -13,8 +13,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
+import java.io.IOException;
+
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.domain.Login;
+import br.ufc.dc.es.meumedico.controller.serverAPI.DELETEUser;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 
@@ -69,6 +74,13 @@ public class ContaUsuarioActivity extends AppCompatActivity {
                                 dao.close();
                                 progressDialog.dismiss();
                                 finish();
+
+                                DELETEUser deleteUser = new DELETEUser();
+                                try {
+                                    deleteUser.Delete(id_usuario);
+                                } catch (IOException|JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         };
                         mThread.start();

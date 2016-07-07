@@ -16,7 +16,7 @@ public class ConfigAPI {
     public static final String POST_USER = "/users";
 
     //variable - id_user
-    public static final String DELETE_ID_USUARIO = "/users/id_usuario";
+    public static final String DELETE_ID_USUARIO = "/users/";
 
     //variable - id_user, id_caregiver
     public static final String POST_RELATIONSHIP = "/relationships";
@@ -25,7 +25,8 @@ public class ConfigAPI {
     public static final String DELETE_RELATIONSHIP = "/relationships_remove";
 
     //variables - id_user, name, checked, horario, description
-    public static final String POST_ALARM = "/users/user_id/alarms";
+    public static final String POST_ALARM_USERS = "/users/";
+    public static final String POST_ALARM_ALARMS = "/alarms";
 
     //variables - id_user, name, checked, hour
     public static final String PUT_ALARM = "/users/user_id/alarms/id";
