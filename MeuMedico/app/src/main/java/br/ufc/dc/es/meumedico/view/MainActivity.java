@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         email = sp.getString("email", "");
 
         if(email.equals("")){
-            startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            startActivity(new Intent(MainActivity.this,MeuMedicoPresentationActivity.class));
             finish();
         }
 

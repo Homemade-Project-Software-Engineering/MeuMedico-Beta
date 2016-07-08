@@ -78,6 +78,11 @@
             android:name=".view.CuidadorActivity"
             android:parentActivityName=".view.MainActivity"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.MeuMedicoPresentationActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

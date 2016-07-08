@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MeuMedicoPresentationActivity"
+    android:background="@color/whiteBackground">
+
+    <RelativeLayout
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/meu_medico_logo"
+            android:layout_width="200dp"
+            android:layout_height="175dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/meu_medico_logo" />
+
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
+            android:id="@+id/MainTitle"
+            android:layout_below="@id/meu_medico_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="@color/shadowGray"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:textSize="45sp"
+            android:shadowRadius="0"
+            android:textColor="@color/emeraldGreen"
+            android:text="@string/main_nome_app" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

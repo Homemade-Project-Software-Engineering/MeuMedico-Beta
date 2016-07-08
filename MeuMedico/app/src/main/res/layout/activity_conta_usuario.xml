@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/wihteBackground"
+    android:background="@color/whiteBackground"
     tools:context="br.ufc.dc.es.meumedico.view.ContaUsuarioActivity">
 
 
