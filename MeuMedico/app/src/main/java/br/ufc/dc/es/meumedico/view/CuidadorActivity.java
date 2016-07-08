@@ -24,6 +24,7 @@ import java.util.Map;
 
 import br.ufc.dc.es.meumedico.R;
 import br.ufc.dc.es.meumedico.controller.helper.isConnected;
+import br.ufc.dc.es.meumedico.controller.serverAPI.DELETECaregiver;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTCaregiver;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
@@ -223,6 +224,18 @@ public class CuidadorActivity extends AppCompatActivity {
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
+
+                                                DELETECaregiver delete = new DELETECaregiver();
+
+                                                Map<String, String> dados = new HashMap<>();
+                                                dados.put("patient_id", String.valueOf(id_usuario));
+                                                dados.put("caregiver_id", String.valueOf(id_recebido));
+
+                                                try {
+                                                    delete.DELETE(dados);
+                                                } catch (IOException|JSONException e) {
+                                                    e.printStackTrace();
+                                                }
 
                                                 dao_cuidador.deleteCuidador(id_usuario,id_recebido);
                                                 Toast.makeText(CuidadorActivity.this, "Cuidador excluido com sucesso",

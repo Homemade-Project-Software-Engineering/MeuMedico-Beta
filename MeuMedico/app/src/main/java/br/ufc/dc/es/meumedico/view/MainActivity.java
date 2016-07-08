@@ -20,6 +20,9 @@ import android.widget.Toast;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -27,6 +30,7 @@ import java.util.Locale;
 
 import br.ufc.dc.es.meumedico.controller.fragments.AtividadeFragment;
 import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.serverAPI.DELETEAlarm;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
@@ -134,6 +138,14 @@ public class MainActivity extends AppCompatActivity {
 
                 MeuMedicoDAO dao = new MeuMedicoDAO(MainActivity.this);
                 dao.delete(atividadeSelecionadaItem);
+                DELETEAlarm delete = new DELETEAlarm();
+                try {
+                    delete.Delete(atividadeSelecionadaItem.getId_usuario(), atividadeSelecionadaItem.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 dao.close();
                 carregaLista();
                 Toast.makeText(MainActivity.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();

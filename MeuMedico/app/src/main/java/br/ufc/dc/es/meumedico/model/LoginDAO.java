@@ -11,7 +11,7 @@ import br.ufc.dc.es.meumedico.controller.domain.Login;
 public class LoginDAO extends SQLiteOpenHelper {
 
     private static final String DATABASE = "bd_login";
-    private static final int VERSAO = 12;
+    private static final int VERSAO = 14;
     private static final String TABELA = "Login";
 
     public LoginDAO(Context context) {

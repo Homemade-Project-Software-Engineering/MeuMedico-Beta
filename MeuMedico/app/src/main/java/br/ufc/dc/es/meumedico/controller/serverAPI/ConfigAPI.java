@@ -15,6 +15,9 @@ public class ConfigAPI {
     //variables - name, password, email
     public static final String POST_USER = "/users";
 
+    //variables - name, password, email /users/user_id
+    public static final String PUT_USER = "/users/";
+
     //variable - id_user
     public static final String DELETE_ID_USUARIO = "/users/";
 
@@ -28,9 +31,12 @@ public class ConfigAPI {
     public static final String POST_ALARM_USERS = "/users/";
     public static final String POST_ALARM_ALARMS = "/alarms";
 
-    //variables - id_user, name, checked, hour
-    public static final String PUT_ALARM = "/users/user_id/alarms/id";
+    //variables - id_user, name, checked, hour /users/user_id/alarms/id
+    public static final String PUT_ALARM_USERS = "/users/";
+    public static final String PUT_ALARM_ALARMS = "/alarms/";
 
-    //variables - id_user, id_activity
-    public static final String DELETE_ALARM = "/users/user_id/alarms/id";
+
+    //variables - id_user, id_activity /users/user_id/alarms/id
+    public static final String DELETE_ALARM_USERS = "/users/";
+    public static final String DELETE_ALARM_ALARMS = "/alarms/";
 }

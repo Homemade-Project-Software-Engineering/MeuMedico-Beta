@@ -42,6 +42,7 @@ import br.ufc.dc.es.meumedico.controller.helper.ValidacaoHelper;
 import br.ufc.dc.es.meumedico.controller.helper.isConnected;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTActivity;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
+import br.ufc.dc.es.meumedico.controller.serverAPI.PUTActivity;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 import br.ufc.dc.es.meumedico.controller.domain.Atividade;
 import br.ufc.dc.es.meumedico.controller.notification.NotificationPublisher;
@@ -94,15 +95,36 @@ public class Cad_AtividadeActivity extends AppCompatActivity
 
                 if(vh.verificaCamposVaziosAtividade()){
                     Toast.makeText(Cad_AtividadeActivity.this, "Todos os campos são obrigatórios, preencha e tente novamente", Toast.LENGTH_LONG).show();
-                }else {
+                }else{
                     final MeuMedicoDAO dao = new MeuMedicoDAO(Cad_AtividadeActivity.this);
                     final Atividade atividade = helper.pegaCamposAtividade();
                     if (atividadeParaSerAlterada != null) {
                         atividade.setId(atividadeParaSerAlterada.getId());
                         atividade.setId_usuario(atividadeParaSerAlterada.getId_usuario());
+
+                        PUTActivity put = new PUTActivity();
+
+                        String dataAPI = String.format(Locale.US, "%02d", ano) + "-" + String.format(Locale.US, "%02d", mes + 1) + "-"
+                                + String.format(Locale.US, "%02d", dia) + " " + String.format(Locale.US, "%02d", hora) + ":"
+                                + String.format(Locale.US, "%02d", minuto) + ":00.0000";
+
+                        Map<String, String> dados = new HashMap<>();
+                        dados.put("name", atividade.getNome());
+                        dados.put("description", atividade.getDescricao());
+                        dados.put("horario", dataAPI);
+                        dados.put("checked", String.valueOf(atividade.getConcluida()));
+                        dados.put("user_id", String.valueOf(atividade.getId_usuario()));
+
+                        try {
+                            put.PUT(dados, atividade.getId_usuario(), atividade.getId());
+                        } catch (IOException|JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         dao.update(atividade);
                         Toast.makeText(Cad_AtividadeActivity.this, "Atividade atualizada com sucesso", Toast.LENGTH_SHORT).show();
-                    } else {
+                        finish();
+                    }else{
 
                         final ProgressDialog dialog = new ProgressDialog(Cad_AtividadeActivity.this);
                         dialog.setMessage("Criando atividade...");
