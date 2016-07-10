@@ -1,15 +1,20 @@
 package br.ufc.dc.es.meumedico.view;
 
-import com.robotium.solo.Solo;
+
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 
-public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity>{
+import com.robotium.solo.Solo;
 
-    private Solo solo;
-    /**Super importance....*/
-    public LoginActivityTest() {
-        super(LoginActivity.class);
+/**
+ * Created by jonas on 09/07/16.
+ */
+public class CuidadorActivityTest extends ActivityInstrumentationTestCase2<CuidadorActivity> {
+
+    Solo solo;
+
+    public CuidadorActivityTest(){
+        super(CuidadorActivity.class);
     }
 
     @Override
@@ -31,28 +36,21 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
      * but should be implemented out as change to the settings in each activity,
      * would be more or less an authentication test.*/
     @SmallTest
-    public void testFirst() throws Exception{
-        solo.assertCurrentActivity("This isn't The right activity",LoginActivity.class);
+    public void testFirst() throws Exception {
+        solo.assertCurrentActivity("This isn't The right activity", CuidadorActivity.class);
         solo.assertMemoryNotLow();
         solo.clearLog();
     }
     @SmallTest
-    public void testMainActivity() throws Exception{
-
-        solo.enterText(0,"email@gmail.com");
-        solo.enterText(1,"12345678");
-
-        assertTrue(solo.searchText("email@gmail.com"));
-        assertTrue(solo.searchText("12345678"));
-
-        solo.clearEditText(0);
-        solo.clearEditText(1);
-
+    public void testCuidadorActivity() throws Exception{
         solo.clickOnButton(0);
-        solo.goBack();
+        solo.enterText(0,"Testing insert ID Caregiver");
+        assertTrue(solo.searchText("Testing insert ID Caregiver"));
+        solo.clickOnButton(0);
         solo.clickOnButton(1);
-        solo.clickOnText("CADASTRE-SE");
-        solo.goBack();
-    }
+        solo.enterText(0,"Testing insert ID Caregiver");
+        assertTrue(solo.searchText("Testing insert ID Caregiver"));
+        solo.clickOnButton(0);
 
+    }
 }

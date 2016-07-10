@@ -37,25 +37,26 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * would be more or less an authentication test.*/
     @SmallTest
     public void testFirst() throws Exception{
+        solo.assertCurrentActivity("This isn't The right activity",MainActivity.class);
         solo.assertMemoryNotLow();
         solo.clearLog();
     }
     @SmallTest
     public void testMainActivity() throws Exception{
-        solo.clickOnText("CADASTRE-SE");
-        solo.enterText(0,"NameExampleTes");
-        solo.enterText(1,"email@gmail.com");
-        solo.enterText(2,"12345678");
-        solo.clickOnButton(0);
-
-        // back to login...
-
-
+        /*
         solo.enterText(0,"email@gmail.com");
         solo.enterText(1,"12345678");
-        solo.clickOnButton(1);
-        //solo.finishOpenedActivities();
 
+        assertTrue(solo.searchText("email@gmail.com"));
+        assertTrue(solo.searchText("12345678"));
+
+        solo.clearEditText(0);
+        solo.clearEditText(1);
+
+        solo.clickOnButton(0);
+        solo.clickOnText("CADASTRE-SE");
+        solo.goBack();
+        */
     }
 
 }

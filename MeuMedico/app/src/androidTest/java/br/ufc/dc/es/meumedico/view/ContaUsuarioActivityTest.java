@@ -36,29 +36,8 @@ public class ContaUsuarioActivityTest extends
     @SmallTest
     public void testContaActivity(){
         solo.clickOnButton(0);
-        //Press hard key back button
-        assertTrue(solo.searchText("NameExampleTes"));
-        assertTrue(solo.searchText("email@gmail.com"));
         solo.goBack();
         solo.clickOnButton(1);
-        solo.clickOnButton(0); //canceled?
-
-        solo.clickOnButton(1);
-        solo.clickOnButton(1); //deleted?
-        /*
-        //Press hard key back button
         solo.goBack();
-        //solo.goBackToActivity("ContaUsuarioActivity");
-        solo.clickOnButton(2);
-        solo.clickOnButton(0); //canceled?
-        //Press hard key back button
-        solo.goBack();
-        //solo.goBackToActivity("ContaUsuarioActivity");
-        solo.clickOnButton(3);
-        solo.clickOnButton(0); //canceled?
-        //Press hard key back button
-        solo.goBack();
-        //solo.goBackToActivity("ContaUsuarioActivity");
-        */
     }
 }
