@@ -49,12 +49,14 @@ public class Cad_AtividadeActivityTest extends ActivityInstrumentationTestCase2<
         solo.clickOnButton(0);// canceled?
         solo.enterText(3,"23:59:59");
         solo.clickOnButton(0);// canceled?
-
         //tests
         assertTrue(solo.searchText("AtividadeTest"));
         assertTrue(solo.searchText("Help with my medicines please!"));
         assertTrue(solo.searchText("6/6/1966"));
         assertTrue(solo.searchText("23:59:59"));
+
+        solo.clearEditText(0);
+        solo.clearEditText(1);
         solo.clickOnButton(0); // test button touch
     }
 }

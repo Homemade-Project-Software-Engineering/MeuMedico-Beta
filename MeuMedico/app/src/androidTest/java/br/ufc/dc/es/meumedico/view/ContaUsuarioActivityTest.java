@@ -33,8 +33,17 @@ public class ContaUsuarioActivityTest extends
          have been opened during the test execution.*/
         solo.finishOpenedActivities();
     }
+    /**This initial test is done to be called first put before the setUp
+     * but should be implemented out as change to the settings in each activity,
+     * would be more or less an authentication test.*/
     @SmallTest
-    public void testContaActivity(){
+    public void testFirst() throws Exception{
+        solo.assertCurrentActivity("This isn't The right activity",ContaUsuarioActivity.class);
+        solo.assertMemoryNotLow();
+        solo.clearLog();
+    }
+    @SmallTest
+    public void testContaActivity()throws Exception{
         solo.clickOnButton(0);
         solo.goBack();
         solo.clickOnButton(1);

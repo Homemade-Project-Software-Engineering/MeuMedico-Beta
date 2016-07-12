@@ -45,6 +45,7 @@ public class FullappTest extends ActivityInstrumentationTestCase2<LoginActivity>
     @LargeTest
     public void testFullApp() throws Exception{
 
+
         solo.enterText(0,"email@example.com");
         solo.typeText(1,"password");
 
@@ -56,15 +57,20 @@ public class FullappTest extends ActivityInstrumentationTestCase2<LoginActivity>
         solo.clickOnText("CADASTRE-SE");
 
         /**Enter in ContaActivity */
+
+
         solo.enterText(0,"PatientTest");
         solo.enterText(1,"patient@email.com");
         solo.enterText(2,"12345678");
         solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btcriarConta));
 
         /**Back to Login and enter again, now with new patient*/
+
         solo.enterText(0,"patient@email.com");
         solo.enterText(1,"12345678");
         solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btSecondScreen));
+
+
 
         // first menu item
         //solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.itemOptionsConta));
@@ -86,16 +92,34 @@ public class FullappTest extends ActivityInstrumentationTestCase2<LoginActivity>
         // second menu item
         solo.pressMenuItem(3);
         // register caregiver
-        solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btCadastrarCuidador));
-
+        //solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btCadastrarCuidador));
+        solo.clickOnButton(0);
+        // enter id caregiver
         solo.enterText(0,"1");
         // creating new caregiver
         solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btn_Confirmar));
 
 
-        solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btExcluirCuidador));
+        //solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btExcluirCuidador));
         // cancel exclusion
+        solo.clickOnButton(1);
         solo.clickOnView(solo.getView(br.ufc.dc.es.meumedico.R.id.btn_Cancelar));
+
+        solo.goBack();
+        //solo.goBack();
+
+        // bt calender
+        solo.clickOnButton(0);
+        //solo.goBack();
+        solo.goBackToActivity("MainActivity");
+
+        // bt emergency, do not click
+
+        //enter again in menu 1
+        solo.pressMenuItem(0);
+        // exclude account
+        solo.clickOnButton(1);
+        solo.clickOnButton(1);
 
         try {
             solo.finalize();
