@@ -1,32 +1,31 @@
 package br.ufc.dc.es.meumedico.view;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.ufc.dc.es.meumedico.R;
+import br.ufc.dc.es.meumedico.controller.domain.Cuidador;
+import br.ufc.dc.es.meumedico.controller.fragments.CuidadorFragment;
 import br.ufc.dc.es.meumedico.controller.helper.isConnected;
 import br.ufc.dc.es.meumedico.controller.serverAPI.DELETECaregiver;
 import br.ufc.dc.es.meumedico.controller.serverAPI.POSTCaregiver;
-import br.ufc.dc.es.meumedico.controller.serverAPI.POSTUser;
 import br.ufc.dc.es.meumedico.model.LoginDAO;
 import br.ufc.dc.es.meumedico.model.MeuMedicoDAO;
 
@@ -36,8 +35,9 @@ public class CuidadorActivity extends AppCompatActivity {
 
     int id_usuario, id_recebido;
     MeuMedicoDAO dao_cuidador = new MeuMedicoDAO(this);
-    ListView lista_cuidador;
     private static CuidadorActivity toastCuidadorActivity;
+    CuidadorFragment frag;
+    String teste[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,42 @@ public class CuidadorActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         this.id_usuario = sp.getInt("id_usuario", 0);
 
-        lista_cuidador = (ListView) findViewById(R.id.lista_cuidador);
-        //registerForContextMenu(lista_cuidador);
+        teste = new String[]{"teste", "teste1", "teste1", "teste1"};
 
-        String teste[] = new String[]{"teste", "teste1", "teste1", "teste1"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, teste);
+        frag = (CuidadorFragment) getSupportFragmentManager().findFragmentByTag("mainFrag");
+        if(frag == null) {
+            frag = new CuidadorFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.rl_fragment_container_cuidador, frag, "mainFrag");
+            ft.commit();
+        }
 
-        lista_cuidador.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        carregaLista();
+    }
+
+    public void carregaLista(){
+
+        frag.mList.clear();
+        frag.mList.addAll(getSetAtividadeList());
+        frag.adapter.notifyDataSetChanged();
+    }
+
+    public List<Cuidador> getSetAtividadeList(){
+
+        List<Cuidador> cuidadores = new ArrayList<>();
+
+        cuidadores.add(new Cuidador(1,teste[0]));
+        cuidadores.add(new Cuidador(2,teste[1]));
+        cuidadores.add(new Cuidador(3,teste[2]));
+        cuidadores.add(new Cuidador(4,teste[3]));
+
+        return cuidadores;
     }
 
     public void inserirCuidador(View view){

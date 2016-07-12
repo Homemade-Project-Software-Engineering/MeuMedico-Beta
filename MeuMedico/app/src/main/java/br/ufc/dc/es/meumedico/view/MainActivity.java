@@ -51,12 +51,15 @@ public class MainActivity extends AppCompatActivity {
     Bundle infosFacebook;
     AtividadeFragment frag;
     private static final String PREF_NAME = "LoginActivityPreferences";
+    TextView textViewSemEventos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.second_activity);
+
+        textViewSemEventos = (TextView) findViewById(R.id.textViewSemEventos);
 
         btDate();
         btEmergency();
@@ -139,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
                 MeuMedicoDAO dao = new MeuMedicoDAO(MainActivity.this);
                 dao.delete(atividadeSelecionadaItem);
                 DELETEAlarm delete = new DELETEAlarm();
-                try {
+                /*try {
                     delete.Delete(atividadeSelecionadaItem.getId_usuario(), atividadeSelecionadaItem.getId());
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
                 dao.close();
                 carregaLista();
                 Toast.makeText(MainActivity.this, "Atividade deletada com sucesso", Toast.LENGTH_SHORT).show();
@@ -274,6 +277,7 @@ public class MainActivity extends AppCompatActivity {
         frag.mList.clear();
         frag.mList.addAll(getSetAtividadeList());
         frag.adapter.notifyDataSetChanged();
+
     }
 
     public List<Atividade> getSetAtividadeList(){
@@ -286,6 +290,12 @@ public class MainActivity extends AppCompatActivity {
         List<Atividade> atividades = dao.getListaAtividades(id_usuario,dataAtual);
 
         dao.close();
+
+        if(atividades.size()==0){
+            textViewSemEventos.setVisibility(View.VISIBLE);
+        }else{
+            textViewSemEventos.setVisibility(View.GONE);
+        }
 
         return atividades;
     }

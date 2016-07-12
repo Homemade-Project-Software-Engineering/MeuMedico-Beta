@@ -64,6 +64,7 @@
     <!-- SecondActivity String res-->
     <string name="second_logado_como">Logado como: ID - Nome</string>
     <string name="second_btCadastrarAtividade">Cadastrar Atividade</string>
+    <string name="second_sem_eventos">Sem Eventos</string>
 
     <!-- CuidadorActivity String res-->
     <string name="cuidador_action_bar">Cuidador</string>
