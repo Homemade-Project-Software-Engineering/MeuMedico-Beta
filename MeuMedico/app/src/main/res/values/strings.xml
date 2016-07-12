@@ -73,4 +73,5 @@
     <string name="cuidador_btExcluirCuidador">Excluir Cuidador</string>
     <string name="cuidador_cuidador_label">Cuidador(es)</string>
 
+    <string name="meu_medico_presentation_description">Imagem-logo da MeuMedicoPresentationActivity</string>
 </resources>
