@@ -9,13 +9,21 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-25.0.3
-    - android-24
+    - build-tools-26.0.2
+    - android-26
     - android-22
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-22
+
+ licenses:
+
+ - android-sdk-preview-license-.+
+
+ - android-sdk-license-.+
+
+ - google-gdk-license-.+
 
 before_install:
 - mkdir "$ANDROID_HOME/licenses" || true
