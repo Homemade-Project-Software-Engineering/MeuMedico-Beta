@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Meu Médico</string>
+    <string name="spinner">Perfis</string>
+    <string name="menu1">Conta</string>
+    <string name="menu2">Cuidadores</string>
+    <string name="menu3">Logout</string>
+    <string name="menu4">Cadastrar Atividade</string>
+    <string name="menu5">Atualizar</string>
+    <string name="date">Date</string>
+    <string-array name="options">
+        <item>Opção 1</item>
+        <item>Opção 2</item>
+        <item>Opção 3</item>
+        <item>Opção 4</item>
+    </string-array>
+    <string name="title_activity_cad__atividade">Cad_Atividade</string>
+    <string name="facebook_app_id">1143975188987718</string>
+    <string name="MensagemDeletarConta">Tem certeza que deseja deletar essa conta?</string>
+    <string name="SimDeletarConta">Sim</string>
+    <string name="CancelarDeletarConta">Cancelar</string>
+    <string name="MensagemLogout">Tem certeza que deseja deslogar?</string>
+    <string name="SimLogout">Sim</string>
+    <string name="CancelarLogout">Cancelar</string>
+    <string name="botao_alterar_atividade">Alterar</string>
+
+    <!-- Cad_AtividadeActivity String res-->
+    <string name="cad_atividade_nome">Nome:</string>
+    <string name="cad_atividade_descricao">Descrição::</string>
+    <string name="cad_atividade_data">Data:</string>
+    <string name="cad_atividade_hora">Hora:</string>
+    <string name="cad_atividade_btSalvar">Salvar</string>
+
+    <!-- ContaActivity String res-->
+    <string name="conta_nome">Nome</string>
+    <string name="conta_email">Email</string>
+    <string name="conta_senha">Senha</string>
+    <string name="conta_editar_conta">Editar Conta</string>
+    <string name="conta_btCriarConta">Criar Conta</string>
+
+    <!-- ContaActivity String res-->
+    <string name="conta_usuario_logado_label">Logado como:</string>
+    <string name="conta_usuario_logado_nome">xxxxxx</string>
+    <string name="conta_usuario_email_label">Email:</string>
+    <string name="conta_usuario_email">xxxxx@xxxx.xxx</string>
+    <string name="conta_usuario_id_label">Seu ID:</string>
+    <string name="conta_usuario_id">00000</string>
+    <string name="conta_usuario_btEditarConta">Editar Conta</string>
+    <string name="conta_usuario_btExcluirConta">Excluir Conta</string>
+
+    <!-- LoginActivity String res-->
+    <string name="main_nome_app">Meu Médico</string>
+    <string name="main_ou">ou</string>
+    <string name="main_email">Email</string>
+    <string name="main_senha">Senha</string>
+    <string name="main_btSecondActivity">Entrar</string>
+    <string name="main_pergunta_conta">Não tem conta ainda?</string>
+    <string name="main_cadastre_se">CADASTRE-SE</string>
+
+    <!-- dialog_insert_cuidador String res-->
+    <string name="dialog_inserir_id_cuidador">Digite o ID do cuidador</string>
+    <string name="dialog_btCancelar">Cancelar</string>
+    <string name="dialog_btConfirmar">Confirmar</string>
+
+    <!-- SecondActivity String res-->
+    <string name="second_logado_como">Logado como: ID - Nome</string>
+    <string name="second_btCadastrarAtividade">Cadastrar Atividade</string>
+    <string name="second_sem_eventos">Sem Atividades</string>
+    <string name="second_data">XX/XX/XXXX</string>
+
+    <!-- CuidadorActivity String res-->
+    <string name="cuidador_action_bar">Cuidador</string>
+    <string name="cuidador_cuidador_acoes">Ações</string>
+    <string name="cuidador_btCadastrarCuidador">Cadastrar Cuidador</string>
+    <string name="cuidador_btExcluirCuidador">Excluir Cuidador</string>
+    <string name="cuidador_cuidador_label">Cuidador(es)</string>
+
+    <string name="meu_medico_presentation_description">Imagem-logo da MeuMedicoPresentationActivity</string>
+</resources>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/whiteBackground"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+    <TableLayout
+        android:id="@+id/topTable"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+            <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
+                android:id="@+id/welcome"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/nightBlack"
+                android:text="@string/second_logado_como" />
+    </TableLayout>
+
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
+        android:layout_margin="5dp"
+        android:layout_below="@id/topTable"
+        android:id="@+id/nameUser"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/nightBlack"
+        android:text="" />
+
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
+        android:id="@+id/btDatePiker"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/btCad_Atividade"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/calendar_button"
+        />
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
+        android:id="@+id/btEmergency"
+        android:layout_margin="20dp"
+        android:layout_below="@+id/btCad_Atividade"
+        android:layout_alignEnd="@+id/btCad_Atividade"
+        android:layout_alignParentEnd="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/emergency_button"
+        />
+
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyCustomButton
+        android:id="@+id/btCad_Atividade"
+        android:text="@string/second_btCadastrarAtividade"
+        android:layout_below="@id/nameUser"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/whitTextButton"
+        android:background="@color/emeraldGreen"
+        />
+
+    <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
+        android:layout_margin="5dp"
+        android:layout_below="@id/btDatePiker"
+        android:id="@+id/dataTelaPrincipal"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="@color/nightBlack"
+        android:text="@string/second_data"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/dataTelaPrincipal">
+
+        <br.ufc.dc.es.meumedico.controller.custom_widgets.MyMainTextView
+            android:text="@string/second_sem_eventos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/nightBlack"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewSemEventos"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

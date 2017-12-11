@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="br.ufc.dc.es.meumedico">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat">
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.LoginActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.ContaActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.Cad_AtividadeActivity"
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.ContaUsuarioActivity"
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            tools:replace="android:theme"
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <receiver android:name=".controller.notification.NotificationPublisher">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".controller.notification.UpdateActivityByNotification">
+            <intent-filter>
+                <action android:name="br.ufc.dc.es.meumedico.intentDone" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="br.ufc.dc.es.meumedico.intentDontDone" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".view.CalendarActivity"
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.CuidadorActivity"
+            android:parentActivityName=".view.MainActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".view.MeuMedicoPresentationActivity"
+            android:screenOrientation="portrait"/>
+
+    </application>
+
+</manifest>
