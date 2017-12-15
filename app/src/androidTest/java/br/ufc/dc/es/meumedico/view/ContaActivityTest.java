@@ -5,11 +5,13 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 import com.robotium.solo.Solo;
 
-public class Cad_AtividadeActivityTest extends ActivityInstrumentationTestCase2<Cad_AtividadeActivity> {
+public class ContaActivityTest extends ActivityInstrumentationTestCase2<ContaActivity> {
 
     private Solo solo;
 
-    public Cad_AtividadeActivityTest(){super(Cad_AtividadeActivity.class);}
+    public ContaActivityTest(){
+        super(ContaActivity.class);
+    }
 
     @Override
     public void setUp() throws Exception {
@@ -26,33 +28,30 @@ public class Cad_AtividadeActivityTest extends ActivityInstrumentationTestCase2<
          have been opened during the test execution.*/
         solo.finishOpenedActivities();
     }
-
     /**This initial test is done to be called first put before the setUp
      * but should be implemented out as change to the settings in each activity,
      * would be more or less an authentication test.*/
     @SmallTest
     public void testFirst() throws Exception {
-        //solo.assertCurrentActivity("This isn't the right Activity to test!",Cad_AtividadeActivity.class);
+        solo.assertCurrentActivity("This isn't The right activity", ContaActivity.class);
         solo.assertMemoryNotLow();
         solo.clearLog();
     }
-
     @SmallTest
-    public void testCad_Atividade() throws Exception {
-        solo.enterText(0,"AtividadeTest");
-        solo.enterText(1,"Help with my medicines please!");
-        solo.enterText(2,"6/6/1966");
-        solo.clickOnButton(0);// canceled?
-        solo.enterText(3,"23:59:59");
-        solo.clickOnButton(0);// canceled?
-        //tests
-        assertTrue(solo.searchText("AtividadeTest"));
-        assertTrue(solo.searchText("Help with my medicines please!"));
-        assertTrue(solo.searchText("6/6/1966"));
-        assertTrue(solo.searchText("23:59:59"));
+    public void testCallCreateAccount() throws Exception {
+        solo.enterText(0,"New client");
+        solo.enterText(1,"new_client@email.com");
+        solo.enterText(2,"12345678");
 
-        solo.clearEditText(0);
+        assertTrue(solo.searchText("12345678"));
+        assertTrue(solo.searchText("new_client@email.com"));
+        assertTrue(solo.searchText("New client"));
+
+        solo.clearEditText(2);
         solo.clearEditText(1);
-        solo.clickOnButton(0); // test button touch
+        solo.clearEditText(0);
+
+
     }
+
 }
